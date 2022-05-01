@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="TZE0rZyIqLl10trYu3BWBWa1Vmz6HFwhb2OcNEK4u-s" />
+     <link rel="shortcut icon" href= /img/favicon.ico >
+    <title>
+        Joe&#39;s blog
+    </title>
+    <meta name="description" content= 放一些乱写的数学笔记 >
+    <meta name="keywords" content= Blog >
+    
+<link rel="stylesheet" href="/blog/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/math/"><i class="fa fa-home
+ replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            概率论导航
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <p>前言：参考书为：《普林斯顿概率论读本》</p>
+<p><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll1">一些有趣的概率问题</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll2">基本概率定理</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll3.1">二项式系数定理</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll4">条件概率贝叶斯概率和全概率</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll5">容斥定理</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll6">离散随机变量</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll7">连续随即变量</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll8">期望</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll9">联合分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll10">期望、方差的性质</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll11">卷积的运用</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll12">微分恒等式、正态分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gl13.pdf">离散型随机变量的概率分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll14">连续型随机变量的概率分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll15">正态分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll16">伽马分布和一些相关的分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll17">柯西分布和卡方分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll18">极限定理和两个不等式</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll19">布尔不等式和邦弗伦尼不等式</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll20">依概率收敛和依分布收敛</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll21">大数定理</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll22">斯特林公式</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll23-1">利用斯特林公式让二项分布近似成正态分布</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll24">较弱的斯特林公式</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll25">生成函数与卷积</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll26">利用生成函数</a><br><a target="_blank" rel="noopener" href="https://marcusloc.gitee.io/math/gll/gll27">概率生成函数</a></p>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p><h4>版权所有 © 2020 | 作者: Joe | 主题 By <a class="theme-author" href="https://github.com/Xunzhuo/hexo-theme-coder" style="font-size:14px; color: #969696">Coder</a></h4>
+    
+    <label class="el-switch el-switch-blue el-switch-sm" style="vertical-align: sub;">
+        <input type="checkbox" name="switch" id="update_style">
+        <span class="el-switch-style"></span>
+    </label>
+
+    <!--         <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script> -->
+</p>
+</div>
+
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="">
+<input type="hidden" id="valine_appKey" value="">
+
+<script src="/blog/libs/jquery.min.js"></script>
+
+
+<script src="/blog/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/blog/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+color: #698fca;
+}
+.v .vlist .vcard .vhead .vsys {
+color: #3a3e4a;
+}
+.v .vlist .vcard .vh .vmeta .vat {
+color: #638fd5;
+}
+.v .vlist .vcard .vhead .vnick {
+color: #6ba1ff;
+}
+.v a {
+color: #8696b1;
+}
+.v .vlist .vcard .vhead .vnick:hover {
+color: #669bfc;
+}
+</style>
+    <script type="text/javascript" color="173,174,173" opacity='1' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

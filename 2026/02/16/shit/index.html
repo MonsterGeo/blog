@@ -18,7 +18,7 @@
 <meta property="og:description" content="Prove for number n is Fibonacci number if and only if 5n2 ± 4 is perfect square number This title is my paper title. Introduction I had originally planned to finish this problem last year.but I">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-16T12:25:58.000Z">
-<meta property="article:modified_time" content="2026-02-17T12:35:23.797Z">
+<meta property="article:modified_time" content="2026-02-25T15:26:31.990Z">
 <meta property="article:author" content="Done fool">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary">
@@ -659,12 +659,190 @@ class="math inline"><em>n</em><sub>2<sub><em>k</em></sub></sub> = <em>F</em>
 class="math inline"><em>n</em><sub>1<sub><em>k</em></sub></sub></span>
 and <span
 class="math inline"><em>n</em><sub>2<sub><em>k</em></sub></sub></span></p>
+<!-- 那你尝试一下这个吧：所有 Fibonacci数 n 都满足这个条件： 5n^2 + 4 or 5n^2 - 4 是平方数，而且这个是if and only if。
+
+那问题：对于 x_n = ax_{n-1} + bx_{n-2}，找出a,b的充分条件使下列句子成立：
+
+若 m = x_n，则存在整数 E,F使 Em^2 + F 或 Em^2 - F 为平方数。 -->
+<h1
+id="for-the-recurrence-relation-x_n-ax_n-1-bx_n-2-find-sufficient-conditions-on-ab-such-that-following-statement-holds">For
+the recurrence relation <span
+class="math inline"><em>x</em><sub><em>n</em></sub> = <em>a</em><em>x</em><sub><em>n</em> − 1</sub> + <em>b</em><em>x</em><sub><em>n</em> − 2</sub></span>
+find sufficient conditions on <span
+class="math inline"><em>a</em>, <em>b</em></span> such that following
+statement holds:</h1>
+<p>Before we explain this question, we need to know some tool.</p>
+<h2 id="linear-difference-equation">linear difference equation</h2>
+<p><strong>define(second-order homogeneous linear difference
+equation):</strong> An equation of the following form is called a
+second-order homogeneous linear difference equation for the sequence
+<span
+class="math inline">{<em>z</em><em>t</em>​, <em>t</em> ∈ <em>Z</em>}</span>:</p>
+<p><span
+class="math display"><em>z</em><sub><em>t</em></sub> = <em>a</em><sub>1</sub><em>z</em><sub><em>t</em> − 1</sub> + <em>a</em><sub>2</sub><em>z</em><sub><em>t</em> − 2</sub></span>
+where <span class="math inline"><em>a</em><sub>1</sub></span> and <span
+class="math inline"><em>a</em><sub>2</sub></span> are real numbers.</p>
+<h2 id="solve-second-order-homogeneous-linear-difference-equation">solve
+second-order homogeneous linear difference equation</h2>
+<p>At first-order linear difference equation, we define <span
+class="math display"><em>x</em><sub><em>k</em> + 1</sub> = <em>A</em><em>x</em><sub><em>k</em></sub>, (<em>k</em> = 0, 1, ⋯)</span></p>
+<p>where <span class="math inline"><em>A</em></span> is <span
+class="math inline"><em>n</em> × <em>n</em></span> matrix.</p>
+<p>There have simple method to find the roots of the equation. One
+method is to find the eigenvalues.Note</p>
+<p><span
+class="math display"><em>x</em><sub><em>k</em></sub> = <em>λ</em><sup><em>k</em></sup><em>x</em><sub>0</sub>(<em>k</em> = 1, 2, ⋯)</span></p>
+<p>and insteed definetion we have</p>
+<p><span
+class="math display"><em>A</em><em>x</em><sub><em>k</em></sub> = <em>A</em>(<em>λ</em><sup><em>k</em></sup><em>x</em><sub>0</sub>) = <em>λ</em><sup><em>k</em></sup>(<em>A</em><em>x</em><sub>0</sub>) = <em>λ</em><sup><em>k</em> + 1</sup><em>x</em><sub>0</sub> = <em>x</em><sub><em>k</em> + 1</sub></span></p>
+<p>That’s mean we can use eigenvalues to compute the solution.</p>
+<h2 id="main">main</h2>
+<p>For the recurrence relation <span
+class="math inline"><em>x</em><sub><em>n</em></sub> = <em>a</em><em>x</em><sub><em>n</em> − 1</sub> + <em>b</em><em>x</em><sub><em>n</em> − 2</sub></span>
+find sufficient conditions on <span
+class="math inline"><em>a</em>, <em>b</em></span> such that following
+statement holds: if <span
+class="math inline"><em>m</em> = <em>x</em><sub><em>n</em></sub></span>
+,then there exist integers<span class="math inline"><em>E</em></span>
+and <span class="math inline"><em>F</em></span> for which either <span
+class="math inline"><em>E</em><em>m</em><sup>2</sup> + <em>F</em></span>
+of <span
+class="math inline"><em>E</em><em>m</em><sup>2</sup> − <em>F</em></span>
+is perfect square.</p>
+<p><strong>Proof:</strong></p>
+<p>we can rewrite <span
+class="math inline"><em>x</em><sub><em>n</em></sub></span> for</p>
+<p><span class="math display">$$
+\left(
+    \begin{matrix}
+        x_{n}\\
+        x_{n-1}
+    \end{matrix}
+\right)
+= \left(
+    \begin{matrix}
+        a &amp; b\\
+        1 &amp; 0
+    \end{matrix}
+\right)
+\cdot
+\left[
+    \begin{matrix}
+        x_{n-1}\\
+        x_{n-2}
+    \end{matrix}
+\right] = A\cdot x
+$$</span></p>
+<p>The eigenvalues of <span class="math inline"><em>A</em></span> is
+<span
+class="math display">det (<em>A</em> − <em>λ</em><em>I</em>) = <em>λ</em><sup>2</sup> − <em>a</em><em>λ</em> − <em>b</em> = 0</span></p>
+<p>and</p>
+<p><span
+class="math display"><em>λ</em><sub>1</sub><em>λ</em><sub>2</sub> = −<em>b</em></span></p>
+<p>if <span
+class="math inline"><em>λ</em><sub>1</sub> ≠ <em>λ</em><sub>2</sub></span></p>
+<p>Then <span
+class="math display"><em>x</em><sub><em>n</em></sub> = <em>C</em><sub>1</sub><em>λ</em><sub>1</sub><sup><em>n</em></sup> + <em>C</em><sub>2</sub><em>λ</em><sub>2</sub><sup><em>n</em></sup></span></p>
+<p>Let <span
+class="math inline"><em>m</em> = <em>x</em><sub><em>n</em></sub></span>
+and assume <span
+class="math inline"><em>E</em><em>m</em><sup>2</sup> + <em>F</em></span>
+or <span
+class="math inline"><em>E</em><em>m</em><sup>2</sup> − <em>F</em></span>
+is perfect square.</p>
+<p>We have</p>
+<p><span
+class="math display"><em>m</em><sup>2</sup> = <em>C</em><sub>1</sub><sup>2</sup><em>λ</em><sub>1</sub><sup>2<em>n</em></sup> + 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub>(<em>λ</em><sub>1</sub><em>λ</em><sub>2</sub>) + <em>C</em><sub>2</sub><sup>2</sup><em>λ</em><sub>2</sub><sup>2<em>n</em></sup></span></p>
+<p>when <span
+class="math inline"><em>λ</em><sub>1</sub><em>λ</em><sub>2</sub> = 1</span>,<span
+class="math inline"><em>m</em><sup>2</sup> = <em>C</em><sub>1</sub><sup>2</sup><em>λ</em><sub>1</sub><sup>2<em>n</em></sup> + <em>C</em><sub>2</sub><sup>2<em>n</em></sup><em>λ</em><sub>2</sub><sup>2<em>n</em></sup> + 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub></span></p>
+<p>defined <span
+class="math inline"><em>F</em> = 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub></span>
+and <span class="math inline"><em>E</em> = 1</span>,we have</p>
+<p><span
+class="math display"><em>E</em><em>m</em><sup>2</sup> + <em>F</em> = <em>m</em><sup>2</sup> − 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub> = <em>m</em><sup>2</sup> − <em>F</em> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub> − <em>C</em><sub>2</sub><em>λ</em><sub>2</sub>)<sup>2</sup></span></p>
+<p>In this case ,<span class="math inline"><em>b</em> = −1</span> and
+<span class="math inline"><em>a</em></span> is any number of <span
+class="math inline">ℤ</span></p>
+<p>Another case is <span class="math inline"><em>b</em> = 1</span>.
+Implication <span
+class="math inline"><em>λ</em><sub>1</sub><em>λ</em><sub>2</sub> = −1</span>,asuume
+<span class="math inline"><em>λ</em><sub>2</sub></span> have negative
+sign. Then</p>
+<p><span
+class="math display"><em>m</em><sup>2</sup> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub><sup><em>n</em></sup>)<sup>2</sup> + 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub>(−1)<sup><em>n</em></sup> + (<em>C</em><sub>2</sub><em>λ</em><sub>2</sub><sup><em>n</em></sup>)<sup>2</sup></span></p>
+<p>One’s situation is <span class="math inline"><em>m</em></span> is
+Fibonacci numbers. This case satisfying equation.</p>
+<p>If <span
+class="math inline"><em>n</em> = 2<em>k</em>, <em>k</em> ∈ ℤ</span>, it
+is case 1. we research situation when <span
+class="math inline"><em>n</em> = 2<em>k</em> − 1</span></p>
+<p>when <span
+class="math inline"><em>n</em> = 2<em>k</em> − 1</span>,<span
+class="math inline"><em>m</em><sup>2</sup> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub><sup><em>n</em></sup>)<sup>2</sup> − 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub> + (<em>C</em><sub>2</sub><em>λ</em><sub>2</sub><sup><em>n</em></sup>)<sup>2</sup></span></p>
+<p>Then</p>
+<p><span class="math display">$$
+\begin{aligned}
+    m^2 =&amp; (C_1\lambda^n_1)^2 -2C_1C_2 + (C_2\lambda_2^n)^2\\
+    m^2 + 2C_1C_2=&amp; (C_1\lambda^n_1)^2 +(C_2\lambda_2^n)^2
+\end{aligned}
+$$</span></p>
+<p>Note <span
+class="math inline"><em>A</em><sup>2</sup> + <em>B</em><sup>2</sup> − 2<em>A</em><em>B</em> = (<em>A</em> − <em>B</em>)<sup>2</sup></span>,
+therefore we have <span
+class="math inline"><em>A</em><sup>2</sup> + <em>B</em><sup>2</sup> = (<em>A</em> − <em>B</em>)<sup>2</sup> − 2<em>A</em><em>B</em></span>
+so</p>
+<p><span
+class="math display"><em>m</em><sup>2</sup> + 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub><sup><em>n</em></sup> − <em>C</em><sub>2</sub><em>λ</em><sub>2</sub><sup><em>n</em></sup>)<sup>2</sup></span></p>
+<p>defined <span
+class="math inline"><em>F</em> = 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub></span>
+and <span class="math inline"><em>E</em> = 1</span>. <span
+class="math inline"><em>a</em></span> can be any number.</p>
+<hr />
+<p>if <span
+class="math inline"><em>λ</em><sub>1</sub> = <em>λ</em><sub>2</sub></span></p>
+<p>Then</p>
+<p><span
+class="math display"><em>x</em><sub><em>n</em></sub> = (<em>C</em><sub>1</sub> + <em>C</em><sub>2</sub><em>n</em>)<em>λ</em><sup><em>n</em></sup></span></p>
+<p><span class="math display">$$
+\begin{array}{lll}
+    m^2 &amp;=&amp; (C_1+C_2n)^2\lambda^{2n}\\
+    m^2 &amp;=&amp;(C_1^2+C_1C_2n+C_2^2n^2)\lambda^{2n}\\
+\end{array}
+$$</span></p>
+<p>Defined <span
+class="math inline"><em>E</em> = 1, <em>F</em> = 0</span>. we have</p>
+<p><span
+class="math display"><em>E</em><em>m</em><sup>2</sup> ± <em>F</em> = <em>m</em><sup>2</sup></span>S</p>
+<p>in this case, there not exist any non-trivial solution.</p>
+<!--总结 -->
+<p>At last, if eigenvalues <span
+class="math inline"><em>λ</em><sub>1</sub> ≠ <em>λ</em><sub>2</sub></span>,
+then <span class="math inline"><em>a</em></span> can be any integers,but
+$b $ must satisfy <span class="math inline"><em>b</em> = −1</span> and
+there exist <span
+class="math inline"><em>E</em> = 1, <em>F</em> = 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub></span>.
+Let <span
+class="math inline"><em>m</em> = <em>x</em><sub><em>n</em></sub></span>
+we have <span
+class="math inline"><em>m</em><sup>2</sup> − <em>F</em> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub> − <em>C</em><sub>2</sub><em>λ</em><sub>2</sub>)<sup>2</sup></span>.</p>
+<p>Let <span class="math inline"><em>b</em> = 1</span>, defined <span
+class="math inline"><em>F</em> = 2<em>C</em><sub>1</sub><em>C</em><sub>2</sub></span>
+when <span class="math inline"><em>n</em> = 2<em>k</em> − 1</span> and
+<span class="math inline"><em>E</em> = 1</span>. we have <span
+class="math inline"><em>m</em><sup>2</sup> + <em>F</em> = (<em>C</em><sub>1</sub><em>λ</em><sub>1</sub> − <em>C</em><sub>2</sub><em>λ</em><sub>2</sub>)<sup>2</sup></span></p>
+<p>In another hand, if <span
+class="math inline"><em>λ</em><sub>1</sub> = <em>λ</em><sub>2</sub></span>,
+then D <span class="math inline">$b = -\frac{a^2}{4}$</span>, there not
+exist any non-trivial solution .</p>
 <hr />
 <h2 id="references">References</h2>
 <p>[1] K. Conrad. <em>Pell’s Equation I</em>.
 https://kconrad.math.uconn.edu/blurbs/ugradnumthy/pelleqn1.pdf</p>
 <p>[2] Koshy, Thomas. <em>Fibonacci and Lucas Numbers with Applications,
 Volume I. 2nd ed.</em>, Wiley, 2018.</p>
+<p>[3] 雷，D. C., 雷，S. R., &amp; 麦克唐纳，J. J. (2018).
+线性代数及其应用 (原书第 5 版) (刘深泉 等，译). 机械工业出版社.</p>
 
     </article>
     <!-- license -->
@@ -672,7 +850,7 @@ Volume I. 2nd ed.</em>, Wiley, 2018.</p>
             <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
             <p>Link：<a href="https://monstergeo.github.io/blog/2026/02/16/shit/">https://monstergeo.github.io/blog/2026/02/16/shit/</a>
             <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/02/16/shit/">February 16th 2026, 8:25:58 pm</a>
-            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/02/16/shit/">February 17th 2026, 8:35:23 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/02/16/shit/">February 25th 2026, 11:26:31 pm</a>
             <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
@@ -749,7 +927,11 @@ sequence)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" hr
 number</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#proposition-2"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">Proposition 2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lemma-1f_n1f_n-1-l_n"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">Lemma 1(Fn + 1 + Fn − 1 &#x3D; Ln)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pells-equation"><span class="toc-number">1.2.2.</span> <span class="toc-text">Pell’s equation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-proposition"><span class="toc-number">1.2.3.</span> <span class="toc-text">main proposition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#proposition-4-n-is-fibonacci-number-if-and-only-if-5n2pm-4-is-perfect-square-number"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Proposition
 4 n is Fibonacci number if and
 only if 5n2 ± 4 is
-perfect square number</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">1.3.</span> <span class="toc-text">References</span></a></li></ol></li></ol>
+perfect square number</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-the-recurrence-relation-x_n-ax_n-1-bx_n-2-find-sufficient-conditions-on-ab-such-that-following-statement-holds"><span class="toc-number">2.</span> <span class="toc-text">For
+the recurrence relation xn &#x3D; axn − 1 + bxn − 2
+find sufficient conditions on a, b such that following
+statement holds:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linear-difference-equation"><span class="toc-number">2.1.</span> <span class="toc-text">linear difference equation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solve-second-order-homogeneous-linear-difference-equation"><span class="toc-number">2.2.</span> <span class="toc-text">solve
+second-order homogeneous linear difference equation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main"><span class="toc-number">2.3.</span> <span class="toc-text">main</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">2.4.</span> <span class="toc-text">References</span></a></li></ol></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -784,11 +966,11 @@ perfect square number</span></a></li></ol></li></ol></li><li class="toc-item toc
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">02/13</span>
-            <a class="archive-post-title" href="/blog/2026/02/13/algor/phase_1/">function grow</a>
+            <a class="archive-post-title" href="/blog/2026/02/13/read-me/">read me</a>
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">02/13</span>
-            <a class="archive-post-title" href="/blog/2026/02/13/read-me/">read me</a>
+            <a class="archive-post-title" href="/blog/2026/02/13/algor/phase_1/">function grow</a>
         </li>
             </ul>
     </div>

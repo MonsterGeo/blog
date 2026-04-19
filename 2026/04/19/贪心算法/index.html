@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Done fool">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Done fool">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="贪心算法 贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。 活动选择问题 第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个n个活动的集合S &#x3D; {a1, a2, ⋯, an}，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动ai有两个属">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贪心算法">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="贪心算法 贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。 活动选择问题 第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个n个活动的集合S &#x3D; {a1, a2, ⋯, an}，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动ai有两个属">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-19T03:37:00.000Z">
+<meta property="article:modified_time" content="2026-04-19T03:37:46.088Z">
+<meta property="article:author" content="Done fool">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/blog/">
+    <title>贪心算法 · Marcus</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/blog/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/blog/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/blog/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/blog/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/blog/scripts/main.js" as="script">
+    <link rel="preload" href="/blog/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/blog/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/blog/">Marcus's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/blog/">Marcus&#39;s blog</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">贪心算法</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/blog/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                贪心算法
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/04/19</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/blog/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/blog/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="贪心算法">贪心算法</h1>
+<p>贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。</p>
+<h2 id="活动选择问题">活动选择问题</h2>
+<p>第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个<span
+class="math inline"><em>n</em></span>个活动的集合<span
+class="math inline"><em>S</em> = {<em>a</em><sub>1</sub>, <em>a</em><sub>2</sub>, ⋯, <em>a</em><sub><em>n</em></sub>}</span>，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>有两个属性——开始时间和结束时间<span
+class="math inline"><em>s</em><sub><em>i</em></sub></span>和<span
+class="math inline"><em>f</em><sub><em>i</em></sub></span>。其中<span
+class="math inline">0 ≤ <em>s</em><sub><em>i</em></sub> &lt; <em>f</em><sub><em>i</em></sub> &lt; ∞</span>，如果被选中，任务<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>发生在半开区间<span
+class="math inline">[<em>s</em><sub><em>i</em></sub>, <em>f</em><sub><em>i</em></sub>)</span>上。两个活动<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>和<span
+class="math inline"><em>a</em><sub><em>j</em></sub></span>我们说他们是兼容的，若<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>和<span
+class="math inline"><em>a</em><sub><em>j</em></sub></span>满足<span
+class="math inline">[<em>s</em><sub><em>i</em></sub>, <em>f</em><sub><em>i</em></sub>) ∩ [<em>s</em><sub><em>j</em></sub>, <em>f</em><sub><em>j</em></sub>) = ∅</span>。我们希望选出一个最大兼容活动集，假定活动按照结束时间的单调递增顺序排序</p>
+<p><span
+class="math display"><em>f</em><sub>1</sub> ≤ <em>f</em><sub>2</sub> ≤ ⋯ ≤ <em>f</em><sub><em>n</em></sub></span></p>
+<p>我们给出一个活动</p>
+<table>
+<thead>
+<tr>
+<th><span class="math inline"><em>i</em></span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span
+class="math inline"><em>s</em><sub><em>i</em></sub></span></td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>5</td>
+<td>3</td>
+<td>5</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+<td>2</td>
+<td>12</td>
+</tr>
+<tr>
+<td><span
+class="math inline"><em>f</em><sub><em>i</em></sub></span></td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>9</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>14</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>其中，子集<span
+class="math inline">{<em>a</em><sub>3</sub>, <em>a</em><sub>9</sub>, <em>a</em><sub>11</sub>}</span>显然是兼容的活动集，但还有一些其他更大的，比如<span
+class="math inline">{<em>a</em><sub>1</sub>, <em>a</em><sub>4</sub>, <em>a</em><sub>8</sub>, <em>a</em><sub>11</sub>}</span></p>
+<p>下面我们分几个步骤解决这个问题，我们先用动态规划将该问题分为两个子问题，然后将两个子问题的最优解合为原问题的一个最优解</p>
+<p>活动选择问题具有最优子结构性质，这也是我们使用动态规划的原因。为了证明它，我们定义<span
+class="math inline"><em>S</em><sub><em>i</em><em>j</em></sub></span>表示在活动<span
+class="math inline"><em>a</em><sub><em>i</em></sub></span>结束之后开始，切在<span
+class="math inline"><em>a</em><sub><em>j</em></sub></span>开始之前结束的活动的集合。现在我们希望求<span
+class="math inline"><em>S</em><sub><em>i</em><em>j</em></sub></span>的一个最大的相互兼容的活动子集，进一步假定<span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span>就是这样的一个子集，它包含活动<span
+class="math inline"><em>a</em><sub><em>k</em></sub></span>。那么因为最优解包含<span
+class="math inline"><em>a</em><sub><em>k</em></sub></span>，我们就又有两个子问题，寻找<span
+class="math inline"><em>S</em><sub><em>i</em><em>k</em></sub></span>的兼容活动和<span
+class="math inline"><em>S</em><sub><em>k</em><em>j</em></sub></span>的兼容活动。令<span
+class="math inline"><em>A</em><sub><em>i</em><em>k</em></sub> = <em>A</em><sub><em>i</em><em>j</em></sub> ∩ <em>S</em><sub><em>i</em><em>k</em></sub></span>和<span
+class="math inline"><em>A</em><sub><em>k</em><em>j</em></sub> = <em>A</em><sub><em>i</em><em>j</em></sub> ∩ <em>S</em><sub><em>k</em><em>j</em></sub></span>。
+那么<span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub> = <em>A</em><sub><em>i</em><em>k</em></sub> ∪ {<em>a</em><sub><em>k</em></sub>} ∪ <em>A</em><sub><em>k</em><em>j</em></sub></span>。于是有<span
+class="math inline">∣<em>A</em><sub><em>i</em><em>j</em></sub>∣ = ∣<em>A</em><sub><em>i</em><em>k</em></sub> ∣ + ∣ <em>A</em><sub><em>k</em><em>j</em></sub> ∣ +1</span></p>
+<p>当然也可以用反证法证明，这里略。</p>
+<p>我们刻画最优子结构，我们使用c[i,j]表示集合<span
+class="math inline"><em>S</em><sub><em>i</em><em>j</em></sub></span>的最优解的大小，那么可以得到递归式</p>
+<p><span
+class="math display"><em>c</em>[<em>i</em>, <em>j</em>] = <em>c</em>[<em>i</em>, <em>k</em>] + <em>c</em>[<em>k</em>, <em>j</em>] + 1</span></p>
+<p>若我们不知道<span
+class="math inline"><em>S</em><sub><em>i</em><em>j</em></sub></span>包含的最优活动<span
+class="math inline"><em>a</em><sub><em>k</em></sub></span>，则我们需要考察全部的活动，寻找哪个活动可以获得最优解，那么</p>
+<p><span class="math display">$$
+c[i,j] = \begin{cases}
+    0 &amp;&amp; \text{if }S_{ij} = \emptyset\\
+    \max_{a_k\in S_{ij}}\{c[i,k] +c[k,j]+1\} &amp;&amp; \text{if} S_{ij}
+\neq \emptyset
+\end{cases}
+$$</span></p>
+<p>那么我们就可以使用一个带备忘录的递归算法，或者自底向上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Memoized-select(s,f,n) </span><br><span class="line">//定义一个全新数组memo[i][j]，用来储存S[i,j]的最优解。然后初始化</span><br><span class="line">for i = 0 to n</span><br><span class="line">    for j = 0 to n</span><br><span class="line">        memo[i][j] = -1 //-1表示没计算</span><br><span class="line">return Recursive-activity-dp(s,f,0,n+1,memo)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Recursive-activity-dp(s,f,i,j,memo)</span><br><span class="line">if memo[i][j] != -1</span><br><span class="line">    return memo[i][j] //被计算了直接返回数值</span><br><span class="line">if j = i+1 //没活了返回0</span><br><span class="line">    memo[i][j] = 0</span><br><span class="line">    return memo[i][j]</span><br><span class="line">max_size = 0</span><br><span class="line">//开始递归，使用最优子结构的公式，我们下遍历所有的k</span><br><span class="line">for k = i+1 to j-1</span><br><span class="line">    if f[i] &lt;= s[k] &amp;&amp; f[k] &lt;= s[j] //a_k ∈ S_ij</span><br><span class="line">    current = Recursive-activity-dp(s,f,i,k,memo) + Recursive-activity-dp(s,f,k,j,memo)+1</span><br><span class="line">    if current &gt; max_size</span><br><span class="line">        max_size = current</span><br><span class="line">memo[i][j] = max_size</span><br><span class="line">return memo[i][j]</span><br></pre></td></tr></table></figure>
+<p>C代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> size = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Recurive_activity_dp</span><span class="params">(<span class="type">int</span> s[],<span class="type">int</span> f[],<span class="type">int</span> i, <span class="type">int</span> j,<span class="type">int</span> memo[][size])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> max_size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(memo[i][j] != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> memo[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j == i+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        memo[i][j] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k = i+<span class="number">1</span>; k &lt; j; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[k] &gt;= f[i] &amp;&amp; f[k] &lt;= s[j])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = <span class="number">1</span> + Recurive_activity_dp(s,f,i,k,memo) + Recurive_activity_dp(s,f,k,j,memo);</span><br><span class="line">            <span class="keyword">if</span>(size &gt; max_size)</span><br><span class="line">            &#123;</span><br><span class="line">                max_size = size;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    memo[i][j] = max_size;</span><br><span class="line">    <span class="keyword">return</span> max_size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Memoized_select</span><span class="params">(<span class="type">int</span> s[],<span class="type">int</span> f[],<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> memo[n][n];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            memo[i][j] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Recurive_activity_dp(s,f,<span class="number">0</span>,size+<span class="number">1</span>,memo);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> s[] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">1000</span>&#125;;</span><br><span class="line">    <span class="type">int</span> f[] = &#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">1000</span>&#125;;</span><br><span class="line">    <span class="type">int</span> ans = Memoized_select(s,f,size);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;The maximum number of activities that can be selected is: %d\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="贪心选择">贪心选择</h2>
+<p>动态规划缺点是烧脑子，其实注意到直觉，我们应该选择<span
+class="math inline"><em>S</em></span>中尽早结束的活动，因为它剩下的资源可供它之后尽可能多的活动使用换句话说，由于活动已经按照结束时间单调递增的顺序排序，贪心选择就是<span
+class="math inline"><em>a</em><sub>1</sub></span>。当然也可以选择其他的，这种方法不是唯一的。</p>
+<p>当做出贪心选择后，只剩下一个子问题需要我们求解，寻找<span
+class="math inline"><em>a</em><sub>1</sub></span>结束后开始的活动。并且我们早就证明该问题具备最优子结构问题，选出<span
+class="math inline"><em>a</em><sub>1</sub></span>之后，剩下的<span
+class="math inline"><em>S</em><sub>1</sub></span>就是需要唯一求解的子问题了。</p>
+<p>当然，我们要看看我们的直觉对不对</p>
+<p><strong>定理：</strong> 考虑任意非空子问题<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>，令<span
+class="math inline"><em>a</em><sub><em>m</em></sub></span>是<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>中结束最早的活动，则<span
+class="math inline"><em>a</em><sub><em>m</em></sub></span>在<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>的某个最大兼容活动子集中。</p>
+<p><strong>证明：</strong> 假设<span
+class="math inline"><em>A</em><sub><em>k</em></sub></span>是<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>中的一个最大兼容活动子集，且<span
+class="math inline"><em>a</em><sub><em>j</em></sub></span>是<span
+class="math inline"><em>A</em><sub><em>k</em></sub></span>中结束最早的活动，若<span
+class="math inline"><em>a</em><sub><em>j</em></sub> = <em>a</em><sub><em>m</em></sub></span>，则证明完毕，若<span
+class="math inline"><em>a</em><sub><em>j</em></sub> ≠ <em>a</em><sub><em>m</em></sub></span>，令集合<span
+class="math inline"><em>A</em><sub><em>k</em></sub><sup>′</sup> = <em>A</em><sub><em>k</em></sub> − {<em>a</em><sub><em>j</em></sub>} ∪ {<em>a</em><sub><em>m</em></sub>}</span>，显然这是成立的，由于<span
+class="math inline"><em>a</em><sub><em>j</em></sub></span>是<span
+class="math inline"><em>A</em><sub><em>k</em></sub></span>中结束最早的活动，现在<span
+class="math inline"><em>f</em><sub><em>m</em></sub> ≤ <em>f</em><sub><em>j</em></sub></span>并且<span
+class="math inline">∣<em>A</em><sub><em>k</em></sub><sup>′</sup>∣ = ∣<em>A</em><sub><em>k</em></sub>∣</span>，因此得出结论，<span
+class="math inline"><em>A</em><sub><em>k</em></sub><sup>′</sup></span>是<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>的一个最大兼容活动子集。且包含<span
+class="math inline"><em>a</em><sub><em>m</em></sub></span></p>
+<p>那么我们可以直接设计一个递归的贪心算法过程，这次我们不需要备忘录功能，每次递归只选择一次。过程<code>RECURSIVE-ACTIVITY-SELECTOR</code>的输入位两个数组<code>s,f</code>表示活动的开始和结束时间，下标<span
+class="math inline"><em>k</em></span>指出要求解的子问题<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>以及问题规模<span
+class="math inline"><em>n</em></span>。返回<span
+class="math inline"><em>S</em><sub><em>k</em></sub></span>的一个最大兼容活动集，假定<span
+class="math inline"><em>n</em></span>个活动都是排序好的，若没排序，我们可以在<span
+class="math inline"><em>O</em>(<em>n</em>lg <em>n</em>)</span>的时间内对其排序。为了方便我们初始化，添加一个虚拟活动<span
+class="math inline"><em>a</em><sub>0</sub></span>，它的结束时间<span
+class="math inline"><em>f</em><sub>0</sub> = 0</span>。这样我们直接调用<code>RECURSIVE-ACTIVITY-SELECTOR(s,f,0,n)</code>即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RECURSIVE-ACTIVITY-SELECTOR(s,f,k,n)</span><br><span class="line">m = k+1</span><br><span class="line">while m &lt;= n and s[m] &lt; f[k]</span><br><span class="line">    m = m+1</span><br><span class="line">if m &lt;= n</span><br><span class="line">    return &#123;a_m&#125; U RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)</span><br><span class="line">else</span><br><span class="line">    return null</span><br></pre></td></tr></table></figure>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 存储选中的活动编号（全局数组，方便递归返回结果）</span></span><br><span class="line"><span class="type">int</span> result[<span class="number">100</span>];</span><br><span class="line"><span class="type">int</span> index = <span class="number">0</span>; <span class="comment">// 结果数组下标</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 递归活动选择器（严格对应伪代码）</span></span><br><span class="line"><span class="comment"> * s: 活动开始时间数组</span></span><br><span class="line"><span class="comment"> * f: 活动结束时间数组</span></span><br><span class="line"><span class="comment"> * k: 上一个选中的活动编号</span></span><br><span class="line"><span class="comment"> * n: 总活动数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">RECURSIVE_ACTIVITY_SELECTOR</span><span class="params">(<span class="type">int</span> s[], <span class="type">int</span> f[], <span class="type">int</span> k, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m = k + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 寻找第一个 s[m] &gt;= f[k] 的活动</span></span><br><span class="line">    <span class="keyword">while</span> (m &lt;= n &amp;&amp; s[m] &lt; f[k]) &#123;</span><br><span class="line">        m = m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到活动，加入结果，继续递归</span></span><br><span class="line">    <span class="keyword">if</span> (m &lt;= n) &#123;</span><br><span class="line">        result[index++] = m; <span class="comment">// 保存活动编号</span></span><br><span class="line">        RECURSIVE_ACTIVITY_SELECTOR(s, f, m, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 无活动可选，直接返回</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 经典活动选择问题数据（下标从 1 开始）</span></span><br><span class="line">    <span class="comment">// 活动编号：1  2  3  4  5  6  7  8  9 10 11</span></span><br><span class="line">    <span class="type">int</span> s[] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">12</span>&#125;; <span class="comment">// 开始时间</span></span><br><span class="line">    <span class="type">int</span> f[] = &#123;<span class="number">0</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">16</span>&#125;; <span class="comment">// 结束时间</span></span><br><span class="line">    <span class="type">int</span> n = <span class="number">11</span>; <span class="comment">// 总活动数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始调用：k=0（虚拟活动，结束时间=0）</span></span><br><span class="line">    RECURSIVE_ACTIVITY_SELECTOR(s, f, <span class="number">0</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大兼容活动编号：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, result[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">https://monstergeo.github.io/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">April 19th 2026, 11:37:00 am</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">April 19th 2026, 11:37:46 am</a>
+            <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划">
+                    <div class="prevTitle">动态规划</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+            <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">贪心算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">活动选择问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E9%80%89%E6%8B%A9"><span class="toc-number">1.2.</span> <span class="toc-text">贪心选择</span></a></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span>
+            <a class="archive-post-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/blog/2026/02/16/shit/">shit</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/fft/">FFT</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/read-me/">read me</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/algor/phase_1/">function grow</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="algroithm">
+                <span class="iconfont-archer">&#xe606;</span>
+                algroithm
+            </span>
+            <span class="sidebar-tag-name" data-tags="math">
+                <span class="iconfont-archer">&#xe606;</span>
+                math
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/blog/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://monstergeo.github.io/blog",
+        root: siteMetaRoot,
+        author: "Done fool"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/blog/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/blog/scripts/share.js" async></script>
+        <!-- mermaid -->
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js' onload="window.mermaid.initialize({theme: 'dark'})" async></script>
+    </body>
+</html>

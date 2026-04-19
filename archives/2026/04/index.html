@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="https://monstergeo.github.io/blog/tags/algroithm/index.html">
+<meta property="og:url" content="https://monstergeo.github.io/blog/archives/2026/04/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Done fool">
@@ -403,84 +403,24 @@
                 <main class="main index-page">
             
         <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                <span class="abstract-title-text">动态规划</span>
+            <a class="abstract-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+                <span class="abstract-title-text">贪心算法</span>
             </a>
             <div class="abstract-content">
-                动态规划和分治算法类似，都通过组合子问题的解求解原问题。分治算法是将问题划分为不相交的子问题，但动态规划处理不同子问题具有公共的子子问题的求解。分治算法将重复的去求解这些子问题，但动态规划只会处理一次。将解保存在一个表格之中，避免了重复的操作。
-动态规划主要求解最优化问题，这类问题有很多可行解，每个解都是一个值，我们求解的是最优值（极大或极小值）
-我们通常这样设计一个动态规划算法：D + 刻画一个最优解的结构特征 +
-递归的定义最优解的值 + 计算最优解的值，通常采用自底向上的方法 +
-利用计算出的信息构造一个最优解
-下面我们给出一个动态规划方法求解最优化问题的例子
-钢条切割...
+                贪心算法
+贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。
+活动选择问题
+第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个n个活动的集合S = {a1, a2, ⋯, an}，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动ai有两个属性——开始时间和结束时间si和fi。其中0 ≤ si &lt; fi &lt; ∞，如果被选中，任务ai发生在半开区间[si, fi)上。两个活动ai和aj我们说他们是兼容的，若ai和aj满足[...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/22</span>
+                <div class="abstract-date" title="Last updated: 2026/04/19">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/19</span>
                 </div>
                 <!-- tags -->
                     <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/13/fft/">
-                <span class="abstract-title-text">FFT</span>
-            </a>
-            <div class="abstract-content">
-                Prior Knowledge
-This article will display how fft does work. If you learn algebra
-before, you will join this article. It will fun so much. basically in
-this article, code is simple, most part is related to math.
-Let’s start at Polynomial.
-basic definitions
-defined(Polynomial): A polynomial ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/02/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/13</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/13/algor/phase_1/">
-                <span class="abstract-title-text">function grow</span>
-            </a>
-            <div class="abstract-content">
-                第一章
-算法的定义
-简单来说，算法是任何的良定义的计算过程，这个过程接收某个值的集合作为输入并产生某个值或值的集合作为输出。这样算法就是把输入转换为输出的计算步骤的一个序列。
-翻译过来就是，给定well-defined的函数f(x), x ∈ A，A是集合，其中f是算法，把x变为f(x)作为输出。那么取遍集合A中的每个元素组成的集合就是一个序列f(x1), f(x2), ⋯
-例如，我们需要把一个数列排成非递减序列，那么这个排序问题可以这样定义：
-
-输入： n个数的一个序列(a1, a2, ⋯, an)
-输出： 输出序列的一个排列(a1′, a2′, ⋯, an′)，满足a1...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/02/13">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/13</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
 </div>
 
             </div>

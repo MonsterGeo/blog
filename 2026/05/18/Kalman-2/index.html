@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Done fool">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Done fool">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="这节是续上上一节的内容，我们将使用一个三阶滤波器α − β − γ滤波器来追踪加速飞行的航空器 使用α − β − γ滤波器 α − β − γ滤波器考虑了目标的加速度，因此，状态预测方程变为 $$\hat{x}_{n+1,n} &#x3D; \hat{x}_{n,n} + \hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalman_2">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/05/18/Kalman-2/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="这节是续上上一节的内容，我们将使用一个三阶滤波器α − β − γ滤波器来追踪加速飞行的航空器 使用α − β − γ滤波器 α − β − γ滤波器考虑了目标的加速度，因此，状态预测方程变为 $$\hat{x}_{n+1,n} &#x3D; \hat{x}_{n,n} + \hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.upmath.me/svgb/hVTbTttIGL7nKaYXlWDXuHaWtKUrX_eiu0_QcOHEQzIbx45sR4RGSJQAITQtRWoLOdGYqgiVpYEsWozjJA9Tz9i5yiusbEPqtKU7FyPrP3yH3_Yfi8MkkgoaSj_LooSWU-DKFAAA3AVfVl_jnfZwtfxlddc2TNvcxI1jp9pzTMM2tt1iz2m8IMaGU-255Q55V8KneyOr4g6qw1IFH5zY5qZtrNrGJ3J57pY7brFCqm3SHFyj46M1ctAga8dObZ28KxH9A2n87Zon-Oyc7LfDPSOrgnfadvcj2d62jRfD5qE7qLp6xe5-cFrP8VaLvCr7oLFFJIpP4yKfSN-ZZxbA9GyEjlKzLB2dAQpMaLyUFCGYZlk6SoEHdHTm96mgLxgBn0fqylM_4p0lJGgpjo0kMtQ4loIomdK4B3Q0HL0LSMvAg6J79Jycr42sGq73Xf0Yb24Mi8dYP8EbG7ZhOmY7GFXgatzt0YI4n0gnFTknCfdoVVsWIVfwzHBLKaTBlUmq0vBw3_3cd3qfR1aNvLnysH3gcZWGNA8hFl9UoYKgGkvIoqwUArDYH7yShOAJL2Z4CTzmkRTC9zvBtYJlNYUWNS6S1SYU4OZr0iq5vQvSKjmn_Z9LyYt8HIq3aQF_Ql7NKTADJQ1IuUwcKiGq5Z_3_thBSJ9bKeL6xVcpGSRxs3MUyGf4PMcy0RCTn2JoZo4Cy16WoeejE5hbXWwekbdn-HRveNhwy53bZ59IA1_4zRgXZUnjYmpCQVlNRc8gBXwbP3i3AYtjDv5nph4HV2AoEGEoMMdQ4D5DgYcMBViGCc9vXMfQEe-a86773vUwVJbh_5KVQPe1YkHhl76T5xfwIkpKnJzTVCTAsHSnt0ta1vfSyaVOLnWnth54CMrGfUkFCZzPT03EboSosogECvhS7vzGTAzL7V045mBkbbn9K6JvjqwyaV1ia-e2qfn_mYik8ecdNrgwFfbS3cdb_-KXOj57Q-oWPjxw6tv46h_S3fX2T_Wlt7LqnYDdHjSdt1X86j2u953a-rC769ns7DnmgDT1kVUeA8d4QciKsvZ1xXhHkDM8kjj2Ecsw1ERG5TNZEapc5NtETtQUHmgplEhPJvzVN44sgAIL7oFphp7_JQ9-BQzNzqzcrDwoCcHCm_Ifw-v_Pw">
+<meta property="og:image" content="https://i.upmath.me/svgb/lZbfT9tWFMff-SsOEpXs7mLZjq8TVGVvkzZpe9sbzoOTXBILY2fOTfkRRaKjLWRjQFu6jXZslKHSqmrXsYqNQMgfU2ynT_wL2712EhPo1OYl1zc-33Pu5_y4MfKkZDl1ak0vVKwCrXmkMVktmDbJypKSycE1OGt3ws1n4cnzYPM0WNv3Vw6Dh2_O2g_8vX3_9frICACAMWXZ9uRs2aIkB8I4RpBKi-CRAjWdkk1AwDoCPSPeiF6_BooE4fHP_sph2L4X7JyErc75yUq3ffxueT34-0l463W3eXB-0ozEi545O2lbpTIteeb8qCYjoGXLyYEgI00WoeRZxckqJZUszoGAZaTjgSe158nf3gh2lrvtNwnR8U-5VGEaQd42C9N9yfFxEHCKLx23SCY95h3BlOvQrEEtZz4H9a-IWa15ZIY4tHHjQ0VlpKdjTTPv3iRDmp8T5kiYERv9A_Tj9leO_dbTYGc5fHkaU3c9YhbKYMyB5UBdRoqMVBmlmDuE5QYY3FGe2O5s0hECSuZoNo7OpCAYczzCujHXO0pfe55razLSMMIywhjpjHBP3CZT9P-1ZWTMM-n5wZlSvaS8Xdz4wrGoZdrWgkkt13m7eE-QEej_pTV8dDt4vtVtHvh7P_jre931P_32bhQc98xgZ13PdEpkdEIe5R4RsEqMdxFYjkM8qJJKVq1QBJ5LTUqyGu4FxtzUB2FpibC-9moEbpp2jVRZTMGt--HL5llrDbDMIguPO2Gr499fDY87UWRiogRKHiHOqN4PqmZTz4yKglcD7pUYXw4T72UTs3wqmKVUxSyrKYx6eWhwmyEYw245i-HNARNFuoqKMcfDS2DBCSyJoudcwoPT8NWiv7EWPrrtN_fDpZXgr13_u2fdB9thqwOfQPDjkb_90_nJarTw797xn7xg0JoHSWJ5u0ZGU_0g4_6ZMb3pbPWbmumR69ETuBVWJtVsPXG4dN-OYxjS6o0zvZGDPrWK7VIouK5XtByTkirU-z-xj6AiTRNBwAhjEYQM0lQRBEVBmO0qGtKwCBctlAzCugiCqiItxb7TSFNEEFIqwmn2rV9hxPo0I4KgpZDOlDWMNCaiZZDOPGKZPfdtBjnREzn5rEqtGXaISwnpvHi3-FuweRg8fBy2dqOE-L_cDb89SrL3SPFCicbcr38ULhzjUqQY2ISUiZHJkhpDm5CuxCZLSgQOy5Ico5uQJmJ4kTnDx_cuA5SlVIQQy9w5bxApxhiveKdJ-CqUaQn8x6dnp9-D8CUpEacowjj4_zwNt9ps-Lz61e8sdZdWg60__NU73d-PInLRvVktuBV2Y5atKZqtCyrSFbExKLl07qo25XXJrzFew_zavDxCYdYq0nJWlTKFmWTXaqxnkzP2YirGDL5tuwvEKZExMNirBdd2vXo0FRt1NnHj6dcAwxgyj969ODUaQ6KJ4cjQiu9TudCJsUjUzmOQnCTvs_dIsWHka7ZN6Bj0yzyZQ46WOMU4EyMj_CH5d-Zf">
+<meta property="article:published_time" content="2026-05-18T14:21:54.000Z">
+<meta property="article:modified_time" content="2026-05-23T05:25:10.616Z">
+<meta property="article:author" content="Done fool">
+<meta property="article:tag" content="Kalman">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.upmath.me/svgb/hVTbTttIGL7nKaYXlWDXuHaWtKUrX_eiu0_QcOHEQzIbx45sR4RGSJQAITQtRWoLOdGYqgiVpYEsWozjJA9Tz9i5yiusbEPqtKU7FyPrP3yH3_Yfi8MkkgoaSj_LooSWU-DKFAAA3AVfVl_jnfZwtfxlddc2TNvcxI1jp9pzTMM2tt1iz2m8IMaGU-255Q55V8KneyOr4g6qw1IFH5zY5qZtrNrGJ3J57pY7brFCqm3SHFyj46M1ctAga8dObZ28KxH9A2n87Zon-Oyc7LfDPSOrgnfadvcj2d62jRfD5qE7qLp6xe5-cFrP8VaLvCr7oLFFJIpP4yKfSN-ZZxbA9GyEjlKzLB2dAQpMaLyUFCGYZlk6SoEHdHTm96mgLxgBn0fqylM_4p0lJGgpjo0kMtQ4loIomdK4B3Q0HL0LSMvAg6J79Jycr42sGq73Xf0Yb24Mi8dYP8EbG7ZhOmY7GFXgatzt0YI4n0gnFTknCfdoVVsWIVfwzHBLKaTBlUmq0vBw3_3cd3qfR1aNvLnysH3gcZWGNA8hFl9UoYKgGkvIoqwUArDYH7yShOAJL2Z4CTzmkRTC9zvBtYJlNYUWNS6S1SYU4OZr0iq5vQvSKjmn_Z9LyYt8HIq3aQF_Ql7NKTADJQ1IuUwcKiGq5Z_3_thBSJ9bKeL6xVcpGSRxs3MUyGf4PMcy0RCTn2JoZo4Cy16WoeejE5hbXWwekbdn-HRveNhwy53bZ59IA1_4zRgXZUnjYmpCQVlNRc8gBXwbP3i3AYtjDv5nph4HV2AoEGEoMMdQ4D5DgYcMBViGCc9vXMfQEe-a86773vUwVJbh_5KVQPe1YkHhl76T5xfwIkpKnJzTVCTAsHSnt0ta1vfSyaVOLnWnth54CMrGfUkFCZzPT03EboSosogECvhS7vzGTAzL7V045mBkbbn9K6JvjqwyaV1ia-e2qfn_mYik8ecdNrgwFfbS3cdb_-KXOj57Q-oWPjxw6tv46h_S3fX2T_Wlt7LqnYDdHjSdt1X86j2u953a-rC769ns7DnmgDT1kVUeA8d4QciKsvZ1xXhHkDM8kjj2Ecsw1ERG5TNZEapc5NtETtQUHmgplEhPJvzVN44sgAIL7oFphp7_JQ9-BQzNzqzcrDwoCcHCm_Ifw-v_Pw">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/blog/">
+    <title>Kalman_2 · Marcus</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/blog/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/blog/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/blog/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/blog/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/blog/scripts/main.js" as="script">
+    <link rel="preload" href="/blog/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/blog/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/blog/">Marcus's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/blog/">Marcus&#39;s blog</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">Kalman_2</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/blog/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                Kalman_2
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/05/18</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/blog/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/blog/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>这节是续上上一节的内容，我们将使用一个三阶滤波器<span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>滤波器来追踪加速飞行的航空器</p>
+<h1 id="使用alpha-beta-gamma滤波器">使用<span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>滤波器</h1>
+<p><span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>滤波器考虑了目标的加速度，因此，状态预测方程变为</p>
+<p><span class="math display">$$\hat{x}_{n+1,n} = \hat{x}_{n,n} +
+\hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delta
+t^2}{2}$$</span></p>
+<p><span class="math display">$$\hat{\dot{x}}_{n+1,n} =
+\hat{\dot{x}}_{n,n} + \hat{\ddot{x}}_{n,n} \Delta t$$</span></p>
+<p><span class="math display">$$\hat{\ddot{x}}_{n+1,n} =
+\hat{\ddot{x}}_{n,n}$$</span></p>
+<p>其中<span class="math inline">$\ddot{x}_{n}$</span>是加速度（<span
+class="math inline"><em>x</em></span>的二阶导）</p>
+<p>那么更新方程如下描述</p>
+<p><span class="math display">$$
+\begin{aligned}
+    \hat{x}_{n,n} = \hat{x}_{n,n-1} + \alpha(z_n - \hat{x}_{n,n-1})
+\end{aligned}
+$$</span></p>
+<p><span class="math display">$$\hat{\dot{x}}_{n,n} =
+\hat{\dot{x}}_{n,n-1} + \beta \left(\frac{z_n - \hat{x}_{n,n-1}}{\Delta
+t}\right)$$</span></p>
+<p><span class="math display">$$\hat{\ddot{x}}_{n,n} =
+\hat{\ddot{x}}_{n,n-1} + \gamma \left(\frac{z_n -
+\hat{x}_{n,n-1}}{0.5\Delta t^2}\right)$$</span></p>
+<p>当<span
+class="math inline"><em>γ</em> = 0</span>的时候，退化成我们上一节讲的<span
+class="math inline"><em>α</em> − <em>β</em></span>滤波器</p>
+<p><code>省略一堆例子</code></p>
+<h1 id="alpha-beta-gamma滤波器总结"><span
+class="math inline"><em>α</em> − <em>β</em> − (<em>γ</em>)</span>滤波器总结</h1>
+<p><span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>滤波器有很多种类，但都是基于相同的原理：</p>
+<ul>
+<li>当前状态估计基于状态更新方程(state update equations)计算的</li>
+<li>下一阶段的状态估计则基于动态模型(dynamic model equations)计算的</li>
+</ul>
+<p>这些滤波器之间的区别在于参数<span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>的选择。一些滤波器倾向于使用固定的三元组参数，但另一些则倾向于在每次迭代的时候重新计算参数的权重。因此，重点在于如何选择参数。而另一个重要的部分是如何初始化。</p>
+<p>这里省略，因为不是我们的重点</p>
+<h1 id="一维卡尔曼滤波器">一维卡尔曼滤波器</h1>
+<p>现在我们继续学习卡尔曼滤波器在一唯下的表现。首先我们考虑一些简单模型，比如不带过程噪声的一维卡尔曼滤波器</p>
+<p>卡尔曼滤波基于5个方程，我们已经学习了其中的2个，即状态更新方程和动态模型方程。在这个章节我们将直接推导剩下的3个方程，并修正状态更新方程。</p>
+<p>和上节的<span
+class="math inline"><em>α</em> − <em>β</em> − <em>γ</em></span>滤波器类似，卡尔曼滤波器也采用测量值-当前状态估计以及下一阶段的状态估计值（预测值）都视为服从正态分布的随机变量。这些随机变量通过均值和方差描述。</p>
+<p>下面是卡尔曼滤波器原理示意图</p>
+<p>系统接收2个输入，首先是测量值（每个周期传感器测到的值），还有初始化（第一次传入的估计值）。卡尔曼滤波器接收这两个参数，更新步骤结合上一步的预测值和当前的测量值进行状态更新，然后进入预测步骤，输出下一哥状态预测值作为下一个周期的预测值给更新步骤用。最后输出当前最佳的状态计算值</p>
+<h2 id="作为随机变量的估计值">作为随机变量的估计值</h2>
+<p>估计值和实际值之间的差我们成为估计误差，随着更多的测量，这个误差将逐渐的收敛到0，同时估计值也会靠近真实值，我们无法准确的知道这个误差是多少，但我们可以对这个状态的不确定性做估计</p>
+<p>而我们使用<span
+class="math inline"><em>p</em></span>代表状态估计方差(state estimate
+variance)</p>
+<h2 id="作为随机变量的测量值">作为随机变量的测量值</h2>
+<p>由于测量误差是随机的，我们可以用<span
+class="math inline"><em>σ</em><sup>2</sup></span>（方差）描述，测量误差的标准差即为测量不确定，我们使用<span
+class="math inline"><em>r</em></span>表示测量方差</p>
+<h2 id="状态预测">状态预测</h2>
+<p>我们接触的第一个例子是测量金条的重量，其中动态系统是常数，即</p>
+<p><span
+class="math display"><em>x̂</em><sub><em>n</em> + 1, <em>n</em></sub> = <em>x̂</em><em>n</em>, <em>n</em></span></p>
+<p>而在第二个例子，我们利用运动方程，将当前状态（目标的位置和速度）预测到了下一个阶段的状态。</p>
+<p><span class="math display">$$
+\begin{aligned}
+    \hat x_{n+1,n} &amp;= \hat x_{n,n} + \Delta t\hat{\dot{x}}_{n,n}\\
+    \hat{\dot{x}}_{n+1,n} &amp;= \hat{\dot{x}}_{n,n}
+\end{aligned}
+$$</span>
+也就是说，预测的位置相当于当前估计的位置加上估计值的速度与时间的乘积。则预测的速度等于当前的速度估计值。（基于匀速假设）</p>
+<p>这个动力模型方程依赖系统。</p>
+<p>由于卡尔曼滤波将估计值视为一个随机变量，因此我们必须将估计方差<span
+class="math inline">(<em>p</em><sub><em>n</em>, <em>n</em></sub>)</span>外推到下一个阶段的状态</p>
+<p>由于金条问题是静态系统，不确定性将不改变，因此<span
+class="math inline"><em>p̂</em><sub><em>n</em> + 1, <em>n</em></sub> = <em>p̂</em><sub><em>n</em>, <em>n</em></sub></span></p>
+<p>其中<span
+class="math inline"><em>p</em></span>是金条重量的估计方差</p>
+<p>若是飞机追踪问题，那么预测不确定方程如下：</p>
+<p><span class="math display">$$
+\begin{aligned}
+    p^x_{n+1,n} =&amp; p^x_{n,n}+ \Delta t^2\cdot p^v_{n,n}\\
+    p^v_{n+1,n} =&amp; p^v_{n,n}
+\end{aligned}
+$$</span></p>
+<p>其中<span
+class="math inline"><em>p</em><sup><em>x</em></sup></span>是位置的估计方差，<span
+class="math inline"><em>p</em><sup><em>v</em></sup></span>是速度的估计方差。</p>
+<p>他们和状态方程类似，这是因为误差随着状态的漂移而漂移。或者更进一步预测不确定性方程是作用在预测值上的一个同态函数。这个同态映射是状态方程。</p>
+<p>上面两个例子的意思是，在速度恒定模型上，位置估计的预测方差等于当前的位置预测方差，加上当前的速度估计方差乘以时间的平方。而速度估计的预测方差直接等于当前的速度估计方差。</p>
+<p>对任意方差为<span
+class="math inline"><em>σ</em><sup>2</sup></span>的正态分布随机变量<span
+class="math inline"><em>x</em></span>，<span
+class="math inline"><em>k</em><em>x</em></span>也服从正态分布并且方差变为<span
+class="math inline"><em>k</em><sup>2</sup><em>σ</em><sup>2</sup></span>。因此在不确定性外推方程上，时间项是平方形式。这个不确定方程也称为协方差外推方程..不过解释这个不是现在要做的事情。</p>
+<h2 id="状态更新">状态更新</h2>
+<p>为了估计系统的当前状态，我们结合了两个随机变量。 +
+先验状态估计（在前一个状态预测当前状态的估计值） + 测量值</p>
+<p>卡尔曼是最优滤波器，因为其结合先验状态和测量值。而当前状态估计正是测量值和先验状态的加权平均。</p>
+<p><span class="math display">$$
+\begin{aligned}
+    \hat x_{n,n} = &amp;w_1z_n + w_2\hat x_{n,n-1}\\
+    w_1+w_2 =&amp; 1
+\end{aligned}
+$$</span></p>
+<p>那么把<span
+class="math inline"><em>w</em><sub>2</sub> = 1 − <em>w</em><sub>1</sub></span>带入方程并转化为方差关系式就有
+<span class="math display">$$
+\begin{aligned}
+    p_{n,n} = w_1^2r_n + (1-w_1)^2p_{n,n-1}
+\end{aligned}
+$$</span></p>
+<p>其中 <span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub></span>是最优组合估计值的方差。
+<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span>是先验估计值<span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub></span>的方差
+<span
+class="math inline"><em>r</em><sub><em>n</em></sub></span>是测量值<span
+class="math inline"><em>z</em><sub><em>n</em></sub></span>的方差。</p>
+<p>注意方差的公式，对随机变量<span
+class="math inline"><em>k</em><em>x</em></span>，则方差就是<span
+class="math inline"><em>k</em><sup>2</sup><em>σ</em><sup>2</sup></span>。</p>
+<p>我们不喜欢不稳定的值，为此我们尽可能的希望<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub></span>是最小的，基于现有关系式，我们希望通过调整<span
+class="math inline"><em>w</em><sub>1</sub></span>使得<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub></span>最小，那么我们对<span
+class="math inline"><em>w</em><sub>1</sub></span>求导并令导数为0.有</p>
+<p><span class="math display">$$
+\frac{dp_{n,n}}{dw_1} = 2w_1r_n - 2(1-w_1)p_{n,n-1} = 0
+$$</span></p>
+<p>我们可以解出</p>
+<p><span class="math display">$$
+w_1 = \frac{p_{n,n-1}}{p_{n,n-1}+r_n}
+$$</span></p>
+<p>那么我们将这个结果应用到估计方程<span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub></span>上</p>
+<p><span
+class="math display"><em>x̂</em><sub><em>n</em>, <em>n</em></sub> = <em>w</em><sub>1</sub><em>z</em><sub><em>n</em></sub> + (1 − <em>w</em><sub>1</sub>)<em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> = <em>w</em><sub>1</sub><em>z</em><sub><em>n</em></sub> + <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> − <em>w</em><sub>1</sub><em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> = <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>w</em><sub>1</sub>(<em>z</em><sub><em>n</em></sub> − <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub>)</span></p>
+<p>那么完整的状态更新方程如下：</p>
+<p><span class="math display">$$
+\begin{aligned}
+    \hat x_{n,n} = \hat x_{n,n-1} + \frac{p_{n,n-1}}{p_{n,n-1} +
+r_n}(z_n - \hat x_{n,n-1})
+\end{aligned}
+$$</span></p>
+<p>这和我们一开始的<span
+class="math inline"><em>α</em> − <em>β</em> − (<em>γ</em>)</span>滤波器特别像，不过这里的创新点是<span
+class="math inline"><em>w</em><sub>1</sub></span>的极值应用在状态方程中，但这个<span
+class="math inline"><em>w</em><sub>1</sub></span>我们叫卡尔曼增益，记为<span
+class="math inline"><em>K</em><sub><em>n</em></sub></span>，而卡尔曼增益是一个介于<span
+class="math inline">0</span>到<span
+class="math inline">1</span>的数。</p>
+<p>最后，我们需要计算当前状态估计的方差，我们已经知道，方差之间的关系由以下公式给出，注意，一维协方差其实就是方差，</p>
+<p><span
+class="math display"><em>p</em><sub><em>n</em>, <em>n</em></sub> = (1 − <em>K</em><sub><em>n</em></sub>)<em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span>
+其中<span
+class="math inline"><em>K</em><sub><em>n</em></sub></span>是卡尔曼增益</p>
+<p>这个方程告诉我们，随着滤波器的每次迭代，估计的不确定性在降低，当测量噪声较高时，卡尔曼增益就会非常低，反过来一样，若噪声较低，那么卡尔曼增益将会很高，不确定度也会迅速向0收敛</p>
+<p>我们来自己测量一下，假设我们在测量一栋建筑物的高度，并且期望的精度是3cm(标准差
+= 3cm)，那么我们应该持续测量直到状态估计方差<span
+class="math inline"><em>σ</em><sup>2</sup></span>小于9cm</p>
+<h2 id="算法设计">算法设计</h2>
+<p>我们来联系之前学到的所有东西。</p>
+<p>滤波器输入的参数有：</p>
+<ul>
+<li>初始化
+<ul>
+<li>初始化只需要运行一次，且它提供两个参数：
+<ul>
+<li>初始系统状态(<span
+class="math inline"><em>x̂</em><sub>0, 0</sub></span>)</li>
+<li>初始系统方差(<span
+class="math inline"><em>p</em><sub>0, 0</sub></span>)
+初始化参数可以由其他系统提供，其他过程，或是通过经验猜出的值。即便初始化参数不够准确，卡尔曼滤波其实也能够收敛到真实值。</li>
+</ul></li>
+</ul></li>
+<li>测量值
+<ul>
+<li>测量值在每个滤波器的周期中会测量一次，并且提供2个参数
+<ul>
+<li>测量系统状态<span
+class="math inline"><em>z</em><sub><em>n</em></sub></span></li>
+<li>测量方差<span
+class="math inline"><em>r</em><sub><em>n</em></sub></span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>而滤波器的输出有：</p>
+<ul>
+<li>系统状态估计<span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub></span></li>
+<li>系统方差<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub></span></li>
+</ul>
+<p>下表总结五个卡尔曼滤波方程</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类别</th>
+<th style="text-align: left;">方程 (Equation)</th>
+<th style="text-align: left;">方程名称 (Equation Name)</th>
+<th style="text-align: left;">文献中的其他别名 (Alternative names used
+in the literature)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>状态更新</strong><br>(State
+Update)</td>
+<td style="text-align: left;"><span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>K</em><sub><em>n</em></sub>(<em>z</em><sub><em>n</em></sub> − <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub>)</span></td>
+<td style="text-align: left;">状态更新<br>(State Update)</td>
+<td style="text-align: left;">滤波方程 (Filtering Equation)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub> = (1 − <em>K</em><sub><em>n</em></sub>)<em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span></td>
+<td style="text-align: left;">协方差更新<br>(Covariance Update)</td>
+<td style="text-align: left;">修正方程 (Corrector Equation)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">$K_n =
+\frac{p_{n,n-1}}{p_{n,n-1} + r_n}$</span></td>
+<td style="text-align: left;">卡尔曼增益<br>(Kalman Gain)</td>
+<td style="text-align: left;">权重方程 (Weight Equation)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>状态预测</strong><br>(State
+Predict)</td>
+<td style="text-align: left;"><span
+class="math inline"><em>x̂</em><sub><em>n</em> + 1, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em></sub></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
+class="math inline">$\hat{x}_{n+1,n} = \hat{x}_{n,n} + \Delta t
+\dot{\hat{x}}_{n,n}$</span><br><span
+class="math inline">$\dot{\hat{x}}_{n+1,n} =
+\dot{\hat{x}}_{n,n}$</span><br><em>(适用于匀速运动动力学)</em></td>
+<td style="text-align: left;">状态外推<br>(State Extrapolation)</td>
+<td style="text-align: left;">预测器方程 (Predictor
+Equation)<br>状态转移方程 (Transition Equation)<br>预测方程 (Prediction
+Equation)<br>动力学模型 (Dynamic Model)<br>状态空间模型 (State Space
+Model)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span
+class="math inline"><em>p</em><sub><em>x</em>, <em>n</em> + 1, <em>n</em></sub> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
+class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>x</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup> + <em>Δ</em><em>t</em><sup>2</sup><em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup></span><br><span
+class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>v</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup></span><br><em>(适用于匀速运动动力学)</em></td>
+<td style="text-align: left;">协方差外推<br>(Covariance
+Extrapolation)</td>
+<td style="text-align: left;">预测器协方差方程 (Predictor Covariance
+Equation)</td>
+</tr>
+</tbody>
+</table>
+<p>注意的是，上述过程不含过程噪声，这是我们接下来研究的重点对象。状态外推方程和协方差外推方程取决于系统的动力学特征。</p>
+<p>算法如下设计：</p>
+<ul>
+<li><p>步骤0：初始化 系统提供两个参数，并运行一次</p>
+<ul>
+<li>系统初始状态<span
+class="math inline"><em>x̂</em><sub>0, 0</sub></span></li>
+<li>初始状态方差<span
+class="math inline"><em>p</em><sub>0, 0</sub></span></li>
+</ul></li>
+<li><p>步骤1 测量</p>
+<ul>
+<li>系统测量状态<span
+class="math inline"><em>z</em><sub><em>n</em></sub></span></li>
+<li>测量方差<span
+class="math inline"><em>r</em><sub><em>n</em></sub></span></li>
+</ul></li>
+<li><p>步骤2：系统更新 状态更新过程负责对系统的当前状态做状态估计
+输入有：</p>
+<ul>
+<li>测量值(<span
+class="math inline"><em>z</em><sub><em>n</em></sub></span>)</li>
+<li>测量方差<span
+class="math inline"><em>r</em><sub><em>n</em></sub></span></li>
+<li>先验系统状态估计<span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub></span></li>
+<li>先验系统状态估计方差<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span></li>
+</ul>
+<p>基于这些输入，状态更新过程计算卡尔曼增益并给出两个输出</p>
+<ul>
+<li>当前系统状态估计值和估计方差<span
+class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub></span>
+<span
+class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub></span></li>
+</ul></li>
+<li><p>步骤3： 预测</p>
+<p>预测过程基于系统的动力学模型，将当前系统状态估计值及其方差外推至下一个系统状态。
+在滤波器的第一次迭代中，初始化参数被视为先验状态估计值和方差。在随后的滤波器迭代中，预测输出将用作先验（预测的）状态估计值和方差。</p></li>
+</ul>
+<h2 id="卡尔曼增益带来的直觉">卡尔曼增益带来的直觉</h2>
+<p>让我们重写状态更新方程为</p>
+<center>
+<p><span
+class="math display"><em>x̂</em><sub><em>n</em>, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>K</em><sub><em>n</em></sub>(<em>z</em><sub><em>n</em></sub> − <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub>) = (1 − <em>K</em><sub><em>n</em></sub>)<em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>K</em><sub><em>n</em></sub><em>z</em><sub><em>n</em></sub></span></p>
+</center>
+<p>那么我们可以看到，卡尔曼增益<span
+class="math inline"><em>K</em><sub><em>n</em></sub></span>是测量值的权重，则<span
+class="math inline">1 − <em>K</em><sub><em>n</em></sub></span>则是当前估计值的权重。这意味着若<span
+class="math inline"><em>K</em><sub><em>n</em></sub></span>趋向于<span
+class="math inline">0</span>的时候，则表明测量值越不稳定且估计的不确定性很低。因此我们将给估计值很高的权重，给测量值低权重。一种特殊情况是，若测量不确定性的值等于估计的不确定性，那么<span
+class="math inline"><em>K</em><sub><em>n</em></sub> = 0.5</span></p>
+<p>而卡尔曼增益定义在形成新估计值的时候，测量值和先验估计值的权重，告诉我们测量值对最终估计值的修正程度。</p>
+<h2 id="测量高层建筑">测量高层建筑</h2>
+<p>现在我们来使用卡尔曼滤波器对一座高层建筑进行估计</p>
+<p>该模型的高度在一段时间内不会有变化，我们假设它满足这些参数：</p>
+<ul>
+<li>建筑物的真实高度是50米</li>
+<li>高度计的测量（标准差）在5米内</li>
+<li>十次测量值分别是<span
+class="math inline">49.03, 48.44, 55.21, 49.98, 50.6, 52.61, 45.87, 42.64, 48.26, 55.84</span></li>
+</ul>
+<h3 id="初始化">初始化</h3>
+<p>我们假设第一次估计值是<span
+class="math inline"><em>x̂</em><sub>0, 0</sub> = 60</span>m，现在，我们初始化估计方差，人类的估计误差估计在<span
+class="math inline">15</span>m，那么<span
+class="math inline"><em>σ</em> = 15, <em>σ</em><sup>2</sup> = 225</span>。那么<span
+class="math inline"><em>p</em><sub>0, 0</sub> = 225</span></p>
+<p>因为一开始我们还没测量，则我们对下一个时刻的估计就是上面的两个参数。因此<span
+class="math inline"><em>x̂</em><sub>1, 0</sub> = 60</span>m，且<span
+class="math inline"><em>p</em><sub>1, 0</sub> = 225</span>。那么我们开始第一次测量</p>
+<h3 id="第一次测量">第一次测量</h3>
+<p>首先，第一次测量为<span
+class="math inline"><em>z</em><sub>1</sub> = 49.03</span>m，方差<span
+class="math inline"><em>r</em><sub>1</sub> = 25</span></p>
+<p>现在我们计算卡尔曼增益</p>
+<h3 id="更新">更新</h3>
+<p><span class="math display">$$
+\begin{aligned}
+    K_1 = \frac{p_{1,0}}{p_{1,0}+r_1} = \frac{p_{1,0}}{p_{1,0}+25} = 0.9
+\end{aligned}
+$$</span></p>
+<p>当前估计值为</p>
+<p><span
+class="math display"><em>x̂</em><sub>1, 1</sub> = <em>x̂</em><sub>1, 0</sub> + <em>K</em><sub>1</sub>(<em>z</em><sub>1</sub> − <em>x̂</em><sub>1, 0</sub>) = 60 + 0.9(49.03 − 60) = 50.13</span></p>
+<p>当前估计方差为</p>
+<p><span
+class="math display"><em>p</em><sub>1, 1</sub> = (1 − <em>K</em><sub>1</sub>)<em>p</em><sub>1, 0</sub> = (1 − 0.9)225 = 22.5</span></p>
+<p>然后我们把这些作为下一个时刻的先验估计值提供，记为</p>
+<p><span class="math display">$$
+\begin{aligned}
+    \hat x_{2,1} = \hat x_{1,1} = 50.13\\
+    p_{2,1} = p_{1,1} = 22.5
+\end{aligned}
+$$</span></p>
+<p>第二次更新为</p>
+<p><span class="math display">$$
+\begin{array}{rcl}
+    K_2 &amp;=&amp; \frac{p_{2,1}}{p_{2,1}+r_2} = \frac{22.5}{22.5+25} =
+0.47\\
+    \hat x_{2,2} &amp;=&amp; \hat x_{2,1} + K_2(z_2 - x_{2,1}) =
+50.13+0.47(48.44-50.13) = 49.33\\
+    p_{2,2} &amp;=&amp; (1-K_2)p_{2,1} = (1-0.47)22.5 = 11.84
+\end{array}
+$$</span></p>
+<p>为了方便，我们编写如下递推程序来解决这个问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> measurement[] = &#123;<span class="number">49.03</span>, <span class="number">48.44</span>,<span class="number">55.21</span>,<span class="number">49.98</span>,<span class="number">50.6</span>,<span class="number">52.61</span>,<span class="number">45.87</span>,<span class="number">42.64</span>,<span class="number">48.26</span>,<span class="number">55.84</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//输入为测量值，估计值，估计误差和测量误差，输出新的估计值</span></span><br><span class="line"><span class="type">double</span> <span class="title function_">KalmanFilter</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> max, <span class="type">double</span> measurement[], <span class="type">double</span> estimation, <span class="type">double</span> error_estimation, <span class="type">double</span> error_measurement)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &gt; max)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> estimation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//计算卡尔曼增益</span></span><br><span class="line">    <span class="type">double</span> kalman_gain = error_estimation / (error_estimation + error_measurement);</span><br><span class="line">    <span class="comment">//更新估计值</span></span><br><span class="line">    <span class="type">double</span> new_estimation = estimation + kalman_gain * (measurement[n<span class="number">-1</span>] - estimation);</span><br><span class="line">    <span class="comment">//更新估计方差</span></span><br><span class="line">    <span class="type">double</span> new_error_estimation = (<span class="number">1</span> - kalman_gain) * error_estimation;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;第%d次测量值：%lf, 卡尔曼增益：%lf, 新的估计值：%lf, 新的估计误差：%lf\n&quot;</span>, n, measurement[n<span class="number">-1</span>], kalman_gain, new_estimation, new_error_estimation);</span><br><span class="line">    KalmanFilter(n + <span class="number">1</span>, max, measurement, new_estimation, new_error_estimation, error_measurement);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> estimation = <span class="number">60.0</span>;</span><br><span class="line">    <span class="type">double</span> frist_error_estimation = <span class="number">225.0</span>;</span><br><span class="line">    <span class="type">double</span> error_measurement = <span class="number">25.0</span>;</span><br><span class="line">    <span class="type">int</span> size = <span class="keyword">sizeof</span>(measurement) / <span class="keyword">sizeof</span>(measurement[<span class="number">0</span>]);</span><br><span class="line">    <span class="type">double</span> final_estimation = KalmanFilter(<span class="number">1</span>, size, measurement, estimation, frist_error_estimation, error_measurement);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最终估计值为：%lf\n&quot;</span>, final_estimation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">第1次测量值：49.030000, 卡尔曼增益：0.900000, 新的估计值：50.127000, 新的估计误差：22.500000</span><br><span class="line">第2次测量值：48.440000, 卡尔曼增益：0.473684, 新的估计值：49.327895, 新的估计误差：11.842105</span><br><span class="line">第3次测量值：55.210000, 卡尔曼增益：0.321429, 新的估计值：51.218571, 新的估计误差：8.035714</span><br><span class="line">第4次测量值：49.980000, 卡尔曼增益：0.243243, 新的估计值：50.917297, 新的估计误差：6.081081</span><br><span class="line">第5次测量值：50.600000, 卡尔曼增益：0.195652, 新的估计值：50.855217, 新的估计误差：4.891304</span><br><span class="line">第6次测量值：52.610000, 卡尔曼增益：0.163636, 新的估计值：51.142364, 新的估计误差：4.090909</span><br><span class="line">第7次测量值：45.870000, 卡尔曼增益：0.140625, 新的估计值：50.400938, 新的估计误差：3.515625</span><br><span class="line">第8次测量值：42.640000, 卡尔曼增益：0.123288, 新的估计值：49.444110, 新的估计误差：3.082192</span><br><span class="line">第9次测量值：48.260000, 卡尔曼增益：0.109756, 新的估计值：49.314146, 新的估计误差：2.743902</span><br><span class="line">第10次测量值：55.840000, 卡尔曼增益：0.098901, 新的估计值：49.959560, 新的估计误差：2.472527</span><br><span class="line">最终估计值为：49.959560</span><br></pre></td></tr></table></figure>
+<p align="center">
+<a href="https://www.google.com">
+<img src="https://i.upmath.me/svgb/hVTbTttIGL7nKaYXlWDXuHaWtKUrX_eiu0_QcOHEQzIbx45sR4RGSJQAITQtRWoLOdGYqgiVpYEsWozjJA9Tz9i5yiusbEPqtKU7FyPrP3yH3_Yfi8MkkgoaSj_LooSWU-DKFAAA3AVfVl_jnfZwtfxlddc2TNvcxI1jp9pzTMM2tt1iz2m8IMaGU-255Q55V8KneyOr4g6qw1IFH5zY5qZtrNrGJ3J57pY7brFCqm3SHFyj46M1ctAga8dObZ28KxH9A2n87Zon-Oyc7LfDPSOrgnfadvcj2d62jRfD5qE7qLp6xe5-cFrP8VaLvCr7oLFFJIpP4yKfSN-ZZxbA9GyEjlKzLB2dAQpMaLyUFCGYZlk6SoEHdHTm96mgLxgBn0fqylM_4p0lJGgpjo0kMtQ4loIomdK4B3Q0HL0LSMvAg6J79Jycr42sGq73Xf0Yb24Mi8dYP8EbG7ZhOmY7GFXgatzt0YI4n0gnFTknCfdoVVsWIVfwzHBLKaTBlUmq0vBw3_3cd3qfR1aNvLnysH3gcZWGNA8hFl9UoYKgGkvIoqwUArDYH7yShOAJL2Z4CTzmkRTC9zvBtYJlNYUWNS6S1SYU4OZr0iq5vQvSKjmn_Z9LyYt8HIq3aQF_Ql7NKTADJQ1IuUwcKiGq5Z_3_thBSJ9bKeL6xVcpGSRxs3MUyGf4PMcy0RCTn2JoZo4Cy16WoeejE5hbXWwekbdn-HRveNhwy53bZ59IA1_4zRgXZUnjYmpCQVlNRc8gBXwbP3i3AYtjDv5nph4HV2AoEGEoMMdQ4D5DgYcMBViGCc9vXMfQEe-a86773vUwVJbh_5KVQPe1YkHhl76T5xfwIkpKnJzTVCTAsHSnt0ta1vfSyaVOLnWnth54CMrGfUkFCZzPT03EboSosogECvhS7vzGTAzL7V045mBkbbn9K6JvjqwyaV1ia-e2qfn_mYik8ecdNrgwFfbS3cdb_-KXOj57Q-oWPjxw6tv46h_S3fX2T_Wlt7LqnYDdHjSdt1X86j2u953a-rC769ns7DnmgDT1kVUeA8d4QciKsvZ1xXhHkDM8kjj2Ecsw1ERG5TNZEapc5NtETtQUHmgplEhPJvzVN44sgAIL7oFphp7_JQ9-BQzNzqzcrDwoCcHCm_Ifw-v_Pw" alt="result" width="400" />
+</a>
+</p>
+<p>通过上图我们可以看到卡尔曼增益迅速的收敛，通过程序，我们迭代50次之后可以看到如下不同：</p>
+<p align="center">
+<a href="https://www.google.com">
+<img src="https://i.upmath.me/svgb/lZbfT9tWFMff-SsOEpXs7mLZjq8TVGVvkzZpe9sbzoOTXBILY2fOTfkRRaKjLWRjQFu6jXZslKHSqmrXsYqNQMgfU2ynT_wL2712EhPo1OYl1zc-33Pu5_y4MfKkZDl1ak0vVKwCrXmkMVktmDbJypKSycE1OGt3ws1n4cnzYPM0WNv3Vw6Dh2_O2g_8vX3_9frICACAMWXZ9uRs2aIkB8I4RpBKi-CRAjWdkk1AwDoCPSPeiF6_BooE4fHP_sph2L4X7JyErc75yUq3ffxueT34-0l463W3eXB-0ozEi545O2lbpTIteeb8qCYjoGXLyYEgI00WoeRZxckqJZUszoGAZaTjgSe158nf3gh2lrvtNwnR8U-5VGEaQd42C9N9yfFxEHCKLx23SCY95h3BlOvQrEEtZz4H9a-IWa15ZIY4tHHjQ0VlpKdjTTPv3iRDmp8T5kiYERv9A_Tj9leO_dbTYGc5fHkaU3c9YhbKYMyB5UBdRoqMVBmlmDuE5QYY3FGe2O5s0hECSuZoNo7OpCAYczzCujHXO0pfe55razLSMMIywhjpjHBP3CZT9P-1ZWTMM-n5wZlSvaS8Xdz4wrGoZdrWgkkt13m7eE-QEej_pTV8dDt4vtVtHvh7P_jre931P_32bhQc98xgZ13PdEpkdEIe5R4RsEqMdxFYjkM8qJJKVq1QBJ5LTUqyGu4FxtzUB2FpibC-9moEbpp2jVRZTMGt--HL5llrDbDMIguPO2Gr499fDY87UWRiogRKHiHOqN4PqmZTz4yKglcD7pUYXw4T72UTs3wqmKVUxSyrKYx6eWhwmyEYw245i-HNARNFuoqKMcfDS2DBCSyJoudcwoPT8NWiv7EWPrrtN_fDpZXgr13_u2fdB9thqwOfQPDjkb_90_nJarTw797xn7xg0JoHSWJ5u0ZGU_0g4_6ZMb3pbPWbmumR69ETuBVWJtVsPXG4dN-OYxjS6o0zvZGDPrWK7VIouK5XtByTkirU-z-xj6AiTRNBwAhjEYQM0lQRBEVBmO0qGtKwCBctlAzCugiCqiItxb7TSFNEEFIqwmn2rV9hxPo0I4KgpZDOlDWMNCaiZZDOPGKZPfdtBjnREzn5rEqtGXaISwnpvHi3-FuweRg8fBy2dqOE-L_cDb89SrL3SPFCicbcr38ULhzjUqQY2ISUiZHJkhpDm5CuxCZLSgQOy5Ico5uQJmJ4kTnDx_cuA5SlVIQQy9w5bxApxhiveKdJ-CqUaQn8x6dnp9-D8CUpEacowjj4_zwNt9ps-Lz61e8sdZdWg60__NU73d-PInLRvVktuBV2Y5atKZqtCyrSFbExKLl07qo25XXJrzFew_zavDxCYdYq0nJWlTKFmWTXaqxnkzP2YirGDL5tuwvEKZExMNirBdd2vXo0FRt1NnHj6dcAwxgyj969ODUaQ6KJ4cjQiu9TudCJsUjUzmOQnCTvs_dIsWHka7ZN6Bj0yzyZQ46WOMU4EyMj_CH5d-Zf" alt="result" width="700" />
+</a>
+</p>
+<p>这就是为什么我们说卡尔曼滤波器是最优滤波器</p>
+<h2 id="references">References</h2>
+<p>[1] Alex Becker (2021). Kalman Filter from the Ground Up. Independent
+Publishing.</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/05/18/Kalman-2/">https://monstergeo.github.io/blog/2026/05/18/Kalman-2/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/05/18/Kalman-2/">May 18th 2026, 10:21:54 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/05/18/Kalman-2/">May 23rd 2026, 1:25:10 pm</a>
+            <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/blog/2026/05/16/Kalman/" title="Kalman">
+                    <div class="prevTitle">Kalman</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+            <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8alpha-beta-gamma%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">使用α − β − γ滤波器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#alpha-beta-gamma%E6%BB%A4%E6%B3%A2%E5%99%A8%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">α − β − (γ)滤波器总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">一维卡尔曼滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%BA%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E4%BC%B0%E8%AE%A1%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">作为随机变量的估计值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%BA%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%B5%8B%E9%87%8F%E5%80%BC"><span class="toc-number">3.2.</span> <span class="toc-text">作为随机变量的测量值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E9%A2%84%E6%B5%8B"><span class="toc-number">3.3.</span> <span class="toc-text">状态预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9B%B4%E6%96%B0"><span class="toc-number">3.4.</span> <span class="toc-text">状态更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.5.</span> <span class="toc-text">算法设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E5%A2%9E%E7%9B%8A%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%9B%B4%E8%A7%89"><span class="toc-number">3.6.</span> <span class="toc-text">卡尔曼增益带来的直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E9%87%8F%E9%AB%98%E5%B1%82%E5%BB%BA%E7%AD%91"><span class="toc-number">3.7.</span> <span class="toc-text">测量高层建筑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.7.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E9%87%8F"><span class="toc-number">3.7.2.</span> <span class="toc-text">第一次测量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">3.7.3.</span> <span class="toc-text">更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">3.8.</span> <span class="toc-text">References</span></a></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 8
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span>
+            <a class="archive-post-title" href="/blog/2026/05/18/Kalman-2/">Kalman_2</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/16</span>
+            <a class="archive-post-title" href="/blog/2026/05/16/Kalman/">Kalman</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span>
+            <a class="archive-post-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/blog/2026/02/16/shit/">shit</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/fft/">FFT</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/read-me/">read me</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/algor/phase_1/">function grow</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="Kalman">
+                <span class="iconfont-archer">&#xe606;</span>
+                Kalman
+            </span>
+            <span class="sidebar-tag-name" data-tags="math">
+                <span class="iconfont-archer">&#xe606;</span>
+                math
+            </span>
+            <span class="sidebar-tag-name" data-tags="algroithm">
+                <span class="iconfont-archer">&#xe606;</span>
+                algroithm
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/blog/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://monstergeo.github.io/blog",
+        root: siteMetaRoot,
+        author: "Done fool"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/blog/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/blog/scripts/share.js" async></script>
+        <!-- mermaid -->
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js' onload="window.mermaid.initialize({theme: 'dark'})" async></script>
+    </body>
+</html>

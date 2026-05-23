@@ -403,6 +403,36 @@
                 <main class="main index-page">
             
         <article class="index-post">
+            <a class="abstract-title" href="/blog/2026/05/18/Kalman-2/">
+                <span class="abstract-title-text">Kalman_2</span>
+            </a>
+            <div class="abstract-content">
+                这节是续上上一节的内容，我们将使用一个三阶滤波器α − β − γ滤波器来追踪加速飞行的航空器
+使用α − β − γ滤波器
+α − β − γ滤波器考虑了目标的加速度，因此，状态预测方程变为
+$$\hat{x}_{n+1,n} = \hat{x}_{n,n} +
+\hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delta
+t^2}{2}$$
+$$\hat{\dot{x}}_{n+1,n} =
+\hat{\dot{x}}_{n,n} + \hat{\ddot{x}}_{n,n} \Delta t$$
+$...
+            </div>
+            <!-- read more -->
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/05/23">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/18</span>
+                </div>
+                <!-- tags -->
+                    <div class="abstract-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+</div>
+
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+            
+        <article class="index-post">
             <a class="abstract-title" href="/blog/2026/05/16/Kalman/">
                 <span class="abstract-title-text">Kalman</span>
             </a>
@@ -503,7 +533,7 @@ sequ...
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/07">
+                <div class="abstract-date" title="Last updated: 2026/05/23">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/16</span>
                 </div>
                 <!-- tags -->
@@ -634,15 +664,20 @@ z=\dfra...
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 8
         </div>
         <!-- search  -->
     </div>
     <div class="post-archive">
             <div class="archive-year"> 2026 </div>
             <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span>
+            <a class="archive-post-title" href="/blog/2026/05/18/Kalman-2/">Kalman_2</a>
+        </li>
         <li class="archive-post-item">
             <span class="archive-post-date">05/16</span>
             <a class="archive-post-title" href="/blog/2026/05/16/Kalman/">Kalman</a>
@@ -677,6 +712,10 @@ z=\dfra...
 
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="Kalman">
+                <span class="iconfont-archer">&#xe606;</span>
+                Kalman
+            </span>
             <span class="sidebar-tag-name" data-tags="math">
                 <span class="iconfont-archer">&#xe606;</span>
                 math
@@ -684,10 +723,6 @@ z=\dfra...
             <span class="sidebar-tag-name" data-tags="algroithm">
                 <span class="iconfont-archer">&#xe606;</span>
                 algroithm
-            </span>
-            <span class="sidebar-tag-name" data-tags="Kalman">
-                <span class="iconfont-archer">&#xe606;</span>
-                Kalman
             </span>
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

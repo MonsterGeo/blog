@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="https://monstergeo.github.io/blog/tags/math/index.html">
+<meta property="og:url" content="https://monstergeo.github.io/blog/tags/stm32/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Done fool">
@@ -403,57 +403,26 @@
                 <main class="main index-page">
             
         <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
-                <span class="abstract-title-text">贪心算法</span>
+            <a class="abstract-title" href="/blog/2026/05/23/stm32-minirtos/">
+                <span class="abstract-title-text">stm32_minirtos</span>
             </a>
             <div class="abstract-content">
-                贪心算法
-贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。
-活动选择问题
-第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个n个活动的集合S = {a1, a2, ⋯, an}，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动ai有两个属性——开始时间和结束时间si和fi。其中0 ≤ si &lt; fi &lt; ∞，如果被选中，任务ai发生在半开区间[si, fi)上。两个活动ai和aj我们说他们是兼容的，若ai和aj满足[...
+                在Stm32F103C8t6上跑类unix
+本文章包含如下内容：数据结构+shell编写
+首先是循环列表的实现：
+关于循环列表的原理在另一个博客里面已经讲得够多的了：循环队列
+那么新建一个quene.h文件和quene.c文件。在quene.h里面如下定义：
+1234567891011121314151617181920#ifndef __RINGBUF_H#define __RINGBUF_H#include &lt;stdint.h&gt;#define RING_BUF_SIZE  64  // 缓冲区大小typedef struct &#123;    uint8_t ...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/19">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/19</span>
+                <div class="abstract-date" title="Last updated: 2026/05/24">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/23</span>
                 </div>
                 <!-- tags -->
                     <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/16/shit/">
-                <span class="abstract-title-text">shit</span>
-            </a>
-            <div class="abstract-content">
-                Prove
-for number n is Fibonacci
-number if and only if 5n2 ± 4 is perfect square
-number
-This title is my paper title.
-Introduction
-I had originally planned to finish this problem last year.but I don’t
-car. Let’s try finish at this year.
-Body
-Fibonacci sequence
-defintion 1(Fibonacci
-sequ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/16</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="stm32">stm32</a>
 </div>
 
             </div>

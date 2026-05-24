@@ -415,11 +415,11 @@
             </a>
             <div class="abstract-content">
                 在Stm32F103C8t6上跑类unix
-本文章包含如下内容：数据结构+shell编写
+本文章包含如下内容：数据结构+shell编写，进程调度和线程的内容则是下一个章节会提到的东西
 首先是循环列表的实现：
 关于循环列表的原理在另一个博客里面已经讲得够多的了：循环队列
 那么新建一个quene.h文件和quene.c文件。在quene.h里面如下定义：
-1234567891011121314151617181920#ifndef __RINGBUF_H#define __RINGBUF_H#include &lt;stdint.h&gt;#define RING_BUF_SIZE  64  // 缓冲区大小typedef struct &#123;    uint8_t ...
+1234567891011121314151617181920#ifndef __RINGBUF_H#define __RINGBUF_H#include &lt;stdint.h&gt;#define RING_BUF_SIZE  64  // 缓冲区大小typedef s...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">

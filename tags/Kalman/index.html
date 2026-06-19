@@ -403,6 +403,41 @@
                 <main class="main index-page">
             
         <article class="index-post">
+            <a class="abstract-title" href="/blog/2026/06/06/mult-Kalman/">
+                <span class="abstract-title-text">mult-Kalman</span>
+            </a>
+            <div class="abstract-content">
+                #多重卡尔曼滤波器
+前置知识
+之前我们都只考虑一个一维的卡尔曼滤波，现在我们考虑一个飞机在空间中飞行的例子，它是一个三维的，我们这样说的原因是因为有三个方向，每个方向有单独的状态方程
+那么对于不不确定的状态变量，我们可以用这么一组向量表示
+$$
+\begin{aligned}
+    \begin{bmatrix}
+        x\\
+        y\\
+        z
+    \end{bmatrix}
+\end{aligned}
+$$
+上面这一组向量说明实验是一个三维的。因为有三个状态，我们也把这个叫状态向量。如果你学习过线性代数你应该知道我为什...
+            </div>
+            <!-- read more -->
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/06/06">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/06/06</span>
+                </div>
+                <!-- tags -->
+                    <div class="abstract-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+</div>
+
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+            
+        <article class="index-post">
             <a class="abstract-title" href="/blog/2026/05/23/Kalman-3/">
                 <span class="abstract-title-text">Kalman_3</span>
             </a>
@@ -411,12 +446,32 @@
 在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析
 完整一维卡尔曼滤波模型
 过程噪声
+我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为：
+$$
+\begin{aligned}
+    p_{n+1,n} = p_{n,n} + q_n
+\end{aligned}
+$$
 
+我们把这个公式加入到我们总结的一维卡尔曼滤波表格
+
+
+
+
+
+
+
+
+
+类别
+方程 (Equation)
+方程名称 (Equation Name)
+文献中的其他别名 (A...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
+                <div class="abstract-date" title="Last updated: 2026/06/06">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/23</span>
                 </div>
                 <!-- tags -->
@@ -524,15 +579,20 @@ $...
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 10
+        Total : 11
         </div>
         <!-- search  -->
     </div>
     <div class="post-archive">
             <div class="archive-year"> 2026 </div>
             <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/06</span>
+            <a class="archive-post-title" href="/blog/2026/06/06/mult-Kalman/">mult-Kalman</a>
+        </li>
         <li class="archive-post-item">
             <span class="archive-post-date">05/23</span>
             <a class="archive-post-title" href="/blog/2026/05/23/stm32-minirtos/">stm32_minirtos</a>
@@ -587,13 +647,13 @@ $...
                 <span class="iconfont-archer">&#xe606;</span>
                 algroithm
             </span>
-            <span class="sidebar-tag-name" data-tags="math">
-                <span class="iconfont-archer">&#xe606;</span>
-                math
-            </span>
             <span class="sidebar-tag-name" data-tags="stm32">
                 <span class="iconfont-archer">&#xe606;</span>
                 stm32
+            </span>
+            <span class="sidebar-tag-name" data-tags="math">
+                <span class="iconfont-archer">&#xe606;</span>
+                math
             </span>
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

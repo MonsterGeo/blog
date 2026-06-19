@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="https://monstergeo.github.io/blog/archives/index.html">
+<meta property="og:url" content="https://monstergeo.github.io/blog/archives/page/2/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Done fool">
@@ -403,297 +403,19 @@
                 <main class="main index-page">
             
         <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/06/06/mult-Kalman/">
-                <span class="abstract-title-text">mult-Kalman</span>
+            <a class="abstract-title" href="/blog/2026/02/13/read-me/">
+                <span class="abstract-title-text">read me</span>
             </a>
             <div class="abstract-content">
-                #多重卡尔曼滤波器
-前置知识
-之前我们都只考虑一个一维的卡尔曼滤波，现在我们考虑一个飞机在空间中飞行的例子，它是一个三维的，我们这样说的原因是因为有三个方向，每个方向有单独的状态方程
-那么对于不不确定的状态变量，我们可以用这么一组向量表示
+                This file is be used to test latex and some funny toy.
+Maybe I’ll write some high-tech post. Sometime I use english, but
+most of the time use chinese.
 $$
-\begin{aligned}
-    \begin{bmatrix}
-        x\\
-        y\\
-        z
-    \end{bmatrix}
-\end{aligned}
-$$
-上面这一组向量说明实验是一个三维的。因为有三个状态，我们也把这个叫状态向量。如果你学习过线性代数你应该知道我为什...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/06/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/06/06</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/23/stm32-minirtos/">
-                <span class="abstract-title-text">stm32_minirtos</span>
-            </a>
-            <div class="abstract-content">
-                在Stm32F103C8t6上跑类unix
-本文章包含如下内容：数据结构+shell编写，进程调度和线程的内容则是下一个章节会提到的东西
-首先是循环列表的实现：
-关于循环列表的原理在另一个博客里面已经讲得够多的了：循环队列
-那么新建一个quene.h文件和quene.c文件。在quene.h里面如下定义：
-1234567891011121314151617181920#ifndef __RINGBUF_H#define __RINGBUF_H#include &lt;stdint.h&gt;#define RING_BUF_SIZE  64  // 缓冲区大小typedef s...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/28">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/23</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="stm32">stm32</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/23/Kalman-3/">
-                <span class="abstract-title-text">Kalman_3</span>
-            </a>
-            <div class="abstract-content">
-                添加过程噪声
-在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析
-完整一维卡尔曼滤波模型
-过程噪声
-我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为：
-$$
-\begin{aligned}
-    p_{n+1,n} = p_{n,n} + q_n
-\end{aligned}
-$$
-
-我们把这个公式加入到我们总结的一维卡尔曼滤波表格
-
-
-
-
-
-
-
-
-
-类别
-方程 (Equation)
-方程名称 (Equation Name)
-文献中的其他别名 (A...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/06/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/23</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/18/Kalman-2/">
-                <span class="abstract-title-text">Kalman_2</span>
-            </a>
-            <div class="abstract-content">
-                这节是续上上一节的内容，我们将使用一个三阶滤波器α − β − γ滤波器来追踪加速飞行的航空器
-使用α − β − γ滤波器
-α − β − γ滤波器考虑了目标的加速度，因此，状态预测方程变为
-$$\hat{x}_{n+1,n} = \hat{x}_{n,n} +
-\hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delta
-t^2}{2}$$
-$$\hat{\dot{x}}_{n+1,n} =
-\hat{\dot{x}}_{n,n} + \hat{\ddot{x}}_{n,n} \Delta t$$
-$...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/18</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/16/Kalman/">
-                <span class="abstract-title-text">Kalman</span>
-            </a>
-            <div class="abstract-content">
-                卡尔曼滤波器
-卡尔曼滤波是一种最优递归数字处理算法。为什么是最优，等一下会讲到，首先我们讲基础知识
-估计、准确和精密度
-一架飞机的真实位置对观察者来说是隐藏的，但我们可以使用诸如雷达一样的传感器来估计飞机的位置。每一个测量得出的参数都是一个估计。而准确度表示测量值和真实值的接近长度。
-而精密度表示在同一参数下一系列测量结果的变化，准确和精密度构成了估计的基础。
-一般来说，高精度系统的测量具有低方差，而低精度的测量具有高方差。随机测量误差产生了这种差异。其中，低精度系统成为有偏系统，因为它的系统内有误差。一种减小方差的方法如下：对测量值进行平均或平滑，例如我们使用温度计测量温度，...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/18">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/16</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
-                <span class="abstract-title-text">贪心算法</span>
-            </a>
-            <div class="abstract-content">
-                贪心算法
-贪心算法用于求解局部最优解，但它不保证全局最优。贪心算法的核心思想是每一步都选择当前最优解，从而希望最终得到全局最优解。
-活动选择问题
-第一个例子是一个调度竞争共享资源的多个活动的问题，目标是选出一个最大的互相兼容的活动集合。给定一个n个活动的集合S = {a1, a2, ⋯, an}，这些活动访问同一个资源（比如教室），而这个资源某个时刻只能供给一个活动使用，每个活动ai有两个属性——开始时间和结束时间si和fi。其中0 ≤ si &lt; fi &lt; ∞，如果被选中，任务ai发生在半开区间[si, fi)上。两个活动ai和aj我们说他们是兼容的，若ai和aj满足[...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/04/19">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/04/19</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                <span class="abstract-title-text">动态规划</span>
-            </a>
-            <div class="abstract-content">
-                动态规划和分治算法类似，都通过组合子问题的解求解原问题。分治算法是将问题划分为不相交的子问题，但动态规划处理不同子问题具有公共的子子问题的求解。分治算法将重复的去求解这些子问题，但动态规划只会处理一次。将解保存在一个表格之中，避免了重复的操作。
-动态规划主要求解最优化问题，这类问题有很多可行解，每个解都是一个值，我们求解的是最优值（极大或极小值）
-我们通常这样设计一个动态规划算法：D + 刻画一个最优解的结构特征 +
-递归的定义最优解的值 + 计算最优解的值，通常采用自底向上的方法 +
-利用计算出的信息构造一个最优解
-下面我们给出一个动态规划方法求解最优化问题的例子
-钢条切割...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/22</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/16/shit/">
-                <span class="abstract-title-text">shit</span>
-            </a>
-            <div class="abstract-content">
-                Prove
-for number n is Fibonacci
-number if and only if 5n2 ± 4 is perfect square
-number
-This title is my paper title.
-Introduction
-I had originally planned to finish this problem last year.but I don’t
-car. Let’s try finish at this year.
-Body
-Fibonacci sequence
-defintion 1(Fibonacci
-sequ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/16</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/13/fft/">
-                <span class="abstract-title-text">FFT</span>
-            </a>
-            <div class="abstract-content">
-                Prior Knowledge
-This article will display how fft does work. If you learn algebra
-before, you will join this article. It will fun so much. basically in
-this article, code is simple, most part is related to math.
-Let’s start at Polynomial.
-basic definitions
-defined(Polynomial): A polynomial ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/02/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/13</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/13/algor/phase_1/">
-                <span class="abstract-title-text">function grow</span>
-            </a>
-            <div class="abstract-content">
-                第一章
-算法的定义
-简单来说，算法是任何的良定义的计算过程，这个过程接收某个值的集合作为输入并产生某个值或值的集合作为输出。这样算法就是把输入转换为输出的计算步骤的一个序列。
-翻译过来就是，给定well-defined的函数f(x), x ∈ A，A是集合，其中f是算法，把x变为f(x)作为输出。那么取遍集合A中的每个元素组成的集合就是一个序列f(x1), f(x2), ⋯
-例如，我们需要把一个数列排成非递减序列，那么这个排序问题可以这样定义：
-
-输入： n个数的一个序列(a1, a2, ⋯, an)
-输出： 输出序列的一个排列(a1′, a2′, ⋯, an′)，满足a1...
+\left\{
+\begin{array}{lr}
+x=\dfrac{3\pi}{2}(1+2t)\cos(\dfrac{3\pi}{2}(1+2t)), &amp; \\
+y=s, &amp; 0 \leq s \leq L,|t| \leq1. \\
+z=\dfra...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
@@ -702,16 +424,12 @@ defined(Polynomial): A polynomial ...
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/13</span>
                 </div>
                 <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
             </div>
         </article>
         <div class="index-post-divider"></div>
     <!-- paginator  -->
         <nav class="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/blog/archives/page/2/">2</a><a class="extend next" rel="next" href="/blog/archives/page/2/">NEXT &gt;</a>
+            <a class="extend prev" rel="prev" href="/blog/archives/">&lt; PREV</a><a class="page-number" href="/blog/archives/">1</a><span class="page-number current">2</span>
         </nav>
 </main>
 

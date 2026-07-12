@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Done fool">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Done fool">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="基本图算法 图的表示 给定图G &#x3D; (V, E)，其中V是顶点的集合，而E是边的集合。我们可以把一个图表示为邻接链表或者是邻接矩阵。对于邻接链表来说，它是一个包含∣V∣条链表的数组Adj构成。每个节都有一条链表，比如对每个节点u ∈ V，Adj[u]包含所有和节点u之间有边相连的节点v。即Adj[u]中的每个链表包含的都是与u有链接的节点v  邻接链表： 123451 -&gt; 2 -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="graph_algorithrn">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/07/11/graph-algorithrn/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="基本图算法 图的表示 给定图G &#x3D; (V, E)，其中V是顶点的集合，而E是边的集合。我们可以把一个图表示为邻接链表或者是邻接矩阵。对于邻接链表来说，它是一个包含∣V∣条链表的数组Adj构成。每个节都有一条链表，比如对每个节点u ∈ V，Adj[u]包含所有和节点u之间有边相连的节点v。即Adj[u]中的每个链表包含的都是与u有链接的节点v  邻接链表： 123451 -&gt; 2 -">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.upmath.me/svgb/ndRPaxNBFADw-36KOTSQwjbOzM6_teQbiBe9JTms2WmzuGzK7tS0hkAhxv5hUa9pFVLEk6AiRbQ09ctkku3JryCTrC0pJofM6T2Y95v3Zv9UVfD8ZSJVW76Q8T7YCepqN5YPSonaD2W5HQaRBK3AV40yLHG6ozodUEikAr7c8nZDBe42ANUEsz0gX5ZVfSa3g6htzsjlTmUvl-z92yCpe6EsbyB7bxahmmUVQHm6QPa7f3OY6pPB6PL16OdBdp7-uTrVV5f66Ic-_6x7vUl_mB1_z7rpuP81L7IKQH94Nx4cZmlXn12AIoM2g-tAH30DRQyhjWbZqf40zLpD_SWdXL_RaS_7-Gs0fDsaDvTZ9c1hOjl9NT4-GL8_1r3u5GJgVbeCMKy0GoGStVszlnXlRduhvJM3gWUVnqjYC7YbCjwKIpmASuA_9D0hKBUCEi4gdyhnNWBV_dhrmesqutQW7jrY2ABFhFkJ82m6uYBCyKFMcA4ZhZRTF81ZiLh3GHMNhiAuCbwYpBgxhKnAlEFBKZnzBDX1M8_EmC23mOCMMtfB1IWuuDcns5Ej_g2Kp72ZfOGkjoCMc4gwQtBFhN2b1JTfG9WBS9sjkAjqEIcTThyICJ8XHWYj6OSiSTBdynFMIHG4wJBSgpiY17DRaK5BOO3vFrQK4KncU-Bx05d5UVEgW6ASWQdR05eg4kX1RjMuR81YNUBLJqpWCaJIxiCRO_knVDMntdfQWmfzfyDCri3gKiJeJHLzPolVSGdJk-a5rUCSBaRAq4rUiFZVRv7cz-sv">
+<meta property="og:image" content="https://i.upmath.me/svgb/5Zc7j9tGEMd7foopfIAErNY7s28LqtIGaZJOUqET9yTCBHmg9nx3EVQFBhIgdQC7CJC0KWy4SGE4H0e2u3yFgA8_eHcykOuisNrFzP5n58eZXXIWs8ffb0LchiehuobzbBkvqvCQb-J1HibbPCsCXGZpXE8Et_o87nZwsgkR0nC2uMgjfHKAWELrA92TJLPTsMqKbR2jU95Nrzoldv1xsFku8jAZIbtqRzhPkhOYNA-8_eXl_vdf_37zfP_m9f7HP_e__bF_-vTd6xfvnv31_qdX73_4-e2zF51vMjvL8nx6uc5imMNAaqb1EKqwjItilQcYEGqGTg_HSXLybawW2Wod4eusCBuYZumjdGGN8h69JmHRaKfmkMzSanFZpzMwxKwbwmgEAy852WY27hymm3V2FifbgdedacegKuMiBpgAOjGH6bLMy2qyrVanDEjrR1VIGYgxrKoQimZ0ml8EBgJ2APPpDfjzZhMouJdsJDn5IXAOy7KIVZlvYGC412yEXA1hUaQwkFwiGwkuG7-BYOLGgsahsTf-zfpmee3exmnDAIwP8HJoyQvSEr3yjqjHSyvmiTtqkWnFkNrpLWaNTdW2z6GRPU5oZJz1ggRJZZQR2vSoectQqpaZaWqpmd5iZuQH2-fMpDlOZlaitFYrX7enIddDhsIy35VZPUb0d9dZYyT8vxSaIu8cOnTOOkThZP84w7rpPp5n1jOvOJqDR1rby71TTVpuj5KcJY8SlRNCkhKE_XLTkrnuIkASXEuG5Djdha4uxbpNyd-EJ4Xjzh8lPUMo0GihnXNkre3TM4J57OgZ8YVmrY1H2axfXVRPQo-Y1mS8tdqQcKTqDfaItdeAFg2oXmB0nlvL0AquqIuO3jbxa3bdjtESd5qhFJzkXawttreJuFWm0vL64PhPE09O4LtwFeGbMg1d6gPlmW0WFGUaYLooluuymhRlFddwGTZxPs2KIlSwCefdh2qTw_YBPtiN7xJEgax-Df9ekQ4panVPRXlAUTmGZO6jqL6QNZK9j6Q-mLa87y5NLZnMQpH2fjr-AQ">
+<meta property="article:published_time" content="2026-07-11T08:36:40.000Z">
+<meta property="article:modified_time" content="2026-07-12T11:07:38.967Z">
+<meta property="article:author" content="Done fool">
+<meta property="article:tag" content="algroithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.upmath.me/svgb/ndRPaxNBFADw-36KOTSQwjbOzM6_teQbiBe9JTms2WmzuGzK7tS0hkAhxv5hUa9pFVLEk6AiRbQ09ctkku3JryCTrC0pJofM6T2Y95v3Zv9UVfD8ZSJVW76Q8T7YCepqN5YPSonaD2W5HQaRBK3AV40yLHG6ozodUEikAr7c8nZDBe42ANUEsz0gX5ZVfSa3g6htzsjlTmUvl-z92yCpe6EsbyB7bxahmmUVQHm6QPa7f3OY6pPB6PL16OdBdp7-uTrVV5f66Ic-_6x7vUl_mB1_z7rpuP81L7IKQH94Nx4cZmlXn12AIoM2g-tAH30DRQyhjWbZqf40zLpD_SWdXL_RaS_7-Gs0fDsaDvTZ9c1hOjl9NT4-GL8_1r3u5GJgVbeCMKy0GoGStVszlnXlRduhvJM3gWUVnqjYC7YbCjwKIpmASuA_9D0hKBUCEi4gdyhnNWBV_dhrmesqutQW7jrY2ABFhFkJ82m6uYBCyKFMcA4ZhZRTF81ZiLh3GHMNhiAuCbwYpBgxhKnAlEFBKZnzBDX1M8_EmC23mOCMMtfB1IWuuDcns5Ej_g2Kp72ZfOGkjoCMc4gwQtBFhN2b1JTfG9WBS9sjkAjqEIcTThyICJ8XHWYj6OSiSTBdynFMIHG4wJBSgpiY17DRaK5BOO3vFrQK4KncU-Bx05d5UVEgW6ASWQdR05eg4kX1RjMuR81YNUBLJqpWCaJIxiCRO_knVDMntdfQWmfzfyDCri3gKiJeJHLzPolVSGdJk-a5rUCSBaRAq4rUiFZVRv7cz-sv">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/blog/">
+    <title>graph_algorithrn · Marcus</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/blog/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/blog/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/blog/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/blog/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/blog/scripts/main.js" as="script">
+    <link rel="preload" href="/blog/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/blog/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/blog/">Marcus's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/blog/">Marcus&#39;s blog</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">graph_algorithrn</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/blog/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                graph_algorithrn
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/07/11</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/blog/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/blog/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="基本图算法">基本图算法</h1>
+<h2 id="图的表示">图的表示</h2>
+<p>给定图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>，其中<span
+class="math inline"><em>V</em></span>是顶点的集合，而<span
+class="math inline"><em>E</em></span>是边的集合。我们可以把一个图表示为邻接链表或者是邻接矩阵。对于邻接链表来说，它是一个包含<span
+class="math inline">∣<em>V</em>∣</span>条链表的数组Adj构成。每个节都有一条链表，比如对每个节点<span
+class="math inline"><em>u</em> ∈ <em>V</em></span>，Adj[u]包含所有和节点<span
+class="math inline"><em>u</em></span>之间有边相连的节点<span
+class="math inline"><em>v</em></span>。即Adj[u]中的每个链表包含的都是与u有链接的节点v</p>
+<p><img src="https:////i.upmath.me/svgb/ndRPaxNBFADw-36KOTSQwjbOzM6_teQbiBe9JTms2WmzuGzK7tS0hkAhxv5hUa9pFVLEk6AiRbQ09ctkku3JryCTrC0pJofM6T2Y95v3Zv9UVfD8ZSJVW76Q8T7YCepqN5YPSonaD2W5HQaRBK3AV40yLHG6ozodUEikAr7c8nZDBe42ANUEsz0gX5ZVfSa3g6htzsjlTmUvl-z92yCpe6EsbyB7bxahmmUVQHm6QPa7f3OY6pPB6PL16OdBdp7-uTrVV5f66Ic-_6x7vUl_mB1_z7rpuP81L7IKQH94Nx4cZmlXn12AIoM2g-tAH30DRQyhjWbZqf40zLpD_SWdXL_RaS_7-Gs0fDsaDvTZ9c1hOjl9NT4-GL8_1r3u5GJgVbeCMKy0GoGStVszlnXlRduhvJM3gWUVnqjYC7YbCjwKIpmASuA_9D0hKBUCEi4gdyhnNWBV_dhrmesqutQW7jrY2ABFhFkJ82m6uYBCyKFMcA4ZhZRTF81ZiLh3GHMNhiAuCbwYpBgxhKnAlEFBKZnzBDX1M8_EmC23mOCMMtfB1IWuuDcns5Ej_g2Kp72ZfOGkjoCMc4gwQtBFhN2b1JTfG9WBS9sjkAjqEIcTThyICJ8XHWYj6OSiSTBdynFMIHG4wJBSgpiY17DRaK5BOO3vFrQK4KncU-Bx05d5UVEgW6ASWQdR05eg4kX1RjMuR81YNUBLJqpWCaJIxiCRO_knVDMntdfQWmfzfyDCri3gKiJeJHLzPolVSGdJk-a5rUCSBaRAq4rUiFZVRv7cz-sv" width="250" alt="G = (V,E)"></p>
+<p>邻接链表：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> -&gt; <span class="number">2</span> -&gt; <span class="number">5</span></span><br><span class="line"><span class="number">2</span> -&gt; <span class="number">1</span> -&gt; <span class="number">5</span> -&gt; <span class="number">3</span> -&gt; <span class="number">4</span></span><br><span class="line"><span class="number">3</span> -&gt; <span class="number">2</span> -&gt; <span class="number">4</span></span><br><span class="line"><span class="number">4</span> -&gt; <span class="number">2</span> -&gt; <span class="number">5</span> -&gt; <span class="number">3</span></span><br><span class="line"><span class="number">5</span> -&gt; <span class="number">4</span> -&gt; <span class="number">1</span> -&gt; <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>邻接矩阵：</p>
+<p><span class="math display">$$
+\begin{array}{c|ccccc}
+  &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+\hline
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+2 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+3 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+4 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+5 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+$$</span></p>
+<p>若<span
+class="math inline"><em>G</em></span>是一个有向图，则对于<span
+class="math inline">(<em>u</em>, <em>v</em>)</span>来说节点<span
+class="math inline"><em>v</em></span>将出现在链表Adj[u]上。此时邻接链表的长度和刚刚好就是$E$。如果是无向图，那邻接链表的长度之和刚刚好就是<span
+class="math inline">2 ∣ <em>E</em>∣</span>，因为当<span
+class="math inline"><em>u</em></span>出现在Adj[v]的时候，<span
+class="math inline"><em>v</em></span>也出现在Adj[u]中。但不管是无向图还是有向图，邻接链表的储存空间需求均为<span
+class="math inline"><em>Θ</em>(<em>V</em> + <em>E</em>)</span>。</p>
+<p><img src="https://i.upmath.me/svgb/5Zc7j9tGEMd7foopfIAErNY7s28LqtIGaZJOUqET9yTCBHmg9nx3EVQFBhIgdQC7CJC0KWy4SGE4H0e2u3yFgA8_eHcykOuisNrFzP5n58eZXXIWs8ffb0LchiehuobzbBkvqvCQb-J1HibbPCsCXGZpXE8Et_o87nZwsgkR0nC2uMgjfHKAWELrA92TJLPTsMqKbR2jU95Nrzoldv1xsFku8jAZIbtqRzhPkhOYNA-8_eXl_vdf_37zfP_m9f7HP_e__bF_-vTd6xfvnv31_qdX73_4-e2zF51vMjvL8nx6uc5imMNAaqb1EKqwjItilQcYEGqGTg_HSXLybawW2Wod4eusCBuYZumjdGGN8h69JmHRaKfmkMzSanFZpzMwxKwbwmgEAy852WY27hymm3V2FifbgdedacegKuMiBpgAOjGH6bLMy2qyrVanDEjrR1VIGYgxrKoQimZ0ml8EBgJ2APPpDfjzZhMouJdsJDn5IXAOy7KIVZlvYGC412yEXA1hUaQwkFwiGwkuG7-BYOLGgsahsTf-zfpmee3exmnDAIwP8HJoyQvSEr3yjqjHSyvmiTtqkWnFkNrpLWaNTdW2z6GRPU5oZJz1ggRJZZQR2vSoectQqpaZaWqpmd5iZuQH2-fMpDlOZlaitFYrX7enIddDhsIy35VZPUb0d9dZYyT8vxSaIu8cOnTOOkThZP84w7rpPp5n1jOvOJqDR1rby71TTVpuj5KcJY8SlRNCkhKE_XLTkrnuIkASXEuG5Djdha4uxbpNyd-EJ4Xjzh8lPUMo0GihnXNkre3TM4J57OgZ8YVmrY1H2axfXVRPQo-Y1mS8tdqQcKTqDfaItdeAFg2oXmB0nlvL0AquqIuO3jbxa3bdjtESd5qhFJzkXawttreJuFWm0vL64PhPE09O4LtwFeGbMg1d6gPlmW0WFGUaYLooluuymhRlFddwGTZxPs2KIlSwCefdh2qTw_YBPtiN7xJEgax-Df9ekQ4panVPRXlAUTmGZO6jqL6QNZK9j6Q-mLa87y5NLZnMQpH2fjr-AQ"width="250" alt="G = (V,E)的有向图"></p>
+<p>邻接链表： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> -&gt; <span class="number">2</span> -&gt; <span class="number">4</span></span><br><span class="line"><span class="number">2</span> -&gt; <span class="number">5</span></span><br><span class="line"><span class="number">3</span> -&gt; <span class="number">6</span> -&gt; <span class="number">5</span></span><br><span class="line"><span class="number">4</span> -&gt; <span class="number">2</span></span><br><span class="line"><span class="number">5</span> -&gt; <span class="number">4</span></span><br><span class="line"><span class="number">6</span> -&gt; <span class="number">6</span></span><br></pre></td></tr></table></figure></p>
+<p>邻接矩阵：</p>
+<p><span class="math display">$$
+\begin{array}{c|cccccc}
+  &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 \\
+\hline
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+3 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+4 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+5 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{array}
+$$</span></p>
+<p>只需要稍微修改邻接链表，就可以让它变成权重图。该权重值通常由一个<span
+class="math inline"><em>w</em> : <em>E</em> → <em>R</em></span>的权重函数给出，例如设<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>为一个权重图，权重函数为<span
+class="math inline"><em>w</em></span>，我们可以将边<span
+class="math inline">(<em>u</em>, <em>v</em>) ∈ <em>E</em></span>的权重<span
+class="math inline"><em>w</em>(<em>u</em>, <em>v</em>)</span>存放在<span
+class="math inline"><em>u</em> ∈ <em>V</em></span>的邻接链表中。</p>
+<p>缺点是，由于链表的性质，无法快速判断一条边是否是图中的边。但邻接矩阵可以解决这个问题。但代价是更大的开销。大概是<span
+class="math inline">∣<em>V</em>∣<sup>2</sup></span></p>
+<p>而对矩阵来说，我们通常将图中的节点编号为<span
+class="math inline">1, 2, ⋯, ∣<em>V</em>∣</span>，那么邻接矩阵表示由一个<span
+class="math inline">∣<em>V</em> ∣ × ∣ <em>V</em>∣</span>的矩阵<span
+class="math inline"><em>A</em> = (<em>a</em><sub><em>i</em><em>j</em></sub>)</span>表示，该矩阵满足下述条件：</p>
+<center>
+<p><span class="math display">$$
+a_{ij} = \begin{cases}
+    1 &amp; 若(i,j) \in E\\
+    0 &amp; 其他
+\end{cases}
+$$</span></p>
+</center>
+<p>而无向图生成的邻接矩阵让我们看到，该矩阵是一个对称的矩阵，满足<span
+class="math inline"><em>A</em> = <em>A</em><sup><em>T</em></sup></span>。所以无向图的存储可以少一半的空间，只需要上三角这一块地方即可。当然，邻接矩阵也是可以表示权重图的，给定图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>是权重图，其中<span
+class="math inline"><em>w</em></span>为权重函数，则边<span
+class="math inline">(<em>u</em>, <em>v</em>) ∈ <em>E</em></span>的权重<span
+class="math inline"><em>w</em>(<em>u</em>, <em>v</em>)</span>存放在邻接矩阵的第<span
+class="math inline"><em>u</em></span>行，第<span
+class="math inline"><em>v</em></span>列上。</p>
+<center>
+<p><span class="math display">$$
+a_{ij} = \begin{cases}
+    w(i,j) &amp; 若(i,j) \in E\\
+    0 &amp; 其他
+\end{cases}
+$$</span></p>
+</center>
+<h2 id="练习">练习</h2>
+<ul>
+<li>给定有向图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>的邻接链表，我们计算每个节点的出度（发出的边的个数）和入度（进入的边的条数）
+<ul>
+<li>首先计算出度，首先有<span
+class="math inline">∣<em>V</em>∣</span>个节点，而边的链表长度加起来是<span
+class="math inline">∣<em>E</em>∣</span>，因此遍历整个链表的时间是<span
+class="math inline"><em>Θ</em>(<em>V</em> + <em>E</em>)</span></li>
+<li>接着是入度。实际上也是<span
+class="math inline"><em>Θ</em>(<em>V</em> + <em>E</em>)</span>，进入的节点的边的条数实际上是<span
+class="math inline">∣<em>E</em>∣</span>，遍历所有链表也是$V<span
+class="math inline">，<em>因</em><em>此</em><em>时</em><em>间</em><em>复</em><em>杂</em><em>度</em><em>为</em></span>(V+E)$</li>
+</ul></li>
+<li>有向图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>的平方图是<span
+class="math inline"><em>G</em><sup>2</sup> = (<em>V</em>, <em>E</em><sup>2</sup>)</span>，其中边<span
+class="math inline">(<em>u</em>, <em>v</em>) ∈ <em>E</em><sup>2</sup></span>当且仅当图<span
+class="math inline"><em>G</em></span>包含一条最多由两条边构成的从<span
+class="math inline"><em>u</em></span>到<span
+class="math inline"><em>v</em></span>的路径。我们写一个有效算法计算图<span
+class="math inline"><em>G</em></span>的平方图<span
+class="math inline"><em>G</em><sup>2</sup></span>，这里图<span
+class="math inline"><em>G</em></span>用邻接矩阵或者邻接链表表示都行。
+<ul>
+<li>首先这里<span
+class="math inline"><em>E</em><sup>2</sup> ≠ <em>E</em> × <em>E</em><sup>2</sup></span>，因此我们分析如下，对于一条边<span
+class="math inline">(<em>u</em>, <em>v</em>)</span>，中间节点为<span
+class="math inline"><em>c</em></span>，那么链表为 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u -&gt; c -&gt; v</span><br><span class="line">c -&gt; v</span><br><span class="line">v -&gt; null</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<p>我们的思路如下：首先初始化链表<span
+class="math inline"><em>G</em><sup>2</sup></span>，它包含<span
+class="math inline"><em>V</em></span>个顶点，第一步，我们遍历每一个顶点，检查只有2个顶点的边，并移动到表W，我们加上如下限制，对于不同路径<span
+class="math inline">(<em>u</em>, <em>c</em>), (<em>c</em>, <em>v</em>)</span>和<span
+class="math inline">(<em>u</em>, <em>d</em>), (<em>d</em>, <em>v</em>)</span>，起点和终点是一样的，因此，我们说这两条路径交换，我们不计算可交换路径的条数而是看做同一路径。同样的，对于双向路径<span
+class="math inline">(<em>u</em>, <em>v</em>), (<em>v</em>, <em>u</em>)</span>，这实际上等价于路径<span
+class="math inline"><em>u</em>− &gt; <em>v</em>− &gt; <em>u</em> = <em>u</em></span>。因此我们也排除这种情况。为此我们写出如下伪代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">COMPUTE_SQURE_GRAPH(G)</span><br><span class="line">initialize G^<span class="number">2</span> as empty tab</span><br><span class="line">initialize neb as empty tab</span><br><span class="line"><span class="keyword">for</span> every u ∈ V</span><br><span class="line">    <span class="comment">//frist step, we research every neighbor of point v</span></span><br><span class="line">    <span class="keyword">for</span> every neighbor w ∈ G.adj[u]:</span><br><span class="line">        <span class="keyword">if</span> neb[w] == <span class="literal">false</span>:</span><br><span class="line">            neb[w] = <span class="literal">true</span>; </span><br><span class="line">            insert w at G^<span class="number">2.</span>adj[u] <span class="comment">// insert w at u&#x27;s list</span></span><br><span class="line">    <span class="comment">//step2, by w research new neighbor v.</span></span><br><span class="line">    <span class="keyword">for</span> every neighbor w ∈ G.adj[u]:</span><br><span class="line">        <span class="keyword">for</span> every v ∈ G.adj[w]:</span><br><span class="line">            <span class="keyword">if</span> v != u &amp;&amp; neb[v] == <span class="literal">false</span>:</span><br><span class="line">                neb[v] = <span class="literal">true</span>;</span><br><span class="line">                insert v at G^<span class="number">2.</span>adj[u]</span><br><span class="line">    <span class="comment">//step3, restart process</span></span><br><span class="line">    <span class="keyword">for</span> every v ∈ G^<span class="number">2.</span>adj[u]:</span><br><span class="line">        neb[v] = <span class="literal">false</span></span><br><span class="line"><span class="keyword">return</span> G^<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>时间复杂度分析：第一步和第二步的初始化为<span
+class="math inline"><em>O</em>(<em>V</em>)</span>，因为最多<span
+class="math inline">∣<em>V</em>∣</span>个顶点。
+对for循环，外层一共循环<span
+class="math inline">∣<em>V</em>∣</span>次，步骤一中的循环其实就是计算出度的个数，有向图的出度为<span
+class="math inline">∣<em>E</em>∣</span>，因此为<span
+class="math inline"><em>O</em>(<em>E</em>)</span>，对步骤2，我们对每个顶点u的每个邻居v去遍历。考虑最坏情况如下，我们假设每个邻居都有<span
+class="math inline">∣<em>V</em>∣</span>条出边，那么每次都是遍历<span
+class="math inline"><em>O</em>(<em>V</em> ⋅ <em>E</em>)</span>次。而步骤三最多也就是<span
+class="math inline"><em>O</em>(<em>V</em>)</span>。现在，由于我们不计算可交换路径，实际上的步骤二出度小于<span
+class="math inline">∑<sub>(<em>u</em>, <em>v</em>) ∈ <em>E</em></sub><em>V</em> = <em>V</em> ⋅ ∑<sub>(<em>u</em>, <em>v</em>) ∈ <em>E</em></sub>1 = <em>V</em> ⋅ <em>E</em></span>，因此复杂度为<span
+class="math inline"><em>O</em>(<em>V</em> ⋅ <em>E</em>)</span></p>
+<h1 id="广度优先搜索算法">广度优先搜索算法</h1>
+<p>广度优先搜索是最简单的图搜索算法，也是很多重要算法的原型，比如最小生成树，Dijkatra最短路径算法也基于此。</p>
+<p>给定图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>和一个可见的节点<span
+class="math inline"><em>s</em></span>，广度优先搜索对<span
+class="math inline"><em>G</em></span>中的边进行系统性的探索来发现从<span
+class="math inline"><em>s</em></span>出发可达的所有节点。该算法能够计算节点<span
+class="math inline"><em>s</em></span>到每个可达的节点的距离（最少边数），同时生成一颗广度优先搜索树，该树以<span
+class="math inline"><em>s</em></span>为根节点，包含所有<span
+class="math inline"><em>s</em></span>可达的节点。对于每个从源节点<span
+class="math inline"><em>s</em></span>可达的节点<span
+class="math inline"><em>v</em></span>，在广度优先搜索树里从<span
+class="math inline"><em>s</em></span>到点<span
+class="math inline"><em>v</em></span>的简单路径对应的就是图<span
+class="math inline"><em>G</em></span>中的从<span
+class="math inline"><em>s</em></span>到<span
+class="math inline"><em>v</em></span>的<strong>最短路径</strong>，换句话说就是含有最少边的路径。该算法对有向和无向都可以用</p>
+<p>该算法名字来源自其行为，当算法发现距离源节点<span
+class="math inline"><em>s</em></span>为k的所有节点之后，才会开始搜索所有距离为<span
+class="math inline"><em>k</em> + 1</span>的节点。</p>
+<p>现在，为了分析算法，我们使用三种颜色：白、灰、黑。首先我们把所有节点初始化为白色，在推进过程中，也许会变成灰色或者黑色。在第一次遇到一个节点的时候，该节点的状态改写为“发现”，然后涂上灰色。无论是黑色还是灰色，都是已经被发现的节点。不同的是。对边<span
+class="math inline">(<em>u</em>, <em>v</em>) ∈ <em>E</em></span>且节点<span
+class="math inline"><em>u</em></span>是黑色，则节点<span
+class="math inline"><em>v</em></span>可能是灰色也可能是黑色，换句话说，黑色节点的邻接节点都是已经被发现的。而灰色节点的邻接节点可能有没被发现的白色节点。</p>
+<p>在执行广度优先搜索的过程中将构造一刻广度优先树，一开始，该树只有一个根节点<span
+class="math inline"><em>s</em></span>，在扫描发现节点<span
+class="math inline"><em>u</em></span>的邻接链表时，发现一个白色节点<span
+class="math inline"><em>v</em></span>，就把节点<span
+class="math inline"><em>v</em></span>和边<span
+class="math inline">(<em>u</em>, <em>v</em>)</span>加入到树中，在树中，我们说<span
+class="math inline"><em>u</em></span>是<span
+class="math inline"><em>v</em></span>的前驱，或者父节点。每个点最多发现一次，因此最多只有一个父节点。若<span
+class="math inline"><em>u</em></span>是<span
+class="math inline"><em>s</em></span>到点<span
+class="math inline"><em>v</em></span>的简单路径上的一个节点，则<span
+class="math inline"><em>u</em></span>是<span
+class="math inline"><em>v</em></span>的祖先，<span
+class="math inline"><em>v</em></span>是<span
+class="math inline"><em>u</em></span>的后代。我们来看伪代码</p>
+<p>首先，我们赋予节点一些属性,u.color表示颜色,u.π表示前驱节点，u.d记录s到u的距离。并且额外给予一个队列Q管理灰色节点集
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">BFS(G,s)</span><br><span class="line"><span class="keyword">for</span> each vertex u∈G.V-&#123;s&#125; <span class="comment">//遍历除了s之外的每个节点</span></span><br><span class="line">    u.color = WHITE <span class="comment">//初始化为白色</span></span><br><span class="line">    u.d = ∞</span><br><span class="line">    u.π = NIL </span><br><span class="line">s.color = GRAY</span><br><span class="line">s.d = <span class="number">0</span></span><br><span class="line">s.π = NIL</span><br><span class="line">Q = ∅</span><br><span class="line">ENQUEUE(Q,s) <span class="comment">//第一次先检查s的周围</span></span><br><span class="line"><span class="keyword">while</span> Q ≠ ∅</span><br><span class="line">    u = DEQUEUE(Q) <span class="comment">//出队待检查节点</span></span><br><span class="line">    <span class="keyword">for</span> each v∈G.Adj[u] <span class="comment">//寻找链表上的每个节点</span></span><br><span class="line">        <span class="keyword">if</span> v.color == WHITE <span class="comment">//第一次发现</span></span><br><span class="line">            v.color = GRAY <span class="comment">//染灰</span></span><br><span class="line">            v.d = u.d+<span class="number">1</span> <span class="comment">//设置距离</span></span><br><span class="line">            v.π = u <span class="comment">//设置前驱</span></span><br><span class="line">            ENQUEUE(Q,v) <span class="comment">//把另一个灰色节点填进去</span></span><br><span class="line">    u.color = BLACK <span class="comment">//所有节点检查完则染黑</span></span><br></pre></td></tr></table></figure></p>
+<p>注意在队列里面，相同距离的节点优先处理。初始化 <span
+class="math inline"><em>O</em>(<em>V</em>)</span>
+，每个邻接链表扫描一次，有向图链表长度等价<span
+class="math inline">∣<em>E</em>∣</span>，因此为<span
+class="math inline"><em>O</em>(<em>E</em>)</span>，因此总的时间为<span
+class="math inline"><em>O</em>(<em>V</em> + <em>E</em>)</span></p>
+<h3 id="最短路径">最短路径</h3>
+<p>现在我们证明广度优先搜索算法可以正确的计算最短路径距离</p>
+<ul>
+<li>引理1： 给定<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>，<span
+class="math inline"><em>G</em></span>可以是有向图或者无向图，设<span
+class="math inline"><em>s</em> ∈ <em>V</em></span>为任意节点,则对任意边<span
+class="math inline">(<em>u</em>, <em>v</em>) ∈ <em>E</em></span>，存在<span
+class="math inline"><em>δ</em>(<em>s</em>, <em>v</em>) ≤ <em>δ</em>(<em>s</em>, <em>u</em>) + 1</span>，其中<span
+class="math inline"><em>δ</em></span>为距离函数。
+<ul>
+<li><strong>证明</strong>: 若<span
+class="math inline"><em>s</em></span>是可以从<span
+class="math inline"><em>u</em></span>到达的点，则<span
+class="math inline"><em>v</em></span>也可以是从<span
+class="math inline"><em>u</em></span>得到的点。这个距离只有一点。因此，若<span
+class="math inline"><em>u</em></span>到<span
+class="math inline"><em>s</em></span>是最短路径，那么就不存在其他路径使得它比<span
+class="math inline">(<em>u</em>, <em>v</em>) + 1</span>长。因此该不等式成立。</li>
+</ul></li>
+</ul>
+<p>我们要证明距离是最短的，即<span
+class="math inline"><em>δ</em>(<em>s</em>, <em>v</em>) = <em>v</em>.<em>d</em></span>，先证明v.d<span
+class="math inline"> ≥ <em>δ</em>(<em>s</em>, <em>v</em>)</span> +
+引理2：令<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>是无向或者有向图，假定BFS以点<span
+class="math inline"><em>s</em></span>为根在<span
+class="math inline"><em>G</em></span>上运行，当BFS终结的时候，每个节点<span
+class="math inline"><em>v</em> ∈ <em>V</em></span>，BFS计算出来的v.d满足<span
+class="math inline"><em>v</em>.<em>d</em> ≥ <em>δ</em>(<em>s</em>, <em>v</em>)</span>.
++ 证明: 我们对算法的ENQUEUE操作归纳，对基础步骤<span
+class="math inline"><em>δ</em>(<em>s</em>, <em>s</em>)</span> = s.d =
+0，成立。对归纳步骤，利用引理1和算法的第16行，v.d = u.d+1 <span
+class="math inline"> ≥ <em>δ</em>(<em>s</em>, <em>u</em>) + 1 ≥ <em>δ</em>(<em>s</em>, <em>v</em>)</span>
+，之后<span
+class="math inline"><em>v</em></span>加入队列Q，v在入队的时候已经涂上灰色所以不会再次入队，v.d的值不会再变化，因此归纳假设是成立的。</p>
+<ul>
+<li>引理3：假定BFS在图<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>的运行过程中，队列<span
+class="math inline"><em>Q</em></span>包含的节点为<span
+class="math inline">⟨<em>v</em><sub>1</sub>, <em>v</em><sub>2</sub>, ⋯, <em>v</em><sub><em>r</em></sub>⟩</span>，其中<span
+class="math inline"><em>v</em><sub>1</sub></span>是头，<span
+class="math inline"><em>v</em><sub><em>r</em></sub></span>是队列的尾部，那么<span
+class="math inline"><em>v</em><sub><em>r</em></sub></span>.d $$ <span
+class="math inline"><em>v</em><sub>1</sub></span>.d+1，并且对于<span
+class="math inline"><em>i</em> = 1, 2, ⋯, <em>r</em> − 1</span>，<span
+class="math inline"><em>v</em><sub>1</sub></span>.d <span
+class="math inline"> ≤ <em>v</em><sub><em>r</em> + 1</sub></span>.d
+<ul>
+<li><strong>证明：</strong>
+实际上一次循环中的每个队列有相同距离，最多塞2代的数据，比如第二层存在2个节点A,B，s扫一圈之后进去遍历A,塞入A的周围节点，由于Q是先入先出，只有在B扫描完之后才会推出。因此等式很简单就能看出来。</li>
+</ul></li>
+</ul>
+<p>那么我们可以导出如下推论：</p>
+<ul>
+<li>推论：在执行BFS的时候，节点<span
+class="math inline"><em>v</em><sub><em>i</em></sub>, <em>v</em><sub><em>j</em></sub></span>都加入<span
+class="math inline"><em>Q</em></span>中，并且<span
+class="math inline"><em>v</em><sub><em>i</em></sub></span>在<span
+class="math inline"><em>v</em><sub><em>j</em></sub></span>前入队，则<span
+class="math inline"><em>v</em><sub>1</sub></span>.d <span
+class="math inline"> ≤ <em>v</em><sub><em>j</em></sub></span>.d</li>
+</ul>
+<h4 id="bfs的正确性">BFS的正确性</h4>
+<p><strong>定理:广度优先搜索算法的正确性</strong> 设<span
+class="math inline"><em>G</em> = (<em>V</em>, <em>E</em>)</span>是一个有向图或者无向图，设BFS用点s在G上运行，BFS将在运行过程中发现点s可达的所有点<span
+class="math inline"><em>v</em> ∈ <em>V</em></span>，在介绍的时候对所有的<span
+class="math inline"><em>v</em> ∈ <em>V</em></span>，v.d = <span
+class="math inline"><em>δ</em>(<em>s</em>, <em>v</em>)</span>。并且对任意的可从<span
+class="math inline"><em>s</em></span>到达的点<span
+class="math inline"><em>v</em> ≠ <em>s</em></span>,<span
+class="math inline"><em>s</em></span>到<span
+class="math inline"><em>v</em></span>的一条最短路径为从<span
+class="math inline"><em>s</em></span>到v.π的最短路径加上<span
+class="math inline">(<em>v</em>.<em>π</em>, <em>v</em>)</span></p>
+<p>我们给出一个打印最短路径的程序:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Print_Path(G,s,v)</span><br><span class="line"><span class="keyword">if</span> v == s</span><br><span class="line">    print s</span><br><span class="line">elseif v.π == NIL</span><br><span class="line">    print <span class="string">&quot;no path&quot;</span></span><br><span class="line"><span class="keyword">else</span> Print_Path(G,s,v.π)</span><br><span class="line">    <span class="keyword">return</span> v</span><br></pre></td></tr></table></figure>
+<p>该递归程序时间关于路径顶点数的上的一个线性函数。每次调用都比前一次少一个节点。</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/07/11/graph-algorithrn/">https://monstergeo.github.io/blog/2026/07/11/graph-algorithrn/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/07/11/graph-algorithrn/">July 11th 2026, 4:36:40 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/07/11/graph-algorithrn/">July 12th 2026, 7:07:38 pm</a>
+            <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/blog/2026/06/06/mult-Kalman/" title="mult-Kalman">
+                    <div class="prevTitle">mult-Kalman</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+            <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%9B%BE%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">基本图算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.</span> <span class="toc-text">图的表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.2.</span> <span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">广度优先搜索算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">2.0.1.</span> <span class="toc-text">最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bfs%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">BFS的正确性</span></a></li></ol></li></ol></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span>
+            <a class="archive-post-title" href="/blog/2026/07/11/graph-algorithrn/">graph_algorithrn</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/06</span>
+            <a class="archive-post-title" href="/blog/2026/06/06/mult-Kalman/">mult-Kalman</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span>
+            <a class="archive-post-title" href="/blog/2026/05/23/stm32-minirtos/">stm32_minirtos</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span>
+            <a class="archive-post-title" href="/blog/2026/05/23/Kalman-3/">Kalman_3</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span>
+            <a class="archive-post-title" href="/blog/2026/05/18/Kalman-2/">Kalman_2</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/16</span>
+            <a class="archive-post-title" href="/blog/2026/05/16/Kalman/">Kalman</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span>
+            <a class="archive-post-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/blog/2026/02/16/shit/">shit</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/fft/">FFT</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/read-me/">read me</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/algor/phase_1/">function grow</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="Kalman">
+                <span class="iconfont-archer">&#xe606;</span>
+                Kalman
+            </span>
+            <span class="sidebar-tag-name" data-tags="algroithm">
+                <span class="iconfont-archer">&#xe606;</span>
+                algroithm
+            </span>
+            <span class="sidebar-tag-name" data-tags="math">
+                <span class="iconfont-archer">&#xe606;</span>
+                math
+            </span>
+            <span class="sidebar-tag-name" data-tags="stm32">
+                <span class="iconfont-archer">&#xe606;</span>
+                stm32
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/blog/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://monstergeo.github.io/blog",
+        root: siteMetaRoot,
+        author: "Done fool"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/blog/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/blog/scripts/share.js" async></script>
+        <!-- mermaid -->
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js' onload="window.mermaid.initialize({theme: 'dark'})" async></script>
+    </body>
+</html>

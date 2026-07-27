@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="https://monstergeo.github.io/blog/tags/Kalman/index.html">
+<meta property="og:url" content="https://monstergeo.github.io/blog/tags/Linear-systems/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Done fool">
@@ -403,137 +403,37 @@
                 <main class="main index-page">
             
         <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/06/06/mult-Kalman/">
-                <span class="abstract-title-text">mult-Kalman</span>
+            <a class="abstract-title" href="/blog/2026/07/25/linear_systems/Lyapunov-Stability/">
+                <span class="abstract-title-text">Lyapunov_Stability</span>
             </a>
             <div class="abstract-content">
-                #多重卡尔曼滤波器
-前置知识
-之前我们都只考虑一个一维的卡尔曼滤波，现在我们考虑一个飞机在空间中飞行的例子，它是一个三维的，我们这样说的原因是因为有三个方向，每个方向有单独的状态方程
-那么对于不不确定的状态变量，我们可以用这么一组向量表示
+                李雅普诺夫稳定性
+这章节作为课题前置的基础知识学习笔记。
+它包含以下内容： + 矩阵范数 + 李雅普诺夫稳定性 + 正定矩阵 + 离散时间
++ 局部李雅普诺夫稳定性 + 使用MATLAB来实现测试
+矩阵范数
+矩阵范数有许多形式，对m × n矩阵A = [aij]来说，以下是常用的矩阵范数定义：
+
+1范数（绝对值距离）
+
 $$
-\begin{aligned}
-    \begin{bmatrix}
-        x\\
-        y\\
-        z
-    \end{bmatrix}
-\end{aligned}
+\Vert A\Vert_1 = \max_{i \leq j \leq n}\sum^m_{i= 1} \mid a_{ij}\mid
 $$
-上面这一组向量说明实验是一个三维的。因为有三个状态，我们也把这个叫状态向量。如果你学习过线性代数你应该知道我为什...
+
+无穷范数
+
+$$
+   \Vert A\Vert_{\infty} = \max_{1 ...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/06/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/06/06</span>
+                <div class="abstract-date" title="Last updated: 2026/07/27">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/07/25</span>
                 </div>
                 <!-- tags -->
                     <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/23/Kalman-3/">
-                <span class="abstract-title-text">Kalman_3</span>
-            </a>
-            <div class="abstract-content">
-                添加过程噪声
-在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析
-完整一维卡尔曼滤波模型
-过程噪声
-我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为：
-$$
-\begin{aligned}
-    p_{n+1,n} = p_{n,n} + q_n
-\end{aligned}
-$$
-
-我们把这个公式加入到我们总结的一维卡尔曼滤波表格
-
-
-
-
-
-
-
-
-
-类别
-方程 (Equation)
-方程名称 (Equation Name)
-文献中的其他别名 (A...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/06/06">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/23</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/18/Kalman-2/">
-                <span class="abstract-title-text">Kalman_2</span>
-            </a>
-            <div class="abstract-content">
-                这节是续上上一节的内容，我们将使用一个三阶滤波器α − β − γ滤波器来追踪加速飞行的航空器
-使用α − β − γ滤波器
-α − β − γ滤波器考虑了目标的加速度，因此，状态预测方程变为
-$$\hat{x}_{n+1,n} = \hat{x}_{n,n} +
-\hat{\dot{x}}_{n,n} \Delta t + \hat{\ddot{x}}_{n,n} \frac{\Delta
-t^2}{2}$$
-$$\hat{\dot{x}}_{n+1,n} =
-\hat{\dot{x}}_{n,n} + \hat{\ddot{x}}_{n,n} \Delta t$$
-$...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/18</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/05/16/Kalman/">
-                <span class="abstract-title-text">Kalman</span>
-            </a>
-            <div class="abstract-content">
-                卡尔曼滤波器
-卡尔曼滤波是一种最优递归数字处理算法。为什么是最优，等一下会讲到，首先我们讲基础知识
-估计、准确和精密度
-一架飞机的真实位置对观察者来说是隐藏的，但我们可以使用诸如雷达一样的传感器来估计飞机的位置。每一个测量得出的参数都是一个估计。而准确度表示测量值和真实值的接近长度。
-而精密度表示在同一参数下一系列测量结果的变化，准确和精密度构成了估计的基础。
-一般来说，高精度系统的测量具有低方差，而低精度的测量具有高方差。随机测量误差产生了这种差异。其中，低精度系统成为有偏系统，因为它的系统内有误差。一种减小方差的方法如下：对测量值进行平均或平滑，例如我们使用温度计测量温度，...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/18">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/05/16</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Linear_systems">Linear_systems</a>
 </div>
 
             </div>

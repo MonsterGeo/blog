@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Blog">
-<meta property="og:url" content="https://monstergeo.github.io/blog/page/2/index.html">
+<meta property="og:url" content="https://monstergeo.github.io/blog/archives/2026/09/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Done fool">
@@ -212,9 +212,8 @@
             document.write('<script src="/blog/lib/jquery.min.js" />')
         }
     </script>
-        <body class="home-body">
         <!-- header -->
-        <header class="header header-mobile index-header">
+        <header class="header header-mobile">
     <!-- top read progress line -->
     <div class="header-element">
         <div class="read-progress"></div>
@@ -248,7 +247,7 @@
 </header>
 
         <!-- fixed footer -->
-        <footer class="footer-fixed index-footer-fixed">
+        <footer class="footer-fixed">
     <!-- donate button -->
 
     <!-- back to top button -->
@@ -259,24 +258,18 @@
 
         <!-- wrapper -->
         <div class="wrapper">
-            <div class="site-intro" style="    height:50vh;
-">
+            <div class="site-intro" style="">
     <!-- 主页  -->
-    <!-- 文章页  -->
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-img" style="background-image: url(/blog/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                Marcus's blog
-            <!-- 文章页  -->
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
-                    run, barry, run!
-            <!-- 文章页  -->
         </p>
         <!-- 文章页 meta -->
     </div>
@@ -410,116 +403,40 @@
                 <main class="main index-page">
             
         <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                <span class="abstract-title-text">动态规划</span>
+            <a class="abstract-title" href="/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">
+                <span class="abstract-title-text">拓扑演变</span>
             </a>
             <div class="abstract-content">
-                动态规划和分治算法类似，都通过组合子问题的解求解原问题。分治算法是将问题划分为不相交的子问题，但动态规划处理不同子问题具有公共的子子问题的求解。分治算法将重复的去求解这些子问题，但动态规划只会处理一次。将解保存在一个表格之中，避免了重复的操作。
-动态规划主要求解最优化问题，这类问题有很多可行解，每个解都是一个值，我们求解的是最优值（极大或极小值）
-我们通常这样设计一个动态规划算法：D + 刻画一个最优解的结构特征 +
-递归的定义最优解的值 + 计算最优解的值，通常采用自底向上的方法 +
-利用计算出的信息构造一个最优解
-下面我们给出一个动态规划方法求解最优化问题的例子
-钢条切割...
+                拓扑演变
+本节我们从一个电感一推导出有用的开关拓扑
+为什么要使用二极管续流
+使用电感遇到的问题无非有两种解决方案： +
+任由近乎无穷大的感应电压尖峰出现。 +
+要么设法将感应电压控制在有限水平。
+不同于电容，电感的两端是有可能突变的，理想电感方程告诉我们$U = L \cdot
+\frac{dI}{dt}$，现在，在开关断开的一瞬间dt → 0,此时电流为1A，电感为1uH，那么容易导出$U
+= 10^{-6} \cdot \frac{1}{dt} (dt\to 0) =
+\infty$，因此这就是我们要处理的第一个问题。
+第二个方案来说，为了解决这个问题，开关关断的...
             </div>
             <!-- read more -->
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/22</span>
+                <div class="abstract-date" title="Last updated: 2026/09/08">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/09/08</span>
                 </div>
                 <!-- tags -->
                     <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/16/shit/">
-                <span class="abstract-title-text">shit</span>
-            </a>
-            <div class="abstract-content">
-                Prove
-for number n is Fibonacci
-number if and only if 5n2 ± 4 is perfect square
-number
-This title is my paper title.
-Introduction
-I had originally planned to finish this problem last year.but I don’t
-car. Let’s try finish at this year.
-Body
-Fibonacci sequence
-defintion 1(Fibonacci
-sequ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/05/23">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/16</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="math">math</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/02/13/fft/">
-                <span class="abstract-title-text">FFT</span>
-            </a>
-            <div class="abstract-content">
-                Prior Knowledge
-This article will display how fft does work. If you learn algebra
-before, you will join this article. It will fun so much. basically in
-this article, code is simple, most part is related to math.
-Let’s start at Polynomial.
-basic definitions
-defined(Polynomial): A polynomial ...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/02/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/02/13</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="power">power</a>
 </div>
 
             </div>
         </article>
         <div class="index-post-divider"></div>
     <!-- paginator  -->
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/blog/">&lt; PREV</a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span>
-        </nav>
 </main>
 
                 <!-- profile -->
-                    <div class="profile">
-    <img class="profile-avatar" alt="avatar" src="/blog/null" >
-    <div class="profile-name">Done fool</div>
-        <div class="profile-signature">
-            Run,barry run,run as fast as you can, you can&#39;t catch me, I&#39;m the ginger
-        </div>
-        <div class="friends">
-            <div>
-                FRIENDS
-            </div>
-                    <span>
-                        <a href="//icarusfell.top" target="_blank">spheniscidition</a>
-                    </span>
-        </div>
-</div>
-
             </div>
             <footer class="footer footer-unloaded">
     <!-- social  -->

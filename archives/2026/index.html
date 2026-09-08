@@ -403,6 +403,38 @@
                 <main class="main index-page">
             
         <article class="index-post">
+            <a class="abstract-title" href="/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">
+                <span class="abstract-title-text">拓扑演变</span>
+            </a>
+            <div class="abstract-content">
+                拓扑演变
+本节我们从一个电感一推导出有用的开关拓扑
+为什么要使用二极管续流
+使用电感遇到的问题无非有两种解决方案： +
+任由近乎无穷大的感应电压尖峰出现。 +
+要么设法将感应电压控制在有限水平。
+不同于电容，电感的两端是有可能突变的，理想电感方程告诉我们$U = L \cdot
+\frac{dI}{dt}$，现在，在开关断开的一瞬间dt → 0,此时电流为1A，电感为1uH，那么容易导出$U
+= 10^{-6} \cdot \frac{1}{dt} (dt\to 0) =
+\infty$，因此这就是我们要处理的第一个问题。
+第二个方案来说，为了解决这个问题，开关关断的...
+            </div>
+            <!-- read more -->
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2026/09/08">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/09/08</span>
+                </div>
+                <!-- tags -->
+                    <div class="abstract-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="power">power</a>
+</div>
+
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+            
+        <article class="index-post">
             <a class="abstract-title" href="/blog/2026/08/23/%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA/">
                 <span class="abstract-title-text">嵌入式系统稳定性简述</span>
             </a>
@@ -691,34 +723,6 @@ $...
             </div>
         </article>
         <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                <span class="abstract-title-text">动态规划</span>
-            </a>
-            <div class="abstract-content">
-                动态规划和分治算法类似，都通过组合子问题的解求解原问题。分治算法是将问题划分为不相交的子问题，但动态规划处理不同子问题具有公共的子子问题的求解。分治算法将重复的去求解这些子问题，但动态规划只会处理一次。将解保存在一个表格之中，避免了重复的操作。
-动态规划主要求解最优化问题，这类问题有很多可行解，每个解都是一个值，我们求解的是最优值（极大或极小值）
-我们通常这样设计一个动态规划算法：D + 刻画一个最优解的结构特征 +
-递归的定义最优解的值 + 计算最优解的值，通常采用自底向上的方法 +
-利用计算出的信息构造一个最优解
-下面我们给出一个动态规划方法求解最优化问题的例子
-钢条切割...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2026/03/22">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2026/03/22</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="algroithm">algroithm</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
     <!-- paginator  -->
         <nav class="page-nav">
             <span class="page-number current">1</span><a class="page-number" href="/blog/archives/2026/page/2/">2</a><a class="extend next" rel="next" href="/blog/archives/2026/page/2/">NEXT &gt;</a>
@@ -764,15 +768,20 @@ $...
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 12
+        Total : 13
         </div>
         <!-- search  -->
     </div>
     <div class="post-archive">
             <div class="archive-year"> 2026 </div>
             <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span>
+            <a class="archive-post-title" href="/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">拓扑演变</a>
+        </li>
         <li class="archive-post-item">
             <span class="archive-post-date">08/23</span>
             <a class="archive-post-title" href="/blog/2026/08/23/%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA/">嵌入式系统稳定性简述</a>
@@ -842,6 +851,10 @@ $...
             <span class="sidebar-tag-name" data-tags="stm32">
                 <span class="iconfont-archer">&#xe606;</span>
                 stm32
+            </span>
+            <span class="sidebar-tag-name" data-tags="power">
+                <span class="iconfont-archer">&#xe606;</span>
+                power
             </span>
             <span class="sidebar-tag-name" data-tags="Search">
                 <span class="iconfont-archer">&#xe606;</span>

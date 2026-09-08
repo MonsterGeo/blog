@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Done fool">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Done fool">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="拓扑演变 本节我们从一个电感一推导出有用的开关拓扑 为什么要使用二极管续流 使用电感遇到的问题无非有两种解决方案： + 任由近乎无穷大的感应电压尖峰出现。 + 要么设法将感应电压控制在有限水平。 不同于电容，电感的两端是有可能突变的，理想电感方程告诉我们$U &#x3D; L \cdot \frac{dI}{dt}$，现在，在开关断开的一瞬间dt → 0,此时电流为1A，电感为1uH，那么容易">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拓扑演变">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="拓扑演变 本节我们从一个电感一推导出有用的开关拓扑 为什么要使用二极管续流 使用电感遇到的问题无非有两种解决方案： + 任由近乎无穷大的感应电压尖峰出现。 + 要么设法将感应电压控制在有限水平。 不同于电容，电感的两端是有可能突变的，理想电感方程告诉我们$U &#x3D; L \cdot \frac{dI}{dt}$，现在，在开关断开的一瞬间dt → 0,此时电流为1A，电感为1uH，那么容易">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.upmath.me/svgb/1VfLbus2EN37K7gJ4KAyy_cjgRdFCxQFiqLA7c7xQrHpWKgjpTLdJDX87x2KlCwp9i0u2i5uFoE5wznz4BkO9eCL3__aO390f7r6Hb0UK3-o3bd47993bn7cFaVDr8Xab-cEa_niTyd0A9vR2m3yw86j8wbkKxT3oPQ3mTw8uqeiPAYfCfm0eEtI2Xv3Y7_KwdmMZm_xF11Obg7lqnp-dqVHxQbV7o9DUbs79PCSg6cpyYS1t_cplCJ_qvNntHMbj_Y-rz3KPSIZyss12uZ7tHXF09ajaoPAajK5-eTrvJH8DMHv0aJY361zzTglnFiriebamCWaPKzr_DUkMrUKa5pRxm7RbIamlCos4vL-ChxRjDAiiaXUEqqHcJQAGCctmGjAw_oqmpSKSkqMZeDVCDmC073YYGE1VtfBBDfSiCY8ZaUahwZYkgb7Fo1yiqW-jseJUNpyQrlkkDD_gBfDaeHMeWUtNmkdwLf5CxzxT-X6sPJVjabfFTX6vqrdbXT0opVkVlOliGBGcdVzNGWCYygi_NcRPAm4wlLcIozRqip9Xe32oOIac9XpAk1AxnBIVWJKm-2dhGMuPwBEFdTFdvYJk2CqE0CKoJNciCDq-hEwg7UYRMAUtuZyBExixkcRMI7NIIBO8NF_VA3cM8z10D3Bil12Tw02auSeaiz4wP9Z8jGApOtHAL1FhkcADcKuHAFlWIyPgFJM1DCCKOnRgnBsP9MhEqhGiaBEcc25HLYbY2faRkh2Yf0PLriVmkE7S82pIdqqoYsrbB41ZlyeW-eTz9_Rrwef-oUKYpWm1hiijBX9Rofe09iqELVJFwcjcA_xVgJZSkz4YAPw3Zz1BI5OZEZh1sYIbFKwoQkKVsAk1m4fnl1UWYK77gOJ5ZmNp9mcXAQ7S_rmAkjTqpJ9E2xEjOb96EfmUQWtc3bfIBqosRq4P0uG0dtucxd-yDVCRvt-9lCd1ftq58ZFHuJGVb8qRGI-rAqB5rhSFVCZUVXiEfWqks7soveo6lclIvarEt1frEqMdVCVlGuvKoPsu6qcCfxjXR3ANNLXGiKp0UYoayWjdEBfRoD-KiTWdAO0JAxk1S65CR3Y1_e3p7NIRpJ1PZUEzb5rjQtDi3KhqCIWXglK9cbdYp3vtwheKN7V5fxYlUjg8ByqNpv467QMoVOd6dajDleJbpo4giz222Lj58cpNTSqThmqK597h-YIroolWqyqXVXPj_XTY4aYlHe1W2eI3KOn2rmy-fW4Ozj4gU4ILRejN9wyzeVA4hnHbEwkmDYym9GOhTD_aDYjOF3qJCMjg2ZDo2_2N_a0pVz0E92gq0WFqW4Ik0ZRQY3V-ktrCsTKtEzXkAqHP1xRYOelIrfacHf368z011_n2FE_FNXapYaCZx-XwFnLhBG6z1wAp9C50P-km2LWYNUMCB4FaYcVg2VnkJqKM_HRJgo6yLGPAPnRHwvXRFpf440WCoa0hI4kHFpyNKfHc7kF_MzbmISOJszCVcKp0GIAOMqNif5AHkzoq_DMCiE0EJ1LLQj54suD6d6XQ7NQ5yeBFIHMil6kerjnWm2f6lx97VSf3KDf3JtHvwDTU9ZTA-9AAk_bsmF_Xq62kF5Z1fDx-Or2frkoytLVaO9e0kdoSGGR74qnch6-I5fo-M3p_hpyeI3-C-SH58fq7Tg7XXbAKORK2P8RewMdnmv_TfDwfe_K9eDr_m8">
+<meta property="og:image" content="https://i.upmath.me/svgb/3VhLb-NGDL77V8xhAzioPZ33Y4Mc2u2lQFEU3WIvtlEo9jgW6kiprHQ3a_i_lyONHiPLwaYL9LAJEssk5yOH5JAcLcv0r88HVx7dP654Ro_punwq3Pf4UD7v3e1xn2YOfUw35e6WYC0fy9MJXYE42rht8rQvUSeAyhzVMij8TCbLO3efZkevIyCfFp8C0uy5fTisE1A2p7NP9RNdTa6esnX-8OCyEqVbVLi_n9LCvUXLxwQ0TclMWHt9E0xJk_sieUB7ty3RoUyKEiUlIjOUZBu0Sw5o59L7XYnyLYJVk8nV-13yCFg_JmXp97xIN283j1powznXHB4k_K7QZLkpko-wjyklChs7o0piyq_RfN6RJMPCXsN3xrGkMyosVrYWsQQz3VLaFT2JhsQ1JtKLUIkZYHKsWJAIlFpLhWqwNKOU81UtZf283jt0A1svi6Ryxi8Qt0O99cSCJHhGwn8iOKO9rZ_Z2DebktYGKgg2tCVd0kS45UIaSZhRUmptR1WNuNlYrEVNYtRgoVvSJVXSCKoZF0pxKqWIFWmKFY020KD2NlBnyc_Z5mld5gWa_pAW6F1euOuQMYpIZS1X0hjKGOX9jGngNISAxhpgdwRIGKN1npVFvj94HsVGtjyfuFMGWxcQV8Uxs5V8R6KYmiFE4EmLiW4gAqzUmMsAEazoSOdWBF5khZRYidgKSC_JL1lBsaADKyDxdWxESzm3oWZFJgiNrYlNEBKbM4SGx7FWQxNYlcSRDS1pxIiaF1tBMOexFdxgxi5YwRWmQ0dwgbmNrQikfp4wibW5nN-aS6sIIUIQqZnVUYIPsvkVsIIQbgiR8GcFk2ocdySte8exPjg_pfnGNcXVKKsV54QTq-HIREdFwBEHT1ELFSRgcoKVjM0PUgRSX8ekbmFd5qbMnwE1ujyQOg3nSoOGUSMuFYl3yWOyTn2VqPdrla9yUOugozAtWbRfrSElIOSsK2mBBBnOjVdtoA74UwQWhELIlMVUtKRWJCzpi7QoAbWPEkhQZ5h-oUxDbYbqKXx5M8RaFSfBiHu17w6jpLDNS6qYkAr6jiYWzgAdpnFsbn8HLzeEOiq_u0N66IJCqDHaGA7ZTQ3olaYfFs4UJrY6iU3zaUhw5EXwMQe29j6mOOyTU42FpwCDDYQ0ljKWglhwHUtBGWUDIVA7gJIGKkcsBU1A6dhQaBXEDkgWhF-oIoIJzY0hwsL8Y-WZ-wdRbWBHSMFxF3PKcDhRBiItCNQuFqsamNvH7Uc6Dv5FVRZ6v6EU5gyuIX87TYtNctihx2rwy26PeYYE9gNrvt3WT6cVGGM4dJWZhZKswhQC7pesT4HBws875xQqRRXhm6Bycdil2_L22PGV559mqMjLpHToFjFNVmixzvd5cXss7u9miEn5tnCbGSI36L5wLque7vZPDh7QCaHVYjCYr8IAhS2fzduBoWtHCls5m0NTDq2IY05nc0jGug2RGRksqAQqfiVfra-We_FaT60GXQwDnDEuBFOUaU5gqn5tGBiXVQJoVrXX2sk1ydr2RBqBrRqjMDkShYbHowjYbzMAUOhg4DbEaGUkV4qwV4dAaV_qLRy75lTCWGXOCX7spGMOZ36kbRD6Pv82XQ4Jz63SWhElYXzU4vUeh8uPn0IMbuYSpfzNkhG4N3Yuh95_TqEaJlE-EoWWr_C3l_p1s39fJs_ot6cyNHvoaxJmLx8DqA1Uy-g-H99W6wssqOlGu6mfOUTc-wa3xqm_o_hG3LRcqgQUKvguqrYP3xm2Xa-Mttjy4KO5Yfj2LQGPiopWbTZAdqQ-BBBbVkAIRrMeQrSPAULNg1wjvIWoUOH2QnhsQ0fqI9QmB15AqLcWUGuIyBPdpD7weozd8Pou8iMVj10kIOfpBRcBzwx9FKLW91FDGrUiBLnvowDbd1KwYtRJwejISWFzfSfFvui9tZlcoT_cpxL9CheqkMRTSnkFyutxI6vuWkm23sFBzvKi3KGP7lCuFmmWuQId3GN42eYP6yLZp_fZrX9ftkLH47JMs2dE2YfTchm-kA-n082oWgOXCX-LtFja_08tA7WsfnfmL69fr_a7S4r8WwNIdk6rmeOrFG0hAw7pZ3cE293DyX8I-Fwe3N6tS89FyxIMuNse5ydZu-EL1rzgJcgmpmdQ5L82I77ADAgcWla_c3nJIP9ClBtfuV9lDTq--fDnMc1Ob8ZhufIlUf5H3PwirK-F4rWgsev2ebJZLgF_Mlm6bBO9-f4X">
+<meta property="og:image" content="https://i.upmath.me/svgb/1VhLb-M2EL77V_CwARLUZvl-JPCh3V4KFD20RS62USg2HQt1JFdSms0a_u8dSrQsynKw6aIFusFG0nA4882DM8PMq_SPz6Wr9u4vV7yiXbqsngv3LS6r162b7rdp5tBLuqo2U4K13FWHA7oCdrRy6-R5W6ETA6py1PCg8G80mj-4xzTbex1B8mH2KUgav7Yv5TIBZRM6_tS80cXo6jlb5k9PLqtQukaF-_M5Ldwtmu8S0HRNxsLam7sAJU0ei-QJbd26QmWVFBVKKkTGKMlWaJOUaOPSx02F8jWCXaPR1a-bZAeyvk-qyts8S1e3q50W2nDONYcXCT8LNJqviuQF7LimRGFjx1RJTPkNmkxOJMmwsDfwzTiWdEyFxco2LJZgpltKu6PDcSRxjYn0LFRiBjI5VixwBEqjpZZqsDSDlPNdLWX5utw6dAemV0VSO-MniFvZmJ5Y4ATPSPhNBGe0Y_oZxi5sSloMVBBsaEu6pIlwy4U0kjCjpNTaDqoacLOxWIuGxKjBQrekS6qkEVQzLpTiVEoRK9IUKxoZcJTaMaDJkh-z1fOyygt0_V1aoI954W5CxigilbVcSWMoY5R3M-YoTkMIaKwBrCNAwhgt86wq8m3p1yg2sl3ziXvNwHQBcVUcM1vzn0gUU9MXEdakxUQfRQSxUmMug4iA4kQ6RxHWIhRSYiViFJBekl9CQbGgPRSQ-DoG0VLOMTRLEQShsTUxBCGxOZNwXONYqz4EVidxhKElDYBo1mIUBHMeo-AGM3YBBVeY9h3BBeY2RhFI3TxhEmtzOb81l1YRQoQgUjOrowTvZfM7xApCuCFEwn8rmFTDcgfSunMcm4PzQ5qv3LG4GmW14pxwYjUcmeioCDji4ClqoYIEmZxgJWP4gYtA6uuYdNrYlLlr5s-AGtweSCcN50qDhkEQl4rEx2SXLFNfJRp7rfJVDmoddBSmJYvs1RpSAkLOTiUtkCDDufGqDdQBf4oAQSiETFlMRUtqWcKWLksrJUjtSgkkqDNMv1GmoTZD9RS-vBlirYqTYMC92neHQVIw85IqJqSCvqOJhTNA-2kcw-1a8HZDaKLyiyvT8hQUQo3RxnDIbmpArzTdsHCmMLH1STw2nyMJjrwIPuawrL2PKQ52cqqx8BRYYD0mjaWMuSAWXMdcUEZZjwnU9kRJA5Uj5oImoHQMFFoFsT2SBeY3qohgQnNjiLAw_1h55v5eVI9iB0jBcRdzynA4UQYiLQjULhar6sHtyu1GOg7-xRrGqBSGU-BjwmjVUTVbJeUG7erJL5vu8wwJ7CfWfL1u3g4Lb7gFq3Xwt_-w4OswkFioGGffvt_J2vhGz6zcpOtqum-X61Z5GKMir5LKoSlimizQbJlv82K6Lx4fxohJeVu41RiRO_RYOJfVbw_bZwcv6IDQYtabxhdhasKWjyftlHDqQQoD9Al04tB_OOZ0PIEMbHoPGZPehpqhXq_56_31ds_e6GnUoIu-5zAPKaKNVAYe3aHoC11PiD_vwfXwwYg--ppZKOLnBGpqwpnvj6swuUSut_93z4-u0G_uU4V-hgYbjIaR36dYM0hAVcjq3ptkyw1YmeUFXJpeXFktZmmWuQKVbhcuX96SWbJNH7Opvz8t0H4_r9LsFVF2f5jPwwe5PxzuhtQyA5ec5lLjp4qvV_vNJUVU-dsUDB5fa90anF6mn90ekLung38IeM5Lt3XLyq-iicTyHs3hecluf9WDsU-8Ewvaf7j_fZ9mhw_DYrmCaxtc3v6Z3PyiWOGH2fcKjR23zZPVfD4snyo4Z4z8R4GBtPSJ-QXsb-Qt3J_reVDV89-_j_v9qEejuctW0d9O_gY">
+<meta property="og:image" content="https://i.upmath.me/svgb/xVZNb9s4EL37V8wlQAwoXJLihxjD58UCxV52b7IPikTbRBXKpagmjuH_vtRHUkmwe0mL9cEgh2_m8Q05HG28-fpWa3_W37U7wdHkvnH6D1T7U6nX59JYDS-m8Ic1RpIf_eUCdwEOhd5lTenhBwB8BT0Ght9isXnSe2PPLccQ-ZK-DpGi08egzrNA9kCi135Etou7xubV87O2HswOnP7WGKcfYXPMAtM9jphSy9WwFZPtXfYMpd55qH3mPGQecASZLeCQ1XDQZn_wUO0geC0Wd_94l3WWL2HzNaSmeCyyhDKVUM6owJJgQraw2BQue2mF3BNMUcwjQskSHh7CPOaI9tPVAEvrg9n59TlgcbdyicBVPvMa1oC3kOZVWbn12e2fIqCcPzpdRIBXsHda2270VDY6DOACsE1nmd_2KQ3KAS8hNy4vNaSv4LLCNPUa4nZ_cJrMW5_VDbmxEoqToEMyqSRVU7lMvsvr1Mr4ttoP6Cf17kxZ_i_ZOWTHcLH-skWT-8r16TlyLGWcCC45TWgyvgzjbIySQwRiyRIQgryy3lVl_WOJI8aW3W0MJo7iONgYEh06WCRSfGQZ-ScYcfm-1PsnFMmPkJ3_YLnGPwEP_gwlU_5EInaDX2GEZ_yKjiR1_oPlGv8EPPizuX4lbupXaq6fYjLT_265wj8FD_7xTD_F4pZ-itVcPyVkpv_d0vO3N2Kw9OVyo_qkwjEO_5SHKoynj83IvwvHFUr4jfKjgv6a8vvNz40SsYwVY5IlKhaK_vS56aeheMRyVKF_uqoJR9DXJ2EhdURIwQVlXAo2qdBYIhK1hSXjSchEDFMuUTwFzF3yU6t4upfx5nrgKnQT-Fe_evi7KvSwgxAsiUILWYINRkgzmx_CUdjKhdb1omu_TY212kGtj0MLbFOXZqXZ23XbxbZwrl8uq2uxExop-anI502dO3P0tXnTYOyxCT39KhXlgUt8kmtXVd5WXndsVeNv0xERDkAkv5Jvb4uWLHyHaFtMvkL-Aw">
+<meta property="og:image" content="http://i.upmath.me/svgb/1ZZNj-I4EIbv_Iq6tARS2utvJ404r1Ya7WXnFji4EwPWph3WcaabQfz3cUhmIDRcpkcabQ6RXa7yW0_FH1kG--_XxoSD-WL8Hna2CK03f6Am7CuzOFTWGXi1ZdguMFJiF45HeIjuUJq1bqsAZwcINfQ-MDyTyfLZbKw7dBrDzMf8bZgp2f9oNIWOYo8keetbZDV5aF1Rv7wYF8CuwZv_WuvNEyx3OipNccKzbDYfUrF64_ULVGYdoAnaB9ABcALalbDVDWyN3WwD1GuIUZPJwz_B65PlU0y-gdyWT6VOKc9SKjiVWBFMyAomy9Lr1w5kqjhiIiGUzODxEaYEK0T77nzwyputXYfFYar6gWMCvg46GFgAXkFe1FXtFwe_eU6ACvHkTZkAnsPGG-NOreeqNbEBR4BVflX3VV_QyA14BoX1RWUgfwOvS9s2C2BderAf9buY-R1YpjLMcHxTkQnCxrCUkO90HWx0Qam4Q0slRf8H4EwyxTLOFU8zJjM6AiZcXQIPXcWQvEF8dr4kzn4CeW2r6rcUaKt3cSv96es2bpBTfXaEx6VApJJCUi6U5BcFmhKmEIkFUUixUYlSOXSFQmzscB1S7LsEx7W9LHbveM7uL1e2Raj9kB_nAmMZvx8TIkuZHKWHx5-v7xKJeDoDhKCoXfB11ZyHBOJ8djoeoilDLOZOeJdR9J6SuPwzcWG5iI82ob4P9fFRR_2Yso_vLbf0R85DfIrSsT4liN_RpxzhK30qL5D6eHmXf-Q8xKfX_Azf5WfsHT8T1_yD5Zb-yHmIV9f8HN_l5-wdPxfX_IOl1-_XmDgf15MH-GzeAvxdl2ZYQzGJNIln_gxcNEKuXbGNG9nVPt41r6YJq9w6Zzw0ZjfcWd1WynVlN27RXTsrODSvx_mtuQVPMvWhmQ_LpvB2Fxr71YB1uzZewjelqKBJJj-ota7r4OpgTmp1G-7LERl3uEx_pd7GlZ1Y_HEwrhz9NnwD">
+<meta property="og:image" content="http://i.upmath.me/svgb/1VZLb9s4EL77V8wlgA0oXPElijF8Lgosemlvsg-MRNvEKpSXojZxDf_3Uo_EsuJc2gLF6iBwnt981HCotTf_fK-1P-n_tDvCweS-cfovVPtjqVen0lgNz6bw-1WMBD_48xnugjsUequa0sPFAXwFvQ8Mz2y2ftQ7Y08txpD5nL0MmaLj26LOVQC7x9FLv8Kb2V1j8-rpSVsPZgtO_9sYpx9gfVABaR5HTMrFcijFqJ1TT1DqrYfaK-dBeYgjULaAvaphr81u76HaQoiaze6-eqc6zd-h-BoyUzwUKiVMpoQzksQCxxhvYLYunHpuicwFQ5RHmOAF3N_DHMcCkV5cDl5ZvTdbvzrNRW84R-Aqr7yGFcQbyPKqrNzq5HaPERDOH5wuIoiXsHNa2271WDY6LOAMsMkm-77pNzTwhngBuXF5qSF7AacK09QroG15cLyS25jlB2SpkDGNw5twyTG9JkswfmXXkg0uKOUfsCUJQf8HwjKhgkrGBEslTSS5IoxZ9zmT16_biQRTlCy6hHt1CK33yVVNaKgu3wGzsHU4EQlPCOMiYaOEc0wFwiGBQIJepSTJIHKB6LXDNCQ_toyvaxkX1zteqvtsiyb3lRvqS5NAkhMqqZQilvSqvCldgvAgIwR5Zb2ryro1xEjy3tAepVYR4dANovcc5BRh-j4yGBLE2SWyS8U5Ivw1uIe9qN4jD7YROEUyGYMTRNOb4KGJ5AScSTTBftO8h-5NF2SWIjKmzRKU3KTNOIqntBkNLT2BflPdwO5tI3CC2Jh28Etv0qYSkSntYYPekFv50kmd-NGpIYxxyUhMWcwYjVN669hM8pEEpTcGxdg6HhVE_MSw2Jqy_AOjZXYH3_SLhy9VoQd-4eCmUbguFmCDEjJl831gYisXrqlnXftNZqzVDmp9GK67NlemSrOzq_bG2sCpfj4vb-XmLJLilzKf1nXuzMHX5rsGYw9NuL9vQoVZEbUn65ewtlXlbeV1h1Y1_mO4MFPCXEl_J97OFi1Y-OfQtrj64_gB">
+<meta property="og:image" content="https://i.upmath.me/svgb/1VhLj9s2EL77V_CygBfVsnw_sthDkSJFgSIpmt5sHxSbuxbqSFtJTrIx_N87EqkHZTk9NJfuyRzOfDP8OJwZ7brO_vpaufrkPrnyBT1n2_pYuh9xVb8c3MPpkOUOfc529f6BYC2f6_MZ3YA62rnH9Hio0aCA6gJ5HRT-Fov1B_eU5afGR0A-r74EpOSl_1FtU3B2R5Mv_hfdLG6O-bb4-NHlNcoeUen-Pmale4XWzyl4WpJEWHt7H0LJ0qcy_YgO7rFGVZ2WNUprRBKU5ju0Tyu0d9nTvkbFIwKrxeLmfV2mreQ3CL5Cq2z3apdapakkjBgulDRUbtBivSvTz81Blspik1BGMdO36O4OLY3AohfcX4FkxlpBtRWWCSK5jSEBkCpMVQBUmPWCa4BcE0GFZkRRSgklPELUGtMI0wuIxt-AZIYpSRUljFo4_wUiodG5g4QTjwmg-_QZ7uXXfHfc1kWJlj9lJXpdlO7WO3gWmlsuibBCK2uJHjlYUmISa3AIl1KJiQoCjNG2yOuyOFTDDscWtpprXTbnFCAimLXKIDCY2kEwtrbYsrDjjeFEnHd4rXWQzPiOdIM5w5qPfTMRBTO2VkNUwRjuI3bdCuY8jzSDrW3oHzmGi9Bi1jFnWOjIMefY6MhzkMy4jnSDucTMRL51FMzY2gxReWNBMBWR7yAZbl9oeAF-fS1ZFeQ9J0JxY42xUs6kv8_2PvtH-H2u3fdZ-75OX9DvxzqkqhJUcUY11UozoWyUqoo1D1SQgOaXwAmFM3ZLRrAwkQIkrmr3OWY8aWilulNQmPvHJdQIAq6NT_lUBMt-yxMqLaaNdXcZ3dqjxebdHoFn0NkHSB9wixAdYeIf7q3fCvaQDbbH9ABBNBdCtzf495D9aSfnB4a2L9uDmzI9x0vYinjhAisTUwMiKq5QA_eiYmbCTY0iGyQXzIStiBkPOSZmNoBhT5mYm-HEEw56bq62CWhflhMKvYILqIvxOxk_tCFTp-uQuVddQLtkGnqHhpJOlZhrG75JjLqGUBMflwIyfp4_Z8XOhbdJoIdarSXRlsGRbNxHoLBQKJW0g2NEYNJWFx7wvQYlMlr3Fl2yGXlp5AU95tRJi3npkdFAK_9G81UKuq9gBh6NFNqq-KKmF-ODiyrYa8ikdNsVMAPFkUgojdYAMGdjjhj0jiaHRAjPL6HFMHPbL-lwuCCA-Fm7z5rqGtRbBQ71awzQKgT9kUKQXKOAwIu3DCYES7k1Fgp8xMGYxSGs6TrEfc2HBT4sVHUugWltzAzLo1QMkBeChrmB-D9clVXNwBOmHG6YVQou0mpDtIyYV756wMTq8Zo1nEvRbm3wrGRqM6xDukLyNKR3TSksg1q3jHBbCVHfbLIM7kQpDk0QuuyErQv-W8Tp-l88CCk1pQKokk15YnrGxZj_pkbOCaJi8UtZHKF6-utgMAcQYgTT0kgJ80JULWSbqhLaWVR8ZNe6NWsSd7Q_MYg700UR83pXD28EFHINXyKQLIqo0cS92qXVHsEXTu3K_OFU5Ejg5nOqeHz0v84bCN-axPSPuCnlpvXmMVbVPnusH06BRdg6J6gs6rR26AFRQzZotS0ORflwKp8-JIhJ-ap0uwSRe_RUOpe3vz4cjg5-oDNCm9XkE3DjXw30fZ7cwVRjJx1NYSuTO9pQ0HYz3kw5dwSHNk8SMjFoFdr9Vr-1b83bztf68W5Qw-nrY_nJxYQq6HVCEy6F5PAdE79uJpoXcNH2FZZN5abY0H5yEO08BrMr7QZzia1Omkna6hmKm6mftdsqZhm6Bv-f87y4QX-6LzV6Cx04nHtpSMPYLcrbrpzm2z0cLy9K-CD_7Kp6s8ry3JWocs_hw745wio9ZE_5Q_NtvkGn07raltlzXWVfHfrhvF6f7-c8USESpb6fp3dv3pyveILPShh1vqOrt1c8MU26seq_cXgo0h24WCzWLt9F_1r5Bw">
+<meta property="og:image" content="https://i.upmath.me/svgb/1VhLb-M2EL77V_ASIEEdlu_HBjkUW2xRoGiLbm-2D1qbiYV6pVSSdzdr-L93RFIyqdjpoXupT-Jw5pvhx-EM6WVX_vW1dd3BfXLNM3oq192-cd_jtnveufvDrqwc-lxuuu09wVo-dccjugJ1tHEPxX7XoZMC6moUdFD8zWbLD-6xrA69j4h8XHyJSPPn8aNdF-Dsls6_hC-6ml3tq3X98aOrOlQ-oMb9vS8b9wYtnwrwdE3mwtqbuxhKWTw2xUe0cw8darui6VDRITJHRbVB26JFW1c-bjtUPyCwms2u3ndN4SW_QPAtWpSbN5vCKk0lYcRwoaShcoVmy01TfO4Xcq0sNnPKKGb6Bt3eomsjsBgFdxcgmbFWUG2FZYJIbnNIAKQKUxUBFWaj4BIg10RQoRlRlFJCCc8QtcY0wwwCovErkMwwJamihFEL63-BSGi27ijhJGAC6LZ4gn35udrs113doOsfyga9rRt3Exw8Cc0tl0RYoZW1RCcOrinAWTG3BseIqZFxhDFa11XX1Ls2ijm2IO_3FMYKCzq3BDOvCQKDqTgJUlPYOh1ngrHtlzPgeesoOeM4043mDMPeJb6tyIJJrdUpqmissRS57yA55zvVjeYGW5n4ZoRkwZysGWGnqLwxIxwblvoeJC9957rRXGLGMt8qCya1NqeogjElmNjMd5SMW8-o9mSZ17JVQeJzIhQ31hgr5Zn8D-k-pn-SW8Qk6CFt33fFM_p938VcVYIqDoFQrTQTyma5Opp7MCqxGaK9ptxirtJpoTEbZynsGhhrrIdpDt-weGCUe3PlqT2TA2GGEjJkAAgsBwHFlMcMCmCJKLUHTDXORQgfrMcM9knwE-swo0_5G_Agr4nOvJ8kefAQa5waw-9XqsfDky4dqFk_r3duQm8OGmYSRqDgSZEzAqkk6AVGYDPgROeMhA06MRI37Jz3YStZYttXiISR4P0sIyHWjJG40hMj6dJHRi52BOhUlhMKbYELiCU_EWka-rxT7My49_ha04HOyDS0CQ3VmypxrkOEfpA0CKEmPl4KSHoQfyzrjYunkEC7tFpLoi2DJdm8ZUiJJTikQFKGx4ivLUECu5TrTK2GPDvFkkBFtcHqJXKUnHUdGGXYvNJzlYKmK5iBziqFtirftOkmjT3xRNdbSKliPZQtAyWRSCiI1gAwZylfjFm_pEhEHDLICwhwGFI6VuEoMJgzP8_6mhrVvQIcWJ4CeIWonyhEySUKCAVPDC4GFoqMsVDWMw4YjRzwNKzpOMZ9yYcFPizUci6BaW3MGZaTtIyQLwQ9cyfi_3Bt2fb3nHi54YZZpWAjrTZEy4x51VtDx7MRT4XEUHQYG3xWMrU5jWPWQvL0pA9ZG4dRbRhmuF5C1KutlcGeKMWh9UFvnbD1gn-POB3_iwchpaZUAFWyL1VMn3GR8g-YZwVZ4fipqfdQR8N2wKVCE2IE09JICbeEvHL4VJUE54VDxsymmvWJm8xPDCY1Y1rQgt7FxRtBudTwAIFkUUQlF-3Fpmi3CB42nWuq-0NdIYH7V1T98BC-jisIH9qOGQ9xX9aN9xYwFu22fOjuD5FFmDrOUVN3RefQPaKGrNBiXe_q5v7QPH6YIyblm8Zt5ojcocfGucp_fdjtHXygI0KrxeTltwqnhvQd_ZZjZietzd8Fb2lPge9rHHM6vyU4tmQyJxMDr-Dnvb639-a-CXo_wQ3qOX27bz65nFAFfU9owqWQHJ4v-emGfiqELxD8RRPWEtpv34TN2IRh602fWVgMTdz69xiPnXHCMrV2OLoZ0Yz2oP9zrmdX6E_3pUO_QkeOC782pL8x3aDKd-miWm9heVXdwFv8s2u71aKsKteg1j3FN32_hEWxKx-r-_5ZvkKHw7JdN-VT15ZfHfruuFwe7855gpdcfyH5dq5-e_fueMGV0HNFvqGnXy84YpoM16z_xuGuLjbgYjZbumqT_avyDw">
+<meta property="article:published_time" content="2026-09-08T14:15:44.000Z">
+<meta property="article:modified_time" content="2026-09-08T14:22:06.986Z">
+<meta property="article:author" content="Done fool">
+<meta property="article:tag" content="power">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.upmath.me/svgb/1VfLbus2EN37K7gJ4KAyy_cjgRdFCxQFiqLA7c7xQrHpWKgjpTLdJDX87x2KlCwp9i0u2i5uFoE5wznz4BkO9eCL3__aO390f7r6Hb0UK3-o3bd47993bn7cFaVDr8Xab-cEa_niTyd0A9vR2m3yw86j8wbkKxT3oPQ3mTw8uqeiPAYfCfm0eEtI2Xv3Y7_KwdmMZm_xF11Obg7lqnp-dqVHxQbV7o9DUbs79PCSg6cpyYS1t_cplCJ_qvNntHMbj_Y-rz3KPSIZyss12uZ7tHXF09ajaoPAajK5-eTrvJH8DMHv0aJY361zzTglnFiriebamCWaPKzr_DUkMrUKa5pRxm7RbIamlCos4vL-ChxRjDAiiaXUEqqHcJQAGCctmGjAw_oqmpSKSkqMZeDVCDmC073YYGE1VtfBBDfSiCY8ZaUahwZYkgb7Fo1yiqW-jseJUNpyQrlkkDD_gBfDaeHMeWUtNmkdwLf5CxzxT-X6sPJVjabfFTX6vqrdbXT0opVkVlOliGBGcdVzNGWCYygi_NcRPAm4wlLcIozRqip9Xe32oOIac9XpAk1AxnBIVWJKm-2dhGMuPwBEFdTFdvYJk2CqE0CKoJNciCDq-hEwg7UYRMAUtuZyBExixkcRMI7NIIBO8NF_VA3cM8z10D3Bil12Tw02auSeaiz4wP9Z8jGApOtHAL1FhkcADcKuHAFlWIyPgFJM1DCCKOnRgnBsP9MhEqhGiaBEcc25HLYbY2faRkh2Yf0PLriVmkE7S82pIdqqoYsrbB41ZlyeW-eTz9_Rrwef-oUKYpWm1hiijBX9Rofe09iqELVJFwcjcA_xVgJZSkz4YAPw3Zz1BI5OZEZh1sYIbFKwoQkKVsAk1m4fnl1UWYK77gOJ5ZmNp9mcXAQ7S_rmAkjTqpJ9E2xEjOb96EfmUQWtc3bfIBqosRq4P0uG0dtucxd-yDVCRvt-9lCd1ftq58ZFHuJGVb8qRGI-rAqB5rhSFVCZUVXiEfWqks7soveo6lclIvarEt1frEqMdVCVlGuvKoPsu6qcCfxjXR3ANNLXGiKp0UYoayWjdEBfRoD-KiTWdAO0JAxk1S65CR3Y1_e3p7NIRpJ1PZUEzb5rjQtDi3KhqCIWXglK9cbdYp3vtwheKN7V5fxYlUjg8ByqNpv467QMoVOd6dajDleJbpo4giz222Lj58cpNTSqThmqK597h-YIroolWqyqXVXPj_XTY4aYlHe1W2eI3KOn2rmy-fW4Ozj4gU4ILRejN9wyzeVA4hnHbEwkmDYym9GOhTD_aDYjOF3qJCMjg2ZDo2_2N_a0pVz0E92gq0WFqW4Ik0ZRQY3V-ktrCsTKtEzXkAqHP1xRYOelIrfacHf368z011_n2FE_FNXapYaCZx-XwFnLhBG6z1wAp9C50P-km2LWYNUMCB4FaYcVg2VnkJqKM_HRJgo6yLGPAPnRHwvXRFpf440WCoa0hI4kHFpyNKfHc7kF_MzbmISOJszCVcKp0GIAOMqNif5AHkzoq_DMCiE0EJ1LLQj54suD6d6XQ7NQ5yeBFIHMil6kerjnWm2f6lx97VSf3KDf3JtHvwDTU9ZTA-9AAk_bsmF_Xq62kF5Z1fDx-Or2frkoytLVaO9e0kdoSGGR74qnch6-I5fo-M3p_hpyeI3-C-SH58fq7Tg7XXbAKORK2P8RewMdnmv_TfDwfe_K9eDr_m8">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/blog/">
+    <title>拓扑演变 · Marcus</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/blog/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/blog/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/blog/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/blog/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/blog/scripts/main.js" as="script">
+    <link rel="preload" href="/blog/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/blog/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/blog/">Marcus's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/blog/">Marcus&#39;s blog</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">拓扑演变</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/blog/)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                拓扑演变
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="power">power</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2026/09/08</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/blog/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/blog/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="拓扑演变">拓扑演变</h1>
+<p>本节我们从一个电感一推导出有用的开关拓扑</p>
+<h2 id="为什么要使用二极管续流">为什么要使用二极管续流</h2>
+<p>使用电感遇到的问题无非有两种解决方案： +
+任由近乎无穷大的感应电压尖峰出现。 +
+要么设法将感应电压控制在有限水平。</p>
+<p>不同于电容，电感的两端是有可能突变的，理想电感方程告诉我们<span
+class="math inline">$U = L \cdot
+\frac{dI}{dt}$</span>，现在，在开关断开的一瞬间<span
+class="math inline"><em>d</em><em>t</em> → 0</span>,此时电流为<span
+class="math inline">1</span>A，电感为<span
+class="math inline">1</span>uH，那么容易导出<span class="math inline">$U
+= 10^{-6} \cdot \frac{1}{dt} (dt\to 0) =
+\infty$</span>，因此这就是我们要处理的第一个问题。</p>
+<p>第二个方案来说，为了解决这个问题，开关关断的时候出现感应电压尖峰的原因是先前流过电感的电流需要续流回路，但无路可走，因而电流很自然的就要去突破电路中最薄弱的环节。在开关中强行产生电弧续流。为此，如果我们能有意识的在电路中提供续流回路，那么开关关断时的电感电流就不需要流过开关，而是通过续流二极管<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>回路续流，这样就不会出现问题，而电感也不会以危险的电压尖峰形式冲击开关。然后，当开关再次导通的时候，电流恰好就从新路径流回开关。最后到达稳态，电路以某一频率重复导通-&gt;关断-&gt;导通-&gt;关断的开关过程</p>
+<p>下面我们以两个示意图来表示这一过程，使用的参数为<span
+class="math inline"><em>V</em> = 12<em>V</em></span>，肖特基二极管的正向压降是<span
+class="math inline">0.5</span>V，并且开关是无压降的</p>
+<center>
+<p>开关闭合下</p>
+<p><img src="https:////i.upmath.me/svgb/1VfLbus2EN37K7gJ4KAyy_cjgRdFCxQFiqLA7c7xQrHpWKgjpTLdJDX87x2KlCwp9i0u2i5uFoE5wznz4BkO9eCL3__aO390f7r6Hb0UK3-o3bd47993bn7cFaVDr8Xab-cEa_niTyd0A9vR2m3yw86j8wbkKxT3oPQ3mTw8uqeiPAYfCfm0eEtI2Xv3Y7_KwdmMZm_xF11Obg7lqnp-dqVHxQbV7o9DUbs79PCSg6cpyYS1t_cplCJ_qvNntHMbj_Y-rz3KPSIZyss12uZ7tHXF09ajaoPAajK5-eTrvJH8DMHv0aJY361zzTglnFiriebamCWaPKzr_DUkMrUKa5pRxm7RbIamlCos4vL-ChxRjDAiiaXUEqqHcJQAGCctmGjAw_oqmpSKSkqMZeDVCDmC073YYGE1VtfBBDfSiCY8ZaUahwZYkgb7Fo1yiqW-jseJUNpyQrlkkDD_gBfDaeHMeWUtNmkdwLf5CxzxT-X6sPJVjabfFTX6vqrdbXT0opVkVlOliGBGcdVzNGWCYygi_NcRPAm4wlLcIozRqip9Xe32oOIac9XpAk1AxnBIVWJKm-2dhGMuPwBEFdTFdvYJk2CqE0CKoJNciCDq-hEwg7UYRMAUtuZyBExixkcRMI7NIIBO8NF_VA3cM8z10D3Bil12Tw02auSeaiz4wP9Z8jGApOtHAL1FhkcADcKuHAFlWIyPgFJM1DCCKOnRgnBsP9MhEqhGiaBEcc25HLYbY2faRkh2Yf0PLriVmkE7S82pIdqqoYsrbB41ZlyeW-eTz9_Rrwef-oUKYpWm1hiijBX9Rofe09iqELVJFwcjcA_xVgJZSkz4YAPw3Zz1BI5OZEZh1sYIbFKwoQkKVsAk1m4fnl1UWYK77gOJ5ZmNp9mcXAQ7S_rmAkjTqpJ9E2xEjOb96EfmUQWtc3bfIBqosRq4P0uG0dtucxd-yDVCRvt-9lCd1ftq58ZFHuJGVb8qRGI-rAqB5rhSFVCZUVXiEfWqks7soveo6lclIvarEt1frEqMdVCVlGuvKoPsu6qcCfxjXR3ANNLXGiKp0UYoayWjdEBfRoD-KiTWdAO0JAxk1S65CR3Y1_e3p7NIRpJ1PZUEzb5rjQtDi3KhqCIWXglK9cbdYp3vtwheKN7V5fxYlUjg8ByqNpv467QMoVOd6dajDleJbpo4giz222Lj58cpNTSqThmqK597h-YIroolWqyqXVXPj_XTY4aYlHe1W2eI3KOn2rmy-fW4Ozj4gU4ILRejN9wyzeVA4hnHbEwkmDYym9GOhTD_aDYjOF3qJCMjg2ZDo2_2N_a0pVz0E92gq0WFqW4Ik0ZRQY3V-ktrCsTKtEzXkAqHP1xRYOelIrfacHf368z011_n2FE_FNXapYaCZx-XwFnLhBG6z1wAp9C50P-km2LWYNUMCB4FaYcVg2VnkJqKM_HRJgo6yLGPAPnRHwvXRFpf440WCoa0hI4kHFpyNKfHc7kF_MzbmISOJszCVcKp0GIAOMqNif5AHkzoq_DMCiE0EJ1LLQj54suD6d6XQ7NQ5yeBFIHMil6kerjnWm2f6lx97VSf3KDf3JtHvwDTU9ZTA-9AAk_bsmF_Xq62kF5Z1fDx-Or2frkoytLVaO9e0kdoSGGR74qnch6-I5fo-M3p_hpyeI3-C-SH58fq7Tg7XXbAKORK2P8RewMdnmv_TfDwfe_K9eDr_m8" alt="开关闭合" width="300" height="200"></p>
+</center>
+<center>
+<p>开关打开下：</p>
+<p><img src = "https:////i.upmath.me/svgb/3VdNj_I2EL7zK3xZiVWD6--PXXGoWqmqVPXyvjfgkAUDUdmEhtDdLeK_dxI7wQnwtlXfS7tIq3jseWbm8cxkMq-yX_84uOrkfnflB9pny-pYum_xofrYuelpl-UOvWWrajslWMt9dT6jBziOVm6dHncVuhxAVYH8GRT-RqP5i9tk-am2EZDPs_eAlHx0D4dlCsYmNHn3T3Qxejjmy-L11eUVytaodL8ds9I9ofk-BUtjkghrH5-DK1m6KdNXtHPrCh2qtKxQWiGSoDRfoW16QFuXbbYVKtYItEajh09VmTaSn8H5A5plq6dVqhmnhBNrNdFcG7NAo_mqTN_qQMZWYU0TytgjmkzQmFKFhV8-34EjihFGJLGUWkJ1H44SAOOkBRMNeL2-iyalopISYxlYNUIO4HTkGyysxuo-mOBGGtG4p6xUQ9cAS9Jav0WjnGKp7-NxIpS2nFAuGQTMr_C8Oy2cuaysxSasa_Btuocr_ilfHZdVUaLxd1mJvi9K9-gN7bWSzGqqFBHMKK4iQ2MmOAYS4b_24EHAFZbiEWGMlkVelcXuAFtcY666vTpNQMZwHarElDbHOwnHXF4B-C3gxXb6AZNgqgNA8KCT3PDA78UeMIO16HnAFLbmtgdMYsYHHjCOTc-BTnBt32_1zDPMdd88wYrdNk8NNmpgnmoseM_-RXLtQNiLPYDaIv0rgAJhd66AMiyGV0ApJqrvgZdEaUE4tl-oEAmpRomgRHHNueyXG2OXtPWQ7Mb6L0xwKzWDcpaaU0O0VX0Td7J5UJh-eSmdH8viCEz4arGGSGq0EcpaySiNqwUuFbShiQUwiAj6mWqX3NQBxPvx8eXHcuc6Jck6l4KgOXdx6oesWLngEzQeLo1RlgkjtIpbxZhTCFEkhnQ8WoOVqonlXhBOWNFbdgrBL87EtY4XdJBDGzXktT0Gjyas792jFgrSRFooZa6oGmTKMDNawC90Z2KU4oRZuA1OhRY9wEFsTMQp0cuRC_-fstc98PLpLauW23APFBIP2p-iXNROc9ZLDmMxs4lR2LTvFGCGyFYCBSAw5_EBBl2S2MsBAp0Rzkt4v4cD0FekSZTFqqEamoph7fl-YYctiUnXmxmERBPDcVvWHq0TxNocenrYCcreWY_ntWP3B-p-y0TqDaAlkXpj_CKJ1RtHw1bQ9-GYi-9x6FE59TjuwbZbESW1yPCIkvAuvcEIgSlL9xjpbqcLKUhuMRK2IkY8YMSIt32LkOBmTEgbjLl4HgfeEXKvPiRTygoK9SEtg98lc2er9LBFMCBWrsynpyJHAtfTaLFe-6fzoq5JyusXQkjLeqGi-mwanwoF6nFnh222rqYn6A-k2z0nqCyqtHJoiqB_L9BsWeyKcnoqNy8JYlI-lW6VIPKMNqVzefP0sjs6eEBnhBazwWC9CMMStjyZcCi_AZEwAshkQnHLIgwlNJkQHN60JCEDheZAs9-cb_Qb9Ybyxo43g-4ybZgQhlrFJYd3SfwC-XtMwzCdUB2mXM7rHBks63bQMk-79TXxujsc887V_5N3AgOHhjbOpBAEPhXEP05xpZOWaMhw4K6_suI2zX5TDWhm-r9O8-gBfXbvFfoFBpEQ9NjAoEhg9s2b4STNl1sILy9K-Lp8c4dqMcvy3JXo4PbhK7UOYZbusk0-rT80F-j0zfn5HnI9rv4L5PnrS_F-mpxvG2D1NFbH9vV9h3cb0EK_lvOj0dzlq97n_58" alt="开关打开" width="300" height="200"></p>
+</center>
+<p>同时，他们的电流情况如下：</p>
+<center>
+<p><img src = "https:////i.upmath.me/svgb/3VhLb-JIEL7zK-owkUAy3n4_EnFYaS4jjfYyq90DoJEDDVhLDGs3m2QQ_32rbQcMgzeaEA47Obm_rq6vuqq6qsjIp399K5zfun9c_gzrdOI3ufslLvzz0g22yzRz8JhO_WJAYi3XfreDGxSHqZslm6WHgwD4FVQyUP91OqN7N0-zbeCoNe-GT7Wm6Hn_UUwSJOvT6Kn6ouPOzSabrB4eXOYhnUHu_t6kubuF0TpBpi6JhLW9u9qUNJnnyQMs3cxD4ZPcQ-KBRJBkU1gkBSxcOl94WM0AT3U6N18WyRp1_fqUFsA-wjCd3k7XVgqurJLUEiGk5mPojKZ58gjQlSSizMZa9KDfhy7VIjYvSFexWJhImWqvWlGuYtVDSaVLSXH-bIVUMryS6UodFGjZVLdXvt-DO7yFz5PyXp8xBEV1i0QwYoim1Gq0wYrDJWBvW4Pb0EBNaTC2tIXwEmB7gAcJo_drGcy3MqzbTEB-wwkvzdBKsCMbGGXBH016hvQiqKukhsUinfnBtqvty25vF0G-8ol3MAAaE7zWcLJarvLBNp_fR8CkvM3dNAJyB_Pcuaz8ul9uHH7ADmA8PMnjcWkMJbHlUZ_HzPYgjmGyyny-WhboqtjKqE9jtCskUZfHnEZ9EvNSDtOPnBwoBcr9Ur48Xx4P4hVPRdMeOsaV0UQRxSSzWqhjx1GGChmrwxAWlO-jEpaExfSMF6s9gntNJ1ryU7qQMCq0ZtRyqgQ1lKjj5CM6UrXPTHh1RwvDqqw-cWC1J06ykOmf04PoIqUYwdJhiGTUHOegkpHSL5WAxUZERsXGnks7WRYOc-I2TtAe_r_33Ln-wYmxSmllGZdKC96ovV1hI6Z5TOt0YyyUthoJVZ3giuyLbg0YfM4oyoKoMucP10gpoyuZUOZLffZE34FANyVaU0FLJfEmUkpmpCH0uJdUOhtW2FOzKkCSfZWipgTYCaAPdaxMmu8BJveALgFOTwB9UGrVAWiLlZJWcqWsVNilFKXNXi8igf2avfiWhOdfI11lY24iLmxcF-IKELxkQ2EShKk9f7xGShlWyXSVKDVKdayxQaGbEq3BwpbBLRcML6UEp_w4WJWVDSuswC4acbvPkQoQjB8H5zuA28MsIEKAuZbHQPOIagB3OHjB7-7Jw2-rqaut60obOlcPMsRgmGSTBZaFbJXjkPfoCj8eplnmcijcuh4Ww9MfJst0ng3CvDeG7Xbk0-wZVtlud3eOwjAcWN6FYTZroaBEYvu46i0o15Em171GyH0Rqt4PkcD2w6ev28-7Dy2GG1JOcW9Q61tUMkYxa37Y0uEM6_1gVEzydO2L9JsbB5LRLE8m2z--boPr26_BqIyEeW_KEIp2ToOPQ6iLYv4pm24mfpXDZJPn-GPqPJGl2G74RUTTNJz9T5bw1nGof1t-fWzNL4LG88seX4jDeeWShz55HeVaYjekV64aJLTgq3Johl3hsuR59RqMRFxd9hJe48C5IXTAakq6Ti6FUeWKBIZi-b4sV4vH1E8WrzxjbPpMvfEZf_mztcByfGqKv2ufoASnsTd1tFJlpzNy2fTov1f_Ag" alt="电流分析" width = "300" height = "400"></p>
+</center>
+<p>当开关导通的时候，电感<span
+class="math inline"><em>L</em></span>上端为12V，下端接地是0V。因此二极管反偏截止。能量从电压源来，在电感中储存。那么开关导通时电感电压<span
+class="math inline"><em>V</em><sub><em>o</em><em>n</em></sub> = 12<em>V</em></span>。</p>
+<p>现在断开开关，二极管构成的续流电路为电感电流提供通路。感应电压为了维持电流的持续，并且这里的二极管导通压降是<span
+class="math inline">0.5</span>V，因此此时电感上的电压就是0.5V(不考虑方向)，而这里因为二极管的正极接地，负极流回电感。和参考电源方向相反，因此实际上的电压是<span
+class="math inline">−0.5</span>V。</p>
+<p>在开关导通阶段，电感和开关中的电流上升率<a href="#fn2"
+class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>等于<span
+class="math inline"><em>V</em><sub><em>o</em><em>n</em></sub>/<em>L</em></span>,那么下降率就是<span
+class="math inline"><em>V</em><sub><em>o</em><em>f</em><em>f</em></sub>/<em>L</em></span></p>
+<p>现在我们可以看到。电感有了续流回路，就不会再有尖峰出现。但不可避免的是，有可能会出现
+<strong>阶梯上升</strong>的电流。因此我们还没有出现任何预期可用的输出电压。我们目前取得的工作是：<strong>二极管目前的作用只是把开关导通阶段电感电感储存的部分能量在关断的阶段消耗掉</strong></p>
+<h2 id="到达稳态并获得有用能量">到达稳态并获得有用能量</h2>
+<p>为了防止阶梯效应<a href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>,电路需要以某种方式达到伏秒平衡<span
+class="math inline"><em>V</em><sub><em>o</em><em>n</em></sub> × <em>t</em><sub><em>o</em><em>n</em></sub> = <em>V</em><sub><em>o</em><em>f</em><em>f</em></sub> × <em>t</em><sub><em>o</em><em>f</em><em>f</em></sub></span>。但如果时间太长，虽然可以让电感复位，但不一定能得到输出可用电压。我们的目标是得到可用的直流输出电压，那么一个比较自然的方法是放置电容，在关断的时候利用续流二极管向电容充电，电容电压有希望达到稳态电压<span
+class="math inline"><em>V</em><sub><em>o</em></sub></span>，并且由于开关关断的时候电感电压增加，那么电感的电流下降率也随之增加，从而这里基本解决了我们一开始碰到的问题。电路在这里有希望达到伏秒平衡。</p>
+<p>那么它的工作路径如下，首先我们在二极管上并联一个电容，我们使用的电容最高能充到的电压为<span
+class="math inline">5</span>V，且带有一个<span
+class="math inline">12</span>V的电压源。一开始，电流逐步增加给电感充电，此时电容上的电流为0，然后，开关断开，电感给电容充电，电容和电感此时在连续工作模式下，因而会保持电容电压在一个微小的浮动上。然后断开电感，电容给负载充电。循环往复达到稳态。</p>
+<center>
+<p>从开始保持恒定</p>
+<p><img src="https:////i.upmath.me/svgb/3VhLb-NGDL77V8xhAzioPZ33Y4Mc2u2lQFEU3WIvtlEo9jgW6kiprHQ3a_i_lyONHiPLwaYL9LAJEssk5yOH5JAcLcv0r88HVx7dP654Ro_punwq3Pf4UD7v3e1xn2YOfUw35e6WYC0fy9MJXYE42rht8rQvUSeAyhzVMij8TCbLO3efZkevIyCfFp8C0uy5fTisE1A2p7NP9RNdTa6esnX-8OCyEqVbVLi_n9LCvUXLxwQ0TclMWHt9E0xJk_sieUB7ty3RoUyKEiUlIjOUZBu0Sw5o59L7XYnyLYJVk8nV-13yCFg_JmXp97xIN283j1powznXHB4k_K7QZLkpko-wjyklChs7o0piyq_RfN6RJMPCXsN3xrGkMyosVrYWsQQz3VLaFT2JhsQ1JtKLUIkZYHKsWJAIlFpLhWqwNKOU81UtZf283jt0A1svi6Ryxi8Qt0O99cSCJHhGwn8iOKO9rZ_Z2DebktYGKgg2tCVd0kS45UIaSZhRUmptR1WNuNlYrEVNYtRgoVvSJVXSCKoZF0pxKqWIFWmKFY020KD2NlBnyc_Z5mld5gWa_pAW6F1euOuQMYpIZS1X0hjKGOX9jGngNISAxhpgdwRIGKN1npVFvj94HsVGtjyfuFMGWxcQV8Uxs5V8R6KYmiFE4EmLiW4gAqzUmMsAEazoSOdWBF5khZRYidgKSC_JL1lBsaADKyDxdWxESzm3oWZFJgiNrYlNEBKbM4SGx7FWQxNYlcSRDS1pxIiaF1tBMOexFdxgxi5YwRWmQ0dwgbmNrQikfp4wibW5nN-aS6sIIUIQqZnVUYIPsvkVsIIQbgiR8GcFk2ocdySte8exPjg_pfnGNcXVKKsV54QTq-HIREdFwBEHT1ELFSRgcoKVjM0PUgRSX8ekbmFd5qbMnwE1ujyQOg3nSoOGUSMuFYl3yWOyTn2VqPdrla9yUOugozAtWbRfrSElIOSsK2mBBBnOjVdtoA74UwQWhELIlMVUtKRWJCzpi7QoAbWPEkhQZ5h-oUxDbYbqKXx5M8RaFSfBiHu17w6jpLDNS6qYkAr6jiYWzgAdpnFsbn8HLzeEOiq_u0N66IJCqDHaGA7ZTQ3olaYfFs4UJrY6iU3zaUhw5EXwMQe29j6mOOyTU42FpwCDDYQ0ljKWglhwHUtBGWUDIVA7gJIGKkcsBU1A6dhQaBXEDkgWhF-oIoIJzY0hwsL8Y-WZ-wdRbWBHSMFxF3PKcDhRBiItCNQuFqsamNvH7Uc6Dv5FVRZ6v6EU5gyuIX87TYtNctihx2rwy26PeYYE9gNrvt3WT6cVGGM4dJWZhZKswhQC7pesT4HBws875xQqRRXhm6Bycdil2_L22PGV559mqMjLpHToFjFNVmixzvd5cXss7u9miEn5tnCbGSI36L5wLque7vZPDh7QCaHVYjCYr8IAhS2fzduBoWtHCls5m0NTDq2IY05nc0jGug2RGRksqAQqfiVfra-We_FaT60GXQwDnDEuBFOUaU5gqn5tGBiXVQJoVrXX2sk1ydr2RBqBrRqjMDkShYbHowjYbzMAUOhg4DbEaGUkV4qwV4dAaV_qLRy75lTCWGXOCX7spGMOZ36kbRD6Pv82XQ4Jz63SWhElYXzU4vUeh8uPn0IMbuYSpfzNkhG4N3Yuh95_TqEaJlE-EoWWr_C3l_p1s39fJs_ot6cyNHvoaxJmLx8DqA1Uy-g-H99W6wssqOlGu6mfOUTc-wa3xqm_o_hG3LRcqgQUKvguqrYP3xm2Xa-Mttjy4KO5Yfj2LQGPiopWbTZAdqQ-BBBbVkAIRrMeQrSPAULNg1wjvIWoUOH2QnhsQ0fqI9QmB15AqLcWUGuIyBPdpD7weozd8Pou8iMVj10kIOfpBRcBzwx9FKLW91FDGrUiBLnvowDbd1KwYtRJwejISWFzfSfFvui9tZlcoT_cpxL9CheqkMRTSnkFyutxI6vuWkm23sFBzvKi3KGP7lCuFmmWuQId3GN42eYP6yLZp_fZrX9ftkLH47JMs2dE2YfTchm-kA-n082oWgOXCX-LtFja_08tA7WsfnfmL69fr_a7S4r8WwNIdk6rmeOrFG0hAw7pZ3cE293DyX8I-Fwe3N6tS89FyxIMuNse5ydZu-EL1rzgJcgmpmdQ5L82I77ADAgcWla_c3nJIP9ClBtfuV9lDTq--fDnMc1Ob8ZhufIlUf5H3PwirK-F4rWgsev2ebJZLgF_Mlm6bBO9-f4X" alt="从开始直到恒定" width = "500" height = "200"></p>
+</center>
+<center>
+<p>稳态工作的电路</p>
+<p><img src="https://i.upmath.me/svgb/1VhLb-M2EL77V_CwARLUZvl-JPCh3V4KFD20RS62USg2HQt1JFdSms0a_u8dSrQsynKw6aIFusFG0nA4882DM8PMq_SPz6Wr9u4vV7yiXbqsngv3LS6r162b7rdp5tBLuqo2U4K13FWHA7oCdrRy6-R5W6ETA6py1PCg8G80mj-4xzTbex1B8mH2KUgav7Yv5TIBZRM6_tS80cXo6jlb5k9PLqtQukaF-_M5Ldwtmu8S0HRNxsLam7sAJU0ei-QJbd26QmWVFBVKKkTGKMlWaJOUaOPSx02F8jWCXaPR1a-bZAeyvk-qyts8S1e3q50W2nDONYcXCT8LNJqviuQF7LimRGFjx1RJTPkNmkxOJMmwsDfwzTiWdEyFxco2LJZgpltKu6PDcSRxjYn0LFRiBjI5VixwBEqjpZZqsDSDlPNdLWX5utw6dAemV0VSO-MniFvZmJ5Y4ATPSPhNBGe0Y_oZxi5sSloMVBBsaEu6pIlwy4U0kjCjpNTaDqoacLOxWIuGxKjBQrekS6qkEVQzLpTiVEoRK9IUKxoZcJTaMaDJkh-z1fOyygt0_V1aoI954W5CxigilbVcSWMoY5R3M-YoTkMIaKwBrCNAwhgt86wq8m3p1yg2sl3ziXvNwHQBcVUcM1vzn0gUU9MXEdakxUQfRQSxUmMug4iA4kQ6RxHWIhRSYiViFJBekl9CQbGgPRSQ-DoG0VLOMTRLEQShsTUxBCGxOZNwXONYqz4EVidxhKElDYBo1mIUBHMeo-AGM3YBBVeY9h3BBeY2RhFI3TxhEmtzOb81l1YRQoQgUjOrowTvZfM7xApCuCFEwn8rmFTDcgfSunMcm4PzQ5qv3LG4GmW14pxwYjUcmeioCDji4ClqoYIEmZxgJWP4gYtA6uuYdNrYlLlr5s-AGtweSCcN50qDhkEQl4rEx2SXLFNfJRp7rfJVDmoddBSmJYvs1RpSAkLOTiUtkCDDufGqDdQBf4oAQSiETFlMRUtqWcKWLksrJUjtSgkkqDNMv1GmoTZD9RS-vBlirYqTYMC92neHQVIw85IqJqSCvqOJhTNA-2kcw-1a8HZDaKLyiyvT8hQUQo3RxnDIbmpArzTdsHCmMLH1STw2nyMJjrwIPuawrL2PKQ52cqqx8BRYYD0mjaWMuSAWXMdcUEZZjwnU9kRJA5Uj5oImoHQMFFoFsT2SBeY3qohgQnNjiLAw_1h55v5eVI9iB0jBcRdzynA4UQYiLQjULhar6sHtyu1GOg7-xRrGqBSGU-BjwmjVUTVbJeUG7erJL5vu8wwJ7CfWfL1u3g4Lb7gFq3Xwt_-w4OswkFioGGffvt_J2vhGz6zcpOtqum-X61Z5GKMir5LKoSlimizQbJlv82K6Lx4fxohJeVu41RiRO_RYOJfVbw_bZwcv6IDQYtabxhdhasKWjyftlHDqQQoD9Al04tB_OOZ0PIEMbHoPGZPehpqhXq_56_31ds_e6GnUoIu-5zAPKaKNVAYe3aHoC11PiD_vwfXwwYg--ppZKOLnBGpqwpnvj6swuUSut_93z4-u0G_uU4V-hgYbjIaR36dYM0hAVcjq3ptkyw1YmeUFXJpeXFktZmmWuQKVbhcuX96SWbJNH7Opvz8t0H4_r9LsFVF2f5jPwwe5PxzuhtQyA5ec5lLjp4qvV_vNJUVU-dsUDB5fa90anF6mn90ekLung38IeM5Lt3XLyq-iicTyHs3hecluf9WDsU-8Ewvaf7j_fZ9mhw_DYrmCaxtc3v6Z3PyiWOGH2fcKjR23zZPVfD4snyo4Z4z8R4GBtPSJ-QXsb-Qt3J_reVDV89-_j_v9qEejuctW0d9O_gY" alt="稳态工作电路" width="500" height="200"></p>
+</center>
+<center>
+<p>电感电流图：</p>
+<p><img src ="https:////i.upmath.me/svgb/xVXLbtswELz7K_aQAAqgqCRFPRjDhwK9BAh6aW-WEbASbRO1KZeiGzuC_r2kJMtJYR8C1ygvlIbDmV0uH5mRP18rYWrxW-g9bGRutlp8CiqzX4lJvZJKwIsszHKCgiTamKaBW0uHQsz5dmXgSABTQseBvo1G2Q-xkKp2Hr1yM931Sv5--Khybs3usb_rvvBsdLtVebleC2VAzkGLX1upxQNkG26dPORTxu7GfSiSLzRfw0rMDVSGawPcAPKBqwKWvIKlkIulgXIOdtZodPttyTdW6_NOVkC-wFQWD8WGpDELWYpJGqVhSNgMRlmh-QuAFyEfhyyg9A7u78EjMQ3SA-IlOKCpH8fdWPeHaRJYwCNR0jLp6bkd0nFox_Hi2Akk4Vu5QXwYg7HNwmje5vVkS1B1WfCIUdtYijBjFCf0mAUMwb0xZ8R5ExL0DhjjFkgHIIwdYOEDEHWMI5C0AIoHIE1bBjoABLU5o2gA8N-MMHqvQWi7KLiNY2xLBt_FzsDXshB9Ph5JiE0FBTYTZWGYcpUvSz1RpbY75EVUZjaVSgkNldj0O23mlqG-MTfN-JRkTH1Xho8LPj7XT80ZUYwSH0fxB0WnfCUXauK29AzqR1Vsc1NqyLda2yNx2imhdsU-Gv17ozozUu2hVM2ZZDB1hbyuR0R9e7ivapEyn5GrWhAS-uy6xWCRO5gXWsxLZSr5KmoUELFuXEdtn1ViJXLjRu29OT-3jmF8eakui8DeAuyyw3VhBATF_zsCd6mj5F_stcoIXriOG-Hc7AsuVPHu_f4D" alt="电感电流" width="500" height="200"></p>
+</center>
+<h2 id="升降压变换器">升降压变换器</h2>
+<p>我们反过来倒推上图，现在我们假设上图是一个工作在稳态的变换器，输出电容的电压是5V，我们思考到达稳态的条件。</p>
+<p>电流图上，每个周期内电流上升段的斜率是不变的，此时电源由<span
+class="math inline"><em>V</em><sub>IN</sub></span>提供，那么此时的斜率就是<span
+class="math inline"><em>V</em><sub>IN</sub>/<em>L</em></span>，到下降段的时候，由于电容是不消耗能量的，那么此时电流的压降由我们的二极管提供，给电感充电的电流斜率实际上是<span
+class="math inline"><em>V</em><sub><em>D</em></sub>/<em>L</em></span>，这里<span
+class="math inline"><em>V</em><sub><em>D</em></sub></span>是二极管的压降。利用电感方程(上升的时间比下降的多)可以发现，初始状态下<span
+class="math inline"><em>Δ</em><em>I</em><sub><em>o</em><em>n</em></sub> &gt; <em>Δ</em><em>I</em><sub><em>o</em><em>f</em><em>f</em></sub></span>，因此电流开始阶梯上升。接着，经过电容充电，电流下降段的斜率和<span
+class="math inline"><em>Δ</em><em>I</em><sub>off</sub></span>也会增大，最后电路将达到稳态，满足<span
+class="math inline"><em>Δ</em><em>I</em><sub>off</sub> = <em>Δ</em><em>I</em><sub>on</sub></span>。</p>
+<p>使用伏秒定律，我们带入<span
+class="math inline"><em>V</em><sub><em>O</em><em>N</em></sub> = 12<em>V</em></span>和<span
+class="math inline"><em>V</em><sub>OFF</sub> = 5.5<em>V</em></span>，就有</p>
+<center>
+<p><span class="math display">$$
+\begin{aligned}
+    V_{\text{ON}} \times t_{\text{ON}} &amp;= V_{\text{OFF}} \times
+t_{\text{OFF}}\\
+    12 \times t_{\text{ON}} &amp;= 5.5\times t_{\text{OFF}}\\
+    \Rightarrow\frac{t_{\text{OFF}}}{t_{\text{ON}}} &amp;=\frac{12}{5.5}
+= 2.18
+\end{aligned}
+$$</span></p>
+</center>
+<p>也就是说，在该电路中，为了达到伏秒平衡，关断时间必须是导通时间的2.18倍。</p>
+<p>当我们假设电路在连续导通模式下工作，那么占空比就是</p>
+<center>
+<p><span class="math display">$$
+D = \frac{t_{\text{ON}}} {t_{\text{ON}} + t_{\text{OFF}}}=
+\frac{1}{1+(t_{\text{OFF}}/t_{\text{ON}})} = \frac{1}{1+2.18} = 0.314
+$$</span></p>
+</center>
+<p>现在，若我们使用半导体开关（晶体管一类）替代机械开关，那么非零的正向导通压降记为<span
+class="math inline"><em>V</em><sub><em>s</em><em>w</em></sub></span>，那么此时的外加直流输入电压就是<span
+class="math inline"><em>V</em><sub>ON</sub> = <em>V</em><sub><em>I</em><em>N</em></sub> − <em>V</em><sub><em>S</em><em>W</em></sub></span>。</p>
+<p>关断的时候，电压相当于是<span
+class="math inline"><em>V</em><sub><em>O</em></sub> + <em>V</em><sub><em>D</em></sub></span>(因为参考方向为负)。再带入伏秒定律就有</p>
+<center>
+<p><span class="math display">$$
+\frac{t_{\text{OFF}}}{t_{\text{ON}}} = \frac{V_{ V_{IN}} -
+V_{SW}}{V_\text{O}+V_D}
+$$</span></p>
+</center>
+<p>占空比带入可得</p>
+<center>
+<p><span class="math display">$$
+D = \frac{V_O+V_D}{V_{IN}-V_{SW}+V_O+V_D}
+$$</span></p>
+</center>
+<p>开关和二极管压降很小的情况下，上式可以忽略<span
+class="math inline"><em>V</em><sub><em>D</em></sub>, <em>V</em><sub><em>S</em><em>W</em></sub></span>，那么有</p>
+<center>
+<p><span class="math display">$$
+D \approx \frac{V_O}{V_{IN}+V_{O}}
+$$</span></p>
+</center>
+<h2 id="注意事项">注意事项</h2>
+<p>开关和二极管之间的节点，称为交换节点。电流从电感流入节点后，既可以从二极管流出，也可以从开关流出，这取决开关状态，对每个DC-DC开关拓扑都有相关的节点。因此设计电路板的时候需要十分的注意，交换点处不要铺设太多的铜，否则会形成有效的电场天线，向四周喷射放射状的射频干扰。而且输出导线可能会被该噪声影响并传递给负载。</p>
+<h2 id="升降压变换器分析">升降压变换器分析</h2>
+<p>对于稳态电感电流(此时电流是三角波，上升段等于下降段)，我们可以在其电流图的几何中心寻找到一条线<span
+class="math inline"><em>I</em><sub><em>L</em></sub></span>，它定义为平均电感电流。由于开关导通的时候，流经开关的电流等同于流经电感的电流，因此在<span
+class="math inline"><em>t</em><sub><em>O</em><em>N</em></sub></span>时间段中，平均开关电流等于<span
+class="math inline"><em>I</em><sub><em>L</em></sub></span>。类似的，在<span
+class="math inline"><em>t</em><sub><em>O</em><em>F</em><em>F</em></sub></span>时间段中，平均二极管电流也等于<span
+class="math inline"><em>I</em><sub><em>L</em></sub></span>。这可以直接推导出在全周期内，开关和二极管的平均电流就是他们各自的加权平均值</p>
+<center>
+<p><span class="math display">$$
+\begin{array}{rcl}
+    I_{\text{SW\_AVG}} &amp;=&amp; I_L \times \frac{t_{\text{ON}}}{T} =
+I_L \times D \\
+    I_{\text{D\_AVG}} &amp;=&amp; I_L \times (1-D)
+\end{array}
+$$</span></p>
+</center>
+<p>则平均电感电流可以这样得到:<span class="math inline">$I_L =
+\frac{I_{\text{D\_AVG}}}{1-D} = \frac{I_O}{1-D}$</span>
+同时可以得到其他的公式：<span class="math inline">$I_{SW} = I_L\times D
+= \frac{I_O D}{1-D}$</span></p>
+<p>那么我们有如下的选型总结：</p>
+<center>
+<p>只考虑<span
+class="math inline"><em>V</em><sub><em>o</em></sub></span>和<span
+class="math inline"><em>V</em><sub><em>I</em><em>N</em></sub></span>的幅值，其他的参数暂不考虑
+| 开关管最小额定值|<span
+class="math inline"><em>V</em><sub><em>I</em><em>N</em></sub> + <em>V</em><sub><em>O</em></sub></span>|<span
+class="math inline">$\frac{I_OD}{(1-D)}$</span>| |—-|—-|—-|
+|二极管最小额定值|<span
+class="math inline"><em>V</em><sub><em>I</em><em>N</em></sub> + <em>V</em><sub><em>O</em></sub></span>|<span
+class="math inline"><em>I</em><sub><em>O</em></sub></span>|
+|电感最小额定值|两者中取大的|<span
+class="math inline">$\frac{1.2I_O}{1-D}$</span><a href="#fn4"
+class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a>|</p>
+</center>
+<h2 id="升降压变换器特性">升降压变换器特性</h2>
+<p>基于上述分析，我们有如下的结论： +
+举一些例子，对正对负(正输入和负输出)的升降压变换器能把-12V转换为-5V(降压)，或者把12V转换为-15V(升压)。而负对正电路可以把-12V变为5V或者-5V变成15V。要实现这点，可以通过调整占空比和电容实现。
++
+开关导通的时候，能量从输入传递给电感，此时由于二极管的作用并没有任何的能量传输到输出端
++
+开关关断时，电感储能通过二极管传输到输出端，没有直接来自输入直流电源的能量。
++
+基于上述两点，升降压拓扑也许是唯一的纯反激拓扑，所有从输入传输到输出的能量必须先储存在电感中，其他拓扑没有这些特点。
++ 输入电容的电流是斩波式的，该电流和输出电流叠加构成开关电流 +
+发热量和电流有效值(RMS)的平方成正比。由于斩波式波形的有效值通常较大，效率不是很高，因此电路板上灯带噪声和纹波通常较大，可能需要在输入输出端外额外加滤波器
++
+输出电容虽然在开关闭合的时候给负载供电，在开关打开的时候充电，但平均电容电流始终为0，否则会改变输出电压。由此可知，二极管电流必然等于负载电流。<span
+class="math inline"><em>I</em><sub>D_AVG</sub> = <em>I</em><sub><em>O</em></sub> = <em>I</em><sub><em>L</em></sub> × (1 − <em>D</em>)</span>。因此就得到了我们一开始的<span
+class="math inline">$I_L =
+\frac{I_O}{1-D}$</span>,1.2系数是一般设计准则，要求电感电流波形的峰值比其平均值高出大约20%</p>
+<h2 id="为什么只有三种基本拓扑">为什么只有三种基本拓扑</h2>
+<p>构造含有电感又能为电感续流的拓扑有很多，但一些拓扑的输入和输出之间不存在公用导线，也就是变换器和系统的其他部分不存在合适的参考地。因此不实用。但如果这些变换器是前级变换器，仍可以从变换器的输出端开始建立系统的地，那么也不是不可接受的。</p>
+<p>而基本拓扑结构只有三种，升压，降压和升降压。而电感的链接方式决定了为什么只有三种基本拓扑。并且，只有三种连接方式具有合适的地参考点。也就是电感接输入、输出和地三种方法，如果接到地，那么就构成了升降压变换器。如果接到输入端，那么就构成升压变换器，如果接到输出端，那么就构成了降压变换器</p>
+<center>
+<p>降压
+<img src="https://i.upmath.me/svgb/xVZNb9s4EL37V8wlQAwoXJLihxjD58UCxV52b7IPikTbRBXKpagmjuH_vtRHUkmwe0mL9cEgh2_m8Q05HG28-fpWa3_W37U7wdHkvnH6D1T7U6nX59JYDS-m8Ic1RpIf_eUCdwEOhd5lTenhBwB8BT0Ght9isXnSe2PPLccQ-ZK-DpGi08egzrNA9kCi135Etou7xubV87O2HswOnP7WGKcfYXPMAtM9jphSy9WwFZPtXfYMpd55qH3mPGQecASZLeCQ1XDQZn_wUO0geC0Wd_94l3WWL2HzNaSmeCyyhDKVUM6owJJgQraw2BQue2mF3BNMUcwjQskSHh7CPOaI9tPVAEvrg9n59TlgcbdyicBVPvMa1oC3kOZVWbn12e2fIqCcPzpdRIBXsHda2270VDY6DOACsE1nmd_2KQ3KAS8hNy4vNaSv4LLCNPUa4nZ_cJrMW5_VDbmxEoqToEMyqSRVU7lMvsvr1Mr4ttoP6Cf17kxZ_i_ZOWTHcLH-skWT-8r16TlyLGWcCC45TWgyvgzjbIySQwRiyRIQgryy3lVl_WOJI8aW3W0MJo7iONgYEh06WCRSfGQZ-ScYcfm-1PsnFMmPkJ3_YLnGPwEP_gwlU_5EInaDX2GEZ_yKjiR1_oPlGv8EPPizuX4lbupXaq6fYjLT_265wj8FD_7xTD_F4pZ-itVcPyVkpv_d0vO3N2Kw9OVyo_qkwjEO_5SHKoynj83IvwvHFUr4jfKjgv6a8vvNz40SsYwVY5IlKhaK_vS56aeheMRyVKF_uqoJR9DXJ2EhdURIwQVlXAo2qdBYIhK1hSXjSchEDFMuUTwFzF3yU6t4upfx5nrgKnQT-Fe_evi7KvSwgxAsiUILWYINRkgzmx_CUdjKhdb1omu_TY212kGtj0MLbFOXZqXZ23XbxbZwrl8uq2uxExop-anI502dO3P0tXnTYOyxCT39KhXlgUt8kmtXVd5WXndsVeNv0xERDkAkv5Jvb4uWLHyHaFtMvkL-Aw" alt="降压接法" width="200" height="100"></p>
+</center>
+<center>
+<p>升压
+<img src="http://i.upmath.me/svgb/1ZZNj-I4EIbv_Iq6tARS2utvJ404r1Ya7WXnFji4EwPWph3WcaabQfz3cUhmIDRcpkcabQ6RXa7yW0_FH1kG--_XxoSD-WL8Hna2CK03f6Am7CuzOFTWGXi1ZdguMFJiF45HeIjuUJq1bqsAZwcINfQ-MDyTyfLZbKw7dBrDzMf8bZgp2f9oNIWOYo8keetbZDV5aF1Rv7wYF8CuwZv_WuvNEyx3OipNccKzbDYfUrF64_ULVGYdoAnaB9ABcALalbDVDWyN3WwD1GuIUZPJwz_B65PlU0y-gdyWT6VOKc9SKjiVWBFMyAomy9Lr1w5kqjhiIiGUzODxEaYEK0T77nzwyputXYfFYar6gWMCvg46GFgAXkFe1FXtFwe_eU6ACvHkTZkAnsPGG-NOreeqNbEBR4BVflX3VV_QyA14BoX1RWUgfwOvS9s2C2BderAf9buY-R1YpjLMcHxTkQnCxrCUkO90HWx0Qam4Q0slRf8H4EwyxTLOFU8zJjM6AiZcXQIPXcWQvEF8dr4kzn4CeW2r6rcUaKt3cSv96es2bpBTfXaEx6VApJJCUi6U5BcFmhKmEIkFUUixUYlSOXSFQmzscB1S7LsEx7W9LHbveM7uL1e2Raj9kB_nAmMZvx8TIkuZHKWHx5-v7xKJeDoDhKCoXfB11ZyHBOJ8djoeoilDLOZOeJdR9J6SuPwzcWG5iI82ob4P9fFRR_2Yso_vLbf0R85DfIrSsT4liN_RpxzhK30qL5D6eHmXf-Q8xKfX_Azf5WfsHT8T1_yD5Zb-yHmIV9f8HN_l5-wdPxfX_IOl1-_XmDgf15MH-GzeAvxdl2ZYQzGJNIln_gxcNEKuXbGNG9nVPt41r6YJq9w6Zzw0ZjfcWd1WynVlN27RXTsrODSvx_mtuQVPMvWhmQ_LpvB2Fxr71YB1uzZewjelqKBJJj-ota7r4OpgTmp1G-7LERl3uEx_pd7GlZ1Y_HEwrhz9NnwD" att="降压接法" width="200" height="100"></p>
+</center>
+<center>
+<p>升降压
+<img src="http://i.upmath.me/svgb/1VZLb9s4EL77V8wlgA0oXPElijF8Lgosemlvsg-MRNvEKpSXojZxDf_3Uo_EsuJc2gLF6iBwnt981HCotTf_fK-1P-n_tDvCweS-cfovVPtjqVen0lgNz6bw-1WMBD_48xnugjsUequa0sPFAXwFvQ8Mz2y2ftQ7Y08txpD5nL0MmaLj26LOVQC7x9FLv8Kb2V1j8-rpSVsPZgtO_9sYpx9gfVABaR5HTMrFcijFqJ1TT1DqrYfaK-dBeYgjULaAvaphr81u76HaQoiaze6-eqc6zd-h-BoyUzwUKiVMpoQzksQCxxhvYLYunHpuicwFQ5RHmOAF3N_DHMcCkV5cDl5ZvTdbvzrNRW84R-Aqr7yGFcQbyPKqrNzq5HaPERDOH5wuIoiXsHNa2271WDY6LOAMsMkm-77pNzTwhngBuXF5qSF7AacK09QroG15cLyS25jlB2SpkDGNw5twyTG9JkswfmXXkg0uKOUfsCUJQf8HwjKhgkrGBEslTSS5IoxZ9zmT16_biQRTlCy6hHt1CK33yVVNaKgu3wGzsHU4EQlPCOMiYaOEc0wFwiGBQIJepSTJIHKB6LXDNCQ_toyvaxkX1zteqvtsiyb3lRvqS5NAkhMqqZQilvSqvCldgvAgIwR5Zb2ryro1xEjy3tAepVYR4dANovcc5BRh-j4yGBLE2SWyS8U5Ivw1uIe9qN4jD7YROEUyGYMTRNOb4KGJ5AScSTTBftO8h-5NF2SWIjKmzRKU3KTNOIqntBkNLT2BflPdwO5tI3CC2Jh28Etv0qYSkSntYYPekFv50kmd-NGpIYxxyUhMWcwYjVN669hM8pEEpTcGxdg6HhVE_MSw2Jqy_AOjZXYH3_SLhy9VoQd-4eCmUbguFmCDEjJl831gYisXrqlnXftNZqzVDmp9GK67NlemSrOzq_bG2sCpfj4vb-XmLJLilzKf1nXuzMHX5rsGYw9NuL9vQoVZEbUn65ewtlXlbeV1h1Y1_mO4MFPCXEl_J97OFi1Y-OfQtrj64_gB" alt="升降压接法" width="200" height="100"></p>
+</center>
+<h2 id="升压电路">升压电路</h2>
+<center>
+<p>升压电路
+<img src="https://i.upmath.me/svgb/1VhLj9s2EL77V_CygBfVsnw_sthDkSJFgSIpmt5sHxSbuxbqSFtJTrIx_N87EqkHZTk9NJfuyRzOfDP8OJwZ7brO_vpaufrkPrnyBT1n2_pYuh9xVb8c3MPpkOUOfc529f6BYC2f6_MZ3YA62rnH9Hio0aCA6gJ5HRT-Fov1B_eU5afGR0A-r74EpOSl_1FtU3B2R5Mv_hfdLG6O-bb4-NHlNcoeUen-Pmale4XWzyl4WpJEWHt7H0LJ0qcy_YgO7rFGVZ2WNUprRBKU5ju0Tyu0d9nTvkbFIwKrxeLmfV2mreQ3CL5Cq2z3apdapakkjBgulDRUbtBivSvTz81Blspik1BGMdO36O4OLY3AohfcX4FkxlpBtRWWCSK5jSEBkCpMVQBUmPWCa4BcE0GFZkRRSgklPELUGtMI0wuIxt-AZIYpSRUljFo4_wUiodG5g4QTjwmg-_QZ7uXXfHfc1kWJlj9lJXpdlO7WO3gWmlsuibBCK2uJHjlYUmISa3AIl1KJiQoCjNG2yOuyOFTDDscWtpprXTbnFCAimLXKIDCY2kEwtrbYsrDjjeFEnHd4rXWQzPiOdIM5w5qPfTMRBTO2VkNUwRjuI3bdCuY8jzSDrW3oHzmGi9Bi1jFnWOjIMefY6MhzkMy4jnSDucTMRL51FMzY2gxReWNBMBWR7yAZbl9oeAF-fS1ZFeQ9J0JxY42xUs6kv8_2PvtH-H2u3fdZ-75OX9DvxzqkqhJUcUY11UozoWyUqoo1D1SQgOaXwAmFM3ZLRrAwkQIkrmr3OWY8aWilulNQmPvHJdQIAq6NT_lUBMt-yxMqLaaNdXcZ3dqjxebdHoFn0NkHSB9wixAdYeIf7q3fCvaQDbbH9ABBNBdCtzf495D9aSfnB4a2L9uDmzI9x0vYinjhAisTUwMiKq5QA_eiYmbCTY0iGyQXzIStiBkPOSZmNoBhT5mYm-HEEw56bq62CWhflhMKvYILqIvxOxk_tCFTp-uQuVddQLtkGnqHhpJOlZhrG75JjLqGUBMflwIyfp4_Z8XOhbdJoIdarSXRlsGRbNxHoLBQKJW0g2NEYNJWFx7wvQYlMlr3Fl2yGXlp5AU95tRJi3npkdFAK_9G81UKuq9gBh6NFNqq-KKmF-ODiyrYa8ikdNsVMAPFkUgojdYAMGdjjhj0jiaHRAjPL6HFMHPbL-lwuCCA-Fm7z5rqGtRbBQ71awzQKgT9kUKQXKOAwIu3DCYES7k1Fgp8xMGYxSGs6TrEfc2HBT4sVHUugWltzAzLo1QMkBeChrmB-D9clVXNwBOmHG6YVQou0mpDtIyYV756wMTq8Zo1nEvRbm3wrGRqM6xDukLyNKR3TSksg1q3jHBbCVHfbLIM7kQpDk0QuuyErQv-W8Tp-l88CCk1pQKokk15YnrGxZj_pkbOCaJi8UtZHKF6-utgMAcQYgTT0kgJ80JULWSbqhLaWVR8ZNe6NWsSd7Q_MYg700UR83pXD28EFHINXyKQLIqo0cS92qXVHsEXTu3K_OFU5Ejg5nOqeHz0v84bCN-axPSPuCnlpvXmMVbVPnusH06BRdg6J6gs6rR26AFRQzZotS0ORflwKp8-JIhJ-ap0uwSRe_RUOpe3vz4cjg5-oDNCm9XkE3DjXw30fZ7cwVRjJx1NYSuTO9pQ0HYz3kw5dwSHNk8SMjFoFdr9Vr-1b83bztf68W5Qw-nrY_nJxYQq6HVCEy6F5PAdE79uJpoXcNH2FZZN5abY0H5yEO08BrMr7QZzia1Omkna6hmKm6mftdsqZhm6Bv-f87y4QX-6LzV6Cx04nHtpSMPYLcrbrpzm2z0cLy9K-CD_7Kp6s8ry3JWocs_hw745wio9ZE_5Q_NtvkGn07raltlzXWVfHfrhvF6f7-c8USESpb6fp3dv3pyveILPShh1vqOrt1c8MU26seq_cXgo0h24WCzWLt9F_1r5Bw" alt="升压拓扑" width="200" height = "150"></p>
+</center>
+<p>到此我们就可以做一些简单总结：</p>
+<ul>
+<li>正对正的升压变换器能把12V转为50V，负对负的升压变换器能把-12V变成-50V。因此，输出电压幅值必须始终大于输入电压幅值。所以升压变换器只能升压不能改变极性。</li>
+<li>开关管段的时候，电感储能（通过二极管）传输到输出，但是输出的一部分能量来自直流电源。</li>
+<li>输入电容<a href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>
+的电流是平滑的，这是因为输入电容和电感串联（电感可以防止电流跳变）</li>
+<li>但输出电容的电流是斩波式的，因为它与稳定的负载电流<span
+class="math inline"><em>I</em><sub><em>O</em></sub></span>叠加构成二极管电流。</li>
+<li>输出电容的平均电流是0（稳态下），那么升压变换器的二极管电流必然等于负载电流。那么我们有</li>
+</ul>
+<center>
+<p><span
+class="math display"><em>I</em><sub>D_AVG</sub> = <em>I</em><sub><em>O</em></sub> = <em>I</em><sub><em>L</em></sub> × (1 − <em>D</em>)</span></p>
+</center>
+因此对升压电路我们有
+<center>
+<span class="math display">$$
+I_L = \frac{I_O}{1-D}
+$$</span>
+</center>
+<p>那么我们使用伏秒定律分析升压拓扑，首先可以得到的一些公式如下： +
+<span
+class="math inline"><em>V</em><sub><em>O</em><em>N</em></sub> = <em>V</em><sub><em>I</em><em>N</em></sub> − <em>V</em><sub><em>S</em><em>W</em></sub></span>
++ <span
+class="math inline"><em>V</em><sub><em>O</em><em>F</em><em>F</em></sub> = <em>V</em><sub><em>O</em></sub> + <em>V</em><sub><em>D</em></sub> − <em>V</em><sub><em>I</em><em>N</em></sub></span>
+现在，带入伏秒定律我们有：</p>
+<center>
+<p><span class="math display">$$
+\frac{t_{OFF}}{t_{ON}} = \frac{V_{IN}-V_{SW}}{V_O+V_D-V_{IN}}
+$$</span></p>
+</center>
+<p>经过一些简单的代数运算，并使用占空比定义：<span
+class="math inline">$D = \cfrac{t_{ON}}{T}$</span>，我们就有</p>
+<center>
+<p><span class="math display">$$
+D = \frac{t_{ON}}{t_{OFF}} + 1 = \frac{t_{ON}}{t_{OFF}+t_{ON}}
+=\frac{V_O+V_D-V_{IN}}{V_{IN}-V_{SW}+V_O+V_D-V_{IN}} =
+\frac{V_O+V_D-V_{IN}}{V_O+V_D-V_{SW}} (升压)
+$$</span></p>
+</center>
+<p>如果忽略开关和二极管压降，那么上述式子可以变成</p>
+<center>
+<p><span class="math display">$$
+D \approx \frac{V_O-V_{IN}}{V_O}
+$$</span></p>
+</center>
+<h2 id="降压拓扑">降压拓扑</h2>
+<center>
+<p>降压电路</p>
+<p><img src="https://i.upmath.me/svgb/1VhLb-M2EL77V_ASIEEdlu_HBjkUW2xRoGiLbm-2D1qbiYV6pVSSdzdr-L93RFIyqdjpoXupT-Jw5pvhx-EM6WVX_vW1dd3BfXLNM3oq192-cd_jtnveufvDrqwc-lxuuu09wVo-dccjugJ1tHEPxX7XoZMC6moUdFD8zWbLD-6xrA69j4h8XHyJSPPn8aNdF-Dsls6_hC-6ml3tq3X98aOrOlQ-oMb9vS8b9wYtnwrwdE3mwtqbuxhKWTw2xUe0cw8darui6VDRITJHRbVB26JFW1c-bjtUPyCwms2u3ndN4SW_QPAtWpSbN5vCKk0lYcRwoaShcoVmy01TfO4Xcq0sNnPKKGb6Bt3eomsjsBgFdxcgmbFWUG2FZYJIbnNIAKQKUxUBFWaj4BIg10RQoRlRlFJCCc8QtcY0wwwCovErkMwwJamihFEL63-BSGi27ijhJGAC6LZ4gn35udrs113doOsfyga9rRt3Exw8Cc0tl0RYoZW1RCcOrinAWTG3BseIqZFxhDFa11XX1Ls2ijm2IO_3FMYKCzq3BDOvCQKDqTgJUlPYOh1ngrHtlzPgeesoOeM4043mDMPeJb6tyIJJrdUpqmissRS57yA55zvVjeYGW5n4ZoRkwZysGWGnqLwxIxwblvoeJC9957rRXGLGMt8qCya1NqeogjElmNjMd5SMW8-o9mSZ17JVQeJzIhQ31hgr5Zn8D-k-pn-SW8Qk6CFt33fFM_p938VcVYIqDoFQrTQTyma5Opp7MCqxGaK9ptxirtJpoTEbZynsGhhrrIdpDt-weGCUe3PlqT2TA2GGEjJkAAgsBwHFlMcMCmCJKLUHTDXORQgfrMcM9knwE-swo0_5G_Agr4nOvJ8kefAQa5waw-9XqsfDky4dqFk_r3duQm8OGmYSRqDgSZEzAqkk6AVGYDPgROeMhA06MRI37Jz3YStZYttXiISR4P0sIyHWjJG40hMj6dJHRi52BOhUlhMKbYELiCU_EWka-rxT7My49_ha04HOyDS0CQ3VmypxrkOEfpA0CKEmPl4KSHoQfyzrjYunkEC7tFpLoi2DJdm8ZUiJJTikQFKGx4ivLUECu5TrTK2GPDvFkkBFtcHqJXKUnHUdGGXYvNJzlYKmK5iBziqFtirftOkmjT3xRNdbSKliPZQtAyWRSCiI1gAwZylfjFm_pEhEHDLICwhwGFI6VuEoMJgzP8_6mhrVvQIcWJ4CeIWonyhEySUKCAVPDC4GFoqMsVDWMw4YjRzwNKzpOMZ9yYcFPizUci6BaW3MGZaTtIyQLwQ9cyfi_3Bt2fb3nHi54YZZpWAjrTZEy4x51VtDx7MRT4XEUHQYG3xWMrU5jWPWQvL0pA9ZG4dRbRhmuF5C1KutlcGeKMWh9UFvnbD1gn-POB3_iwchpaZUAFWyL1VMn3GR8g-YZwVZ4fipqfdQR8N2wKVCE2IE09JICbeEvHL4VJUE54VDxsymmvWJm8xPDCY1Y1rQgt7FxRtBudTwAIFkUUQlF-3Fpmi3CB42nWuq-0NdIYH7V1T98BC-jisIH9qOGQ9xX9aN9xYwFu22fOjuD5FFmDrOUVN3RefQPaKGrNBiXe_q5v7QPH6YIyblm8Zt5ojcocfGucp_fdjtHXygI0KrxeTltwqnhvQd_ZZjZietzd8Fb2lPge9rHHM6vyU4tmQyJxMDr-Dnvb639-a-CXo_wQ3qOX27bz65nFAFfU9owqWQHJ4v-emGfiqELxD8RRPWEtpv34TN2IRh602fWVgMTdz69xiPnXHCMrV2OLoZ0Yz2oP9zrmdX6E_3pUO_QkeOC782pL8x3aDKd-miWm9heVXdwFv8s2u71aKsKteg1j3FN32_hEWxKx-r-_5ZvkKHw7JdN-VT15ZfHfruuFwe7855gpdcfyH5dq5-e_fueMGV0HNFvqGnXy84YpoM16z_xuGuLjbgYjZbumqT_avyDw" alt="降压拓扑" width="200" height="150"></p>
+</center>
+<p>我们有如下的总结：</p>
+<ul>
+<li><p>正对正的降压变换器可以把<span
+class="math inline">12<em>V</em></span>变成<span
+class="math inline">5<em>V</em></span>，而负对负的可以吧<span
+class="math inline">−12<em>V</em></span>变成<span
+class="math inline">−5<em>V</em></span>。为此，输入的电压必须小于输出电压。并且无法改变极性。</p></li>
+<li><p>开关导通的时候，能量从直流电源给电感，同时一部分能量给输出端</p></li>
+<li><p>输入电容的电流是斩波式的，该电流和直流电源输出的稳定直流叠加构成开关电流</p></li>
+<li><p>但输出电容电流是平滑的，因为输出电容和电感串联。</p></li>
+<li><p>现在，由于输出电容的平均电流是0，那么降压变换器的平均电感电流必然等于负载电流<a
+href="#fn6" class="footnote-ref" id="fnref6"
+role="doc-noteref"><sup>6</sup></a>。有<span
+class="math inline"><em>I</em><sub><em>L</em></sub> = <em>I</em><sub><em>O</em></sub></span></p></li>
+</ul>
+<p>现在，对稳态电路，使用伏秒定理分析降压拓扑，我们有</p>
+<center>
+<p><span
+class="math display"><em>V</em><sub><em>O</em><em>N</em></sub> = <em>V</em><sub><em>I</em><em>N</em></sub> − <em>V</em><sub><em>S</em><em>W</em></sub> − <em>V</em><sub><em>O</em></sub></span></p>
+</center>
+<p>和<span
+class="math inline"><em>V</em><sub><em>O</em><em>F</em><em>F</em></sub> = <em>V</em><sub><em>O</em></sub> − (−<em>V</em><sub><em>D</em></sub>) = <em>V</em><sub><em>O</em></sub> + <em>V</em><sub><em>D</em></sub></span></p>
+<p>那么就可以推导出来占空比为</p>
+<center>
+<p><span class="math display">$$
+D = \frac{V_O}{V_{IN}+V_D-V_{SW}}
+$$</span></p>
+</center>
+<p>可以简化为<span class="math inline">$D \approx
+\frac{V_O}{V_{IN}}$</span></p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li
+id="fn1"><p>二极管的功能还是单向导通，但是这里的作用是为了在开关闭合的时候防止电流倒灌，开关打开的时候给电感提供回路，也就是续流，因此我们称呼为续流二极管<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn2"><p>电感和开关中的电流上升率可以这样推出，首先我们使用一般RL串联电路在直流下的电感电流上升公式，然后我们令<span
+class="math inline"><em>R</em> → 0</span>即可推导出理想电感的电流上升率：
+<span class="math display">$$
+\begin{array}{rcl}
+I(t)&amp;=&amp; \cfrac{V_{in}}{R}(1-e^{-\frac{R}{L}t})\\
+\cfrac{dI}{dt} &amp;=&amp; \cfrac{V_{in}}{L}\cdot e^{-tR/L}\\
+               &amp;=&amp; \cfrac{V_{in}}{L}(R\to 0)
+\end{array}
+$$</span><a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>上图中看到的能量没放干净导致的电流阶梯上升<a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>工艺问题一般会有20%的容差<a href="#fnref4"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>并在输入和地的电容<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn6"><p>由KCL定理，流入负载的电流等于流出的，由于电感和负载串联到一起，因此<span
+class="math inline"><em>I</em><sub><em>L</em></sub> = <em>I</em><sub><em>O</em></sub></span><a
+href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">https://monstergeo.github.io/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">September 8th 2026, 10:15:44 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">September 8th 2026, 10:22:06 pm</a>
+            <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/blog/2026/08/23/%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA/" title="嵌入式系统稳定性简述">
+                    <div class="prevTitle">嵌入式系统稳定性简述</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+            <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98"><span class="toc-number">1.</span> <span class="toc-text">拓扑演变</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%BB%AD%E6%B5%81"><span class="toc-number">1.1.</span> <span class="toc-text">为什么要使用二极管续流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B0%E8%BE%BE%E7%A8%B3%E6%80%81%E5%B9%B6%E8%8E%B7%E5%BE%97%E6%9C%89%E7%94%A8%E8%83%BD%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">到达稳态并获得有用能量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E9%99%8D%E5%8E%8B%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">升降压变换器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E9%99%8D%E5%8E%8B%E5%8F%98%E6%8D%A2%E5%99%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.5.</span> <span class="toc-text">升降压变换器分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E9%99%8D%E5%8E%8B%E5%8F%98%E6%8D%A2%E5%99%A8%E7%89%B9%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">升降压变换器特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E6%9C%89%E4%B8%89%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%8B%93%E6%89%91"><span class="toc-number">1.7.</span> <span class="toc-text">为什么只有三种基本拓扑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E5%8E%8B%E7%94%B5%E8%B7%AF"><span class="toc-number">1.8.</span> <span class="toc-text">升压电路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%8D%E5%8E%8B%E6%8B%93%E6%89%91"><span class="toc-number">1.9.</span> <span class="toc-text">降压拓扑</span></a></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2026 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span>
+            <a class="archive-post-title" href="/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/">拓扑演变</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span>
+            <a class="archive-post-title" href="/blog/2026/08/23/%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA/">嵌入式系统稳定性简述</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/08</span>
+            <a class="archive-post-title" href="/blog/2026/08/08/Kalman-norma/">Kalman_norma</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span>
+            <a class="archive-post-title" href="/blog/2026/07/25/linear_systems/Lyapunov-Stability/">Lyapunov_Stability</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span>
+            <a class="archive-post-title" href="/blog/2026/07/11/graph-algorithrn/">graph_algorithrn</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span>
+            <a class="archive-post-title" href="/blog/2026/05/23/stm32-minirtos/">stm32_minirtos</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span>
+            <a class="archive-post-title" href="/blog/2026/05/23/Kalman-3/">Kalman_3</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span>
+            <a class="archive-post-title" href="/blog/2026/05/18/Kalman-2/">Kalman_2</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/16</span>
+            <a class="archive-post-title" href="/blog/2026/05/16/Kalman/">Kalman</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span>
+            <a class="archive-post-title" href="/blog/2026/04/19/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/blog/2026/03/22/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/blog/2026/02/16/shit/">shit</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span>
+            <a class="archive-post-title" href="/blog/2026/02/13/fft/">FFT</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="Kalman">
+                <span class="iconfont-archer">&#xe606;</span>
+                Kalman
+            </span>
+            <span class="sidebar-tag-name" data-tags="algroithm">
+                <span class="iconfont-archer">&#xe606;</span>
+                algroithm
+            </span>
+            <span class="sidebar-tag-name" data-tags="math">
+                <span class="iconfont-archer">&#xe606;</span>
+                math
+            </span>
+            <span class="sidebar-tag-name" data-tags="stm32">
+                <span class="iconfont-archer">&#xe606;</span>
+                stm32
+            </span>
+            <span class="sidebar-tag-name" data-tags="power">
+                <span class="iconfont-archer">&#xe606;</span>
+                power
+            </span>
+            <span class="sidebar-tag-name" data-tags="Search">
+                <span class="iconfont-archer">&#xe606;</span>
+                Search
+            </span>
+            <span class="sidebar-tag-name" data-tags="Linear_systems">
+                <span class="iconfont-archer">&#xe606;</span>
+                Linear_systems
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/blog/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://monstergeo.github.io/blog",
+        root: siteMetaRoot,
+        author: "Done fool"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/blog/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/blog/scripts/share.js" async></script>
+        <!-- mermaid -->
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js' onload="window.mermaid.initialize({theme: 'dark'})" async></script>
+    </body>
+</html>

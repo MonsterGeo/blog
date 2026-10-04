@@ -10,22 +10,22 @@
     <meta name="copyright" content="Done fool">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="添加过程噪声 在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析 完整一维卡尔曼滤波模型 过程噪声 我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为： $$ \begin{aligned}     p_{n+1,n} &#x3D; p_{n,n} + q_n \end{aligned} $$">
+    <meta name="description" content="一般条件概率 我们使用E, F分别表示两枚骰子点数之和为8和第一枚骰子点数为3这两个事件，那么要求得F事件发生的情况下，再求E事件发生的概率，我们称为假定条件F发生的情况下E发生的条件概率，记为P(E ∣ F)。 那么我们可以推导适合用于计算P(E ∣ F)的一般公式，我们假定F发生了，为了让E发生，那么事件一定在EF中，那么F是已经发生的，则E发生的概率必然等于EF发生的概率除以F发生的概率">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kalman_3">
-<meta property="og:url" content="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/index.html">
+<meta property="og:title" content="条件概率">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="添加过程噪声 在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析 完整一维卡尔曼滤波模型 过程噪声 我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为： $$ \begin{aligned}     p_{n+1,n} &#x3D; p_{n,n} + q_n \end{aligned} $$">
+<meta property="og:description" content="一般条件概率 我们使用E, F分别表示两枚骰子点数之和为8和第一枚骰子点数为3这两个事件，那么要求得F事件发生的情况下，再求E事件发生的概率，我们称为假定条件F发生的情况下E发生的条件概率，记为P(E ∣ F)。 那么我们可以推导适合用于计算P(E ∣ F)的一般公式，我们假定F发生了，为了让E发生，那么事件一定在EF中，那么F是已经发生的，则E发生的概率必然等于EF发生的概率除以F发生的概率">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-23T05:50:19.000Z">
-<meta property="article:modified_time" content="2026-06-06T11:18:00.280Z">
+<meta property="article:published_time" content="2026-10-04T13:08:07.000Z">
+<meta property="article:modified_time" content="2026-10-04T18:35:49.828Z">
 <meta property="article:author" content="Done fool">
-<meta property="article:tag" content="Kalman">
+<meta property="article:tag" content="Probability Theory">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/blog/">
-    <title>Kalman_3 · Marcus</title>
+    <title>条件概率 · Marcus</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -247,7 +247,7 @@
             <a href="/blog/">Marcus&#39;s blog</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">Kalman_3</a>
+            <a href="#" class="post-name">条件概率</a>
         </div>
     </div>
 </header>
@@ -274,7 +274,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                Kalman_3
+                条件概率
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -286,14 +286,14 @@
             <div class="post-intros">
                 <!-- 文章页标签  -->
                     <div class="post-intro-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Probability Theory">Probability Theory</a>
 </div>
 
                 <!-- 文章字数统计 -->
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2026/05/23</span>
+                    <span class="post-intro-time">2026/10/04</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -445,164 +445,387 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="添加过程噪声">添加过程噪声</h1>
-<p>在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析</p>
-<h2 id="完整一维卡尔曼滤波模型">完整一维卡尔曼滤波模型</h2>
-<h3 id="过程噪声">过程噪声</h3>
+        <h2 id="一般条件概率">一般条件概率</h2>
 <p>我们使用<span
-class="math inline"><em>q</em></span>表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为：</p>
-<p><span class="math display">$$
-\begin{aligned}
-    p_{n+1,n} = p_{n,n} + q_n
-\end{aligned}
-$$</span><br />
-</p>
-<p>我们把这个公式加入到我们总结的一维卡尔曼滤波表格</p>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">类别</th>
-<th style="text-align: left;">方程 (Equation)</th>
-<th style="text-align: left;">方程名称 (Equation Name)</th>
-<th style="text-align: left;">文献中的其他别名 (Alternative names used
-in the literature)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>状态更新</strong><br>(State
-Update)</td>
-<td style="text-align: left;"><span
-class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>K</em><sub><em>n</em></sub>(<em>z</em><sub><em>n</em></sub> − <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub>)</span></td>
-<td style="text-align: left;">状态更新<br>(State Update)</td>
-<td style="text-align: left;">滤波方程 (Filtering Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span
-class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub> = (1 − <em>K</em><sub><em>n</em></sub>)<em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span></td>
-<td style="text-align: left;">协方差更新<br>(Covariance Update)</td>
-<td style="text-align: left;">修正方程 (Corrector Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span class="math inline">$K_n =
-\frac{p_{n,n-1}}{p_{n,n-1} + r_n}$</span></td>
-<td style="text-align: left;">卡尔曼增益<br>(Kalman Gain)</td>
-<td style="text-align: left;">权重方程 (Weight Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>状态预测</strong><br>(State
-Predict)</td>
-<td style="text-align: left;"><span
-class="math inline"><em>x̂</em><sub><em>n</em> + 1, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em></sub></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
-class="math inline">$\hat{x}_{n+1,n} = \hat{x}_{n,n} + \Delta t
-\dot{\hat{x}}_{n,n}$</span><br><span
-class="math inline">$\dot{\hat{x}}_{n+1,n} =
-\dot{\hat{x}}_{n,n}$</span><br><em>(适用于匀速运动动力学)</em></td>
-<td style="text-align: left;">状态外推<br>(State Extrapolation)</td>
-<td style="text-align: left;">预测器方程 (Predictor
-Equation)<br>状态转移方程 (Transition Equation)<br>预测方程 (Prediction
-Equation)<br>动力学模型 (Dynamic Model)<br>状态空间模型 (State Space
-Model)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span
-class="math inline"><em>p</em><sub><em>x</em>, <em>n</em> + 1, <em>n</em></sub> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup> + <em>q</em><sub><em>n</em></sub></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
-class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>x</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup> + <em>Δ</em><em>t</em><sup>2</sup><em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup></span><br><span
-class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>v</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup> + <em>q</em><sub><em>n</em></sub></span><br><em>(适用于匀速运动动力学)</em></td>
-<td style="text-align: left;">协方差外推<br>(Covariance
-Extrapolation)</td>
-<td style="text-align: left;">预测器协方差方程 (Predictor Covariance
-Equation)</td>
-</tr>
-</tbody>
-</table>
-<p>现在我们使用一个例子。</p>
-<h3 id="测量箱中的水温">测量箱中的水温</h3>
-<p>我们假设在稳态下，液体温度是恒温的，但真实的液体也许会有一点可能，我们用下面方程描述系统的动态特性：</p>
+class="math inline"><em>E</em>, <em>F</em></span>分别表示两枚骰子点数之和为8和第一枚骰子点数为3这两个事件，那么要求得<span
+class="math inline"><em>F</em></span>事件发生的情况下，再求<span
+class="math inline"><em>E</em></span>事件发生的概率，我们称为假定条件<span
+class="math inline"><em>F</em></span>发生的情况下<span
+class="math inline"><em>E</em></span>发生的条件概率，记为<span
+class="math inline"><em>P</em>(<em>E</em> ∣ <em>F</em>)</span>。</p>
+<p>那么我们可以推导适合用于计算<span
+class="math inline"><em>P</em>(<em>E</em> ∣ <em>F</em>)</span>的一般公式，我们假定<span
+class="math inline"><em>F</em></span>发生了，为了让<span
+class="math inline"><em>E</em></span>发生，那么事件一定在<span
+class="math inline"><em>E</em><em>F</em></span>中，那么<span
+class="math inline"><em>F</em></span>是已经发生的，则<span
+class="math inline"><em>E</em></span>发生的概率必然等于<span
+class="math inline"><em>E</em><em>F</em></span>发生的概率除以<span
+class="math inline"><em>F</em></span>发生的概率之比，于是</p>
+<strong>定义：</strong> 若<span
+class="math inline"><em>P</em>(<em>F</em>) &gt; 0</span>，那么
 <center>
 <p><span
-class="math display"><em>x</em><sub><em>n</em></sub> = <em>T</em> + <em>w</em><sub><em>n</em></sub></span></p>
+class="math display"><em>P</em>(<em>E</em> ∣ <em>F</em>) = <em>P</em>(<em>E</em><em>F</em>)/<em>P</em>(<em>F</em>)</span></p>
 </center>
-<p>其中<span class="math inline"><em>T</em></span>是稳定温度，<span
-class="math inline"><em>w</em><sub><em>n</em></sub></span>是关于随机变量<span
-class="math inline"><em>q</em></span>的噪声。</p>
-<p>现在，我们做些假设</p>
-<ul>
-<li>我们假设真实温度是50摄氏度</li>
-<li>假设模型是准确的，因此我们将过程噪声<span
-class="math inline"><em>q</em></span>设为极小值<span
-class="math inline">0.0001</span></li>
-<li>误差在0.1摄氏度</li>
-<li>每5秒测量一次</li>
-<li>每次的实际温度为: 50.005, 49.994, 49.993, 50.001, 50.006, 49.998,
-50.021, 50.005, 50 , 49.997</li>
-<li>每次测量值为：49.986, 49.963, 50.9, 50.001, 50.018, 50.05, 49.938,
-49.858, 49.965, 50.114</li>
-</ul>
-<p>依旧简单初始化，我们观测到温度大概在60度，因此<span
-class="math inline"><em>x̂</em><sub>0, 0</sub> = 60</span>，</p>
-<p>现在，我们假设侧脸误差在100，那么方差就是<span
-class="math inline"><em>p</em><sub>0, 0</sub> = 100<sup>2</sup></span>。</p>
-<p>由于这个方差非常高，如果用接近实际值的值来做初始化收敛就会更高，现在我们开始测量</p>
-<p>这是个静态的系统，那么第一次的温度就是<span
-class="math inline"><em>x̂</em><sub>1, 0</sub> = 60</span>，方差为<span
-class="math inline"><em>p</em><sub>1, 0</sub> = <em>p</em><sub>0, 0</sub> + <em>q</em> = 10000 + 0.0001 = 10000.0001</span></p>
-<p>对第一次测量，<span
-class="math inline"><em>z</em><sub>1</sub> = 49.986</span>，那么测量误差为$
-0.1<span class="math inline">，<em>那</em><em>么</em></span>r_1 =
-0.01$。现在我们计算卡尔曼增益</p>
+<p><strong>例题：</strong> 乔伊<span
+class="math inline">80%</span>确定它把失踪的钥匙丢在了外套的两个口袋中的一个，<span
+class="math inline">40%</span>确定在左口袋中，<span
+class="math inline">40%</span>在右口袋中，如果检查了左口袋没有发现钥匙，那么钥匙在右口袋的概率是多少？</p>
+<p><strong>解：</strong>
+检查了左口袋没有，那么钥匙在其他地方的概率是<span
+class="math inline"><em>P</em>(<em>L</em><sup><em>c</em></sup>) = 0.6</span>，现在所求概率是右口袋有钥匙的概率，由于右口袋有钥匙在<span
+class="math inline"><em>L</em><sup><em>c</em></sup></span>中，因此<span
+class="math inline"><em>P</em>(<em>R</em><em>L</em><sup><em>c</em></sup>) = 0.4</span>，所求概率就是</p>
+<center>
+<span
+class="math display"><em>P</em>(<em>R</em> ∣ <em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em><em>L</em><sup><em>c</em></sup>)/<em>P</em>(<em>L</em><sup><em>c</em></sup>) = <em>P</em>(<em>R</em>)/[1 − <em>P</em>(<em>L</em>)] = 2/3</span>
+</center>
+<p>简单的变形我们可以得到乘法公式<span
+class="math inline"><em>P</em>(<em>E</em><em>F</em>) = <em>P</em>(<em>F</em>)<em>P</em>(<em>E</em> ∣ <em>F</em>)</span>，现在我们推广到一般形式上。</p>
+<p><strong>定理：一般乘法规则</strong></p>
+<center>
+<span
+class="math display"><em>P</em>(<em>E</em><sub>1</sub><em>E</em><sub>2</sub>⋯<em>E</em><sub><em>n</em></sub>) = <em>P</em>(<em>E</em><sub>1</sub>)<em>P</em>(<em>E</em><sub>2</sub> ∣ <em>E</em><sub>1</sub>)<em>P</em>(<em>E</em><sub>3</sub> ∣ <em>E</em><sub>1</sub><em>E</em><sub>2</sub>)⋯<em>P</em>(<em>E</em><sub><em>n</em></sub> ∣ <em>E</em><sub>1</sub>⋯<em>E</em><sub><em>n</em> − 1</sub>)</span>
+</center>
+<p><strong>证明：</strong></p>
+<p>带入条件概率的定义即可证明</p>
+<center>
 <p><span class="math display">$$
-\begin{aligned}
-    K_1 = \frac{p_{1,0}}{p_{1,0}+r_1} = 0.999...
-\end{aligned}
+\begin{array}{rcl}
+    P(E_1)\frac{P(E_1E_2)}{P(E_1)}\frac{P(E_1E_2E_3)}{P(E_1E_2)}\cdots\frac{P(E_1E_2\cdots
+E_n)}{P(E_1E_2\cdots E_{n-1})} = P(E_1\cdots E_n)
+\end{array}
 $$</span></p>
-<p>那么第一次估计值如下</p>
+</center>
+<p><strong>例题：</strong>
+一副52张牌随机的分成4堆，每堆13张，计算每一堆正好有一张<span
+class="math inline"><em>A</em></span>的概率：</p>
+<p><strong>解：</strong> 定义事件<span
+class="math inline"><em>E</em><sub><em>i</em></sub>(<em>i</em> = 1, 2, 3, 4)</span>，那么有</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    E_1 &amp;=&amp; \text{黑桃A在任意一堆里}\\
+    E_2 &amp;=&amp; \text{黑桃A和红桃A在不同的堆里}\\
+    E_3 &amp;=&amp; \text{黑桃A，红桃A，方块A在不同堆里}\\
+    E_4 &amp;=&amp; \text{4张A在不同堆里}
+\end{array}
+$$</span>
+</center>
+<p>所求概率是<span
+class="math inline"><em>P</em>(<em>E</em><sub>1</sub><em>E</em><sub>2</sub><em>E</em><sub>3</sub><em>E</em><sub>4</sub>)</span>，利用乘法法则，则</p>
+<center>
 <p><span class="math display">$$
-\begin{aligned}
-    \hat x_{1,1} = \hat{1,0} +K_1(z_1 - \hat x_{1,0}) = 49.986
-\end{aligned}
+\begin{array}{rcl}
+    P(E_1E_2E_3E_4) = P(E_1)P(E_2\mid E_1)P(E_3\mid
+E_1E_2)P(E_4|E_1E_2E_3)
+\end{array}
 $$</span></p>
-<p>更新方差为<span
-class="math inline"><em>p</em><sub>1, 1</sub> = (1 − <em>K</em><sub>1</sub>)<em>p</em><sub>1, 0</sub> = 0.01</span></p>
-<p>那么<span
-class="math inline"><em>p</em><sub>2, 1</sub> = 0.01 + <em>q</em> = 0.0101</span></p>
-<p>我们依旧写一个程序出来跑结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">double measurement2[] = &#123;49.986, 49.963, 50.09, 50.001, 50.018, 50.05, 49.938, 49.858, 49.965, 50.114&#125;;</span><br><span class="line"></span><br><span class="line">double KalmanFilter2(int n, int max, double measurement[], double estimation, double error_estimation, double error_measurement)</span><br><span class="line">&#123;</span><br><span class="line">    if(n &gt; max) return estimation;</span><br><span class="line">    double Kalman_gain = (error_estimation) / (error_estimation + error_measurement);</span><br><span class="line">    double new_estimation = estimation + Kalman_gain * (measurement2[n-1] - estimation);</span><br><span class="line">    double new_error_estimation = (1 - Kalman_gain) * error_estimation;</span><br><span class="line">    double next_error_estimation = new_error_estimation + 0.0001; // 假设系统噪声为0.01</span><br><span class="line">    printf(&quot;第%d次测量值：%lf, 卡尔曼增益：%lf, 新的估计值：%lf, 新的估计误差：%lf\n&quot;, n, measurement2[n-1], Kalman_gain, new_estimation, next_error_estimation);</span><br><span class="line">    KalmanFilter2(n + 1, max, measurement2, new_estimation, next_error_estimation, error_measurement);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double estimation = 60.0;</span><br><span class="line">    double frist_error_estimation = 10000.0001;</span><br><span class="line">    double error_measurement = 0.01;</span><br><span class="line">    int size = sizeof(measurement2) / sizeof(measurement2[0]);</span><br><span class="line">    double final_estimation = KalmanFilter2(1, size, measurement2, estimation, frist_error_estimation, error_measurement);</span><br><span class="line">    printf(&quot;最终估计值为：%lf\n&quot;, final_estimation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">第1次测量值：49.986000, 卡尔曼增益：0.999999, 新的估计值：49.986010, 新的估计误差：0.010100</span><br><span class="line">第2次测量值：49.963000, 卡尔曼增益：0.502487, 新的估计值：49.974448, 新的估计误差：0.005125</span><br><span class="line">第3次测量值：50.090000, 卡尔曼增益：0.338837, 新的估计值：50.013601, 新的估计误差：0.003488</span><br><span class="line">第4次测量值：50.001000, 卡尔曼增益：0.258621, 新的估计值：50.010342, 新的估计误差：0.002686</span><br><span class="line">第5次测量值：50.018000, 卡尔曼增益：0.211742, 新的估计值：50.011964, 新的估计误差：0.002217</span><br><span class="line">第6次测量值：50.050000, 卡尔曼增益：0.181497, 新的估计值：50.018867, 新的估计误差：0.001915</span><br><span class="line">第7次测量值：49.938000, 卡尔曼增益：0.160720, 新的估计值：50.005870, 新的估计误差：0.001707</span><br><span class="line">第8次测量值：49.858000, 卡尔曼增益：0.145824, 新的估计值：49.984307, 新的估计误差：0.001558</span><br><span class="line">第9次测量值：49.965000, 卡尔曼增益：0.134817, 新的估计值：49.981704, 新的估计误差：0.001448</span><br><span class="line">第10次测量值：50.114000, 卡尔曼增益：0.126498, 新的估计值：49.998439, 新的估计误差：0.001365</span><br><span class="line">最终估计值为：49.998439</span><br></pre></td></tr></table></figure>
-<p>卡尔曼增益的收敛速度还是很快的，在第3次的时候就收敛差不多了。</p>
-<p>一维卡尔曼的学习就到这里结束。</p>
+</center>
+<p><span
+class="math inline"><em>E</em><sub>1</sub></span>实际上就是样本空间<span
+class="math inline"><em>S</em></span>，那么<span
+class="math inline"><em>P</em>(<em>E</em><sub>1</sub>) = 1</span>，为了求<span
+class="math inline"><em>P</em>(<em>E</em><sub>2</sub> ∣ <em>E</em><sub>1</sub>)</span>，那么确定黑桃<span
+class="math inline"><em>A</em></span>在一堆，红桃在另外三堆的概率是</p>
+<center>
+<span class="math display">$$
+P(E_2\mid E_1)  = 1- \frac{12}{51} = \frac{39}{51}
+$$</span>
+</center>
+<p>那么对于<span
+class="math inline"><em>E</em><sub>3</sub></span>，有<span
+class="math inline">$P(E_3\mid E_1E_2) = 1- \frac{24}{50} =
+\frac{26}{50}$</span> 对于<span
+class="math inline"><em>E</em><sub>4</sub></span>，<span
+class="math inline">$P(E_4\mid E_1E_2E_3) = 1- \frac{36}{49} =
+\frac{13}{49}$</span>，那么</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    P(E_1E_2E_3E_4) = \frac{39\times 26 \times 13}{51\times 50\times
+49}\approx 0.105
+\end{array}
+$$</span>
+</center>
+<h2 id="贝叶斯公式">贝叶斯公式</h2>
+<p>设<span class="math inline"><em>E</em></span>和<span
+class="math inline"><em>F</em></span>两个事件，可以把<span
+class="math inline"><em>E</em></span>表示为</p>
+<center>
+<span
+class="math display"><em>E</em> = <em>E</em><em>F</em> ∪ <em>E</em><em>F</em><sup><em>c</em></sup></span>
+</center>
+<p>由于<span class="math inline"><em>E</em><em>F</em></span>和<span
+class="math inline"><em>E</em><em>F</em><sup><em>c</em></sup></span>是不相容的，那么我们可以得到</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    P(E) &amp;=&amp; P(EF)+P(EF^c)\\
+         &amp;=&amp; P(E\mid F)P(F)+P(E\mid F^c)P(F^c)\\
+         &amp;=&amp; P(E\mid F)P(F) + P(E\mid F^c)[1-P(F)]
+\end{array}
+$$</span>
+</center>
+<p><strong>例题：</strong>
+保险公司认为人可以分为两类，一类是容易出事故的，一类是不容易出事故的。统计表明，一个易出事故者在一年内发生事故的概率是<span
+class="math inline">0.4</span>。而对不容易出事故的人来说，这个概率是<span
+class="math inline">0.2</span>，假定第一类人占人口比例<span
+class="math inline">30%</span>，现在有一个人投保，那么该人在购买保单之后出事的概率是多少？</p>
+<p><strong>解</strong> 我们假设<span
+class="math inline"><em>A</em></span>表示该人是容易出事故者，用<span
+class="math inline"><em>A</em><sub>1</sub></span>表示一年内出事故的条件。那么所求概率<span
+class="math inline"><em>P</em>(<em>A</em><sub>1</sub>)</span>为：</p>
+<center>
+<span
+class="math display"><em>P</em>(<em>A</em><sub>1</sub>) = <em>P</em>(<em>A</em><sub>1</sub> ∣ <em>A</em>)<em>P</em>(<em>A</em>) + <em>P</em>(<em>A</em><sub>1</sub> ∣ <em>A</em><sup><em>c</em></sup>)<em>P</em>(<em>A</em><sup><em>c</em></sup>) = 0.4 × 0.3 + 0.2 × 0.7 = 0.26</span>
+</center>
+<p><strong>例题2</strong>
+我们假设投保人在买后一年内除了事情，那么它是容易出事故者的概率是多大：</p>
+<p><strong>解：</strong> 所求概率是<span
+class="math inline"><em>P</em>(<em>A</em> ∣ <em>A</em><sub>1</sub>)</span></p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    P(A\mid A_1) = \frac{P(AA_1)}{P(A_1)} = \frac{P(A)P(A_1\mid
+A)}{P(A_1)} = \frac{0.3\times 0.4}{0.26} = \frac{6}{13}
+\end{array}
+$$</span>
+</center>
+<p><strong>定义（优势比）：</strong>事件<span
+class="math inline"><em>A</em></span>的优势比定义为</p>
+<center>
+<span class="math display">$$
+\frac{P(A)}{P(A^c)} = \frac{P(A)}{1-P(A)}
+$$</span>
+</center>
+<p>即事件<span
+class="math inline"><em>A</em></span>的优势比告诉我们事件发生的可能性是不是不可能发生的可能性的倍数。</p>
+<p><strong>例题：</strong>
+某罪犯在犯罪现场留下了一些DNA，法医研究后注意到能够辨认的只有5对，并且每个无罪的人和这5对匹配的概率是<span
+class="math inline">10<sup>−5</sup></span>，律师认为罪犯就是该城镇<span
+class="math inline">1000000</span>个居民之一，在过去10年内，该城镇有10
+000人刑满释放，他们的DNA都记录在册，在检查这些DNA文档之前，律师假定这10
+000个有前科的人犯这个罪的概率是<span
+class="math inline"><em>α</em></span>，而其余的990
+000个居民犯罪的概率是<span
+class="math inline"><em>β</em></span>，其中<span
+class="math inline"><em>α</em> = <em>c</em><em>β</em></span>，其中<span
+class="math inline"><em>c</em></span>是常数。那么将有前科的人DNA进行比对之后，发现只有AJ琼斯符合该DNA，假设律师关于<span
+class="math inline"><em>α</em></span>和<span
+class="math inline"><em>β</em></span>之间的关系是准确的，那么AJ作案的可能性多大？</p>
+<p><strong>解：</strong>首先，概率之和为1，那么我们有</p>
+<center>
+<p><span
+class="math display">1 = 10000<em>α</em> + 990000<em>β</em> = (10000<em>c</em> + 990000)<em>β</em></span></p>
+</center>
+<p>解得</p>
+<center>
+<span class="math display">$$
+\beta = \frac{1}{10 000c+990 000},~ \alpha = c\beta
+$$</span>
+</center>
+<p>我们定义<span
+class="math inline"><em>G</em></span>表示Aj是作案者，<span
+class="math inline"><em>M</em></span>是事件“AJ”是这10
+000人中唯一与现场DNA匹配的人，那么概率</p>
+<center>
+<span class="math display">$$
+P(G\mid M) = \frac{P(GM)}{P(M)} = \frac{P(G)P(M\mid G)}{P(M\mid
+G)P(G)+P(M\mid G^c)P(G^c)}
+$$</span>
+</center>
+<p>首先，若AJ是作案者其他人不是，那么10
+000人AJ是唯一DNA匹配者的概率为</p>
+<center>
+<span
+class="math display"><em>P</em>(<em>M</em> ∣ <em>G</em>) = (1 − 10<sup>−5</sup>)<sup>9999</sup></span>
+</center>
+<p>若AJ不是作案者，但它是唯一匹配的人，那么他的DNA必须匹配，那现在，我们确定其他有前科的人不是作案者的概率，令<span
+class="math inline"><em>C</em> = {</span>除AJ外的有前科人员不是作案者<span
+class="math inline">}</span>，那么</p>
+<center>
+<span class="math display">$$
+P(C\mid G^c) = \frac{P(CG^c)}{G^c} = \frac{1-10000\alpha}{1-\alpha}
+$$</span>
+</center>
+<p>那么，除AJ外，其他有前科的人不是作案者的前提下，这9999人和现场DNA相匹配的概率是<span
+class="math inline">(1 − 10<sup>−5</sup>)<sup>9999</sup></span>，那么</p>
+<center>
+<p><span class="math display">$$
+P(M\mid G^c) =
+10^{-5}\left(\frac{1-10000\alpha}{1-\alpha}\right)(1-10^{-5})^{9999}
+$$</span></p>
+</center>
+<p>若最初假定<span
+class="math inline"><em>c</em> = 100</span>。那么<span
+class="math inline"><em>α</em> = 1/19900</span>且<span
+class="math inline">$P(G\mid M) = \frac{1}{1.099}\approx
+0.9099$</span></p>
+<p><strong>例题：赌徒破产问题</strong></p>
+<p>两个赌徒，连续抛一枚硬币进行打赌，若正面朝上，<span
+class="math inline"><em>B</em></span>给<span
+class="math inline"><em>A</em></span>一元，若反面朝上，则<span
+class="math inline"><em>A</em></span>给<span
+class="math inline"><em>B</em></span>一元，一直这样下去，知道一方输光钱，我们假定连续抛硬币是独立的，每次结果正面朝上的概率是<span
+class="math inline"><em>p</em></span>,假定开始的时候<span
+class="math inline"><em>A</em></span>有<span
+class="math inline"><em>i</em></span>元，而<span
+class="math inline"><em>B</em></span>有<span
+class="math inline"><em>N</em> − <em>i</em></span>元，那么<span
+class="math inline"><em>A</em></span>赢得所有钱的概率多大？</p>
+<p><strong>解：</strong>用<span
+class="math inline"><em>E</em></span>表示：开始<span
+class="math inline"><em>A</em></span>有<span
+class="math inline"><em>i</em></span>元，<span
+class="math inline"><em>B</em></span>有<span
+class="math inline"><em>N</em> − <em>i</em></span>元，而最后<span
+class="math inline"><em>A</em></span>赢得所有钱。用<span
+class="math inline"><em>H</em></span>表示事件的第一次抛掷结果是正面朝上，那么</p>
+<center>
+<p><span
+class="math display"><em>P</em><sub><em>i</em></sub> = <em>P</em>(<em>E</em>) = <em>P</em>(<em>E</em> ∣ <em>H</em>)<em>P</em>(<em>H</em>) + <em>P</em>(<em>E</em> ∣ <em>H</em><sup><em>c</em></sup>)<em>P</em>(<em>H</em><sup><em>c</em></sup>) = <em>p</em><em>P</em>(<em>E</em> ∣ <em>H</em>) + (1 − <em>p</em>)<em>P</em>(<em>E</em> ∣ <em>H</em><sup><em>c</em></sup>)</span></p>
+</center>
+<p>假定第一次的结果是正面向上，那么第一次打赌结束之后的状态是<span
+class="math inline"><em>A</em></span>有了<span
+class="math inline"><em>i</em> + 1</span>元，而<span
+class="math inline"><em>B</em></span>有<span
+class="math inline"><em>N</em> − (<em>i</em> + 1)</span>元，由于概率独立，每次朝上的概率都是<span
+class="math inline"><em>p</em></span>，因此，<span
+class="math inline"><em>A</em></span>赢得所有钱的概率等价于一开始<span
+class="math inline"><em>A</em></span>存在<span
+class="math inline"><em>i</em> + 1</span>元而<span
+class="math inline"><em>B</em></span>有<span
+class="math inline"><em>N</em> − (<em>i</em> + 1)</span>元。</p>
+<p>那么</p>
+<center>
+<span
+class="math display"><em>P</em>(<em>E</em> ∣ <em>H</em>) = <em>P</em><sub><em>i</em> + 1</sub></span>
+</center>
+<p>并且</p>
+<center>
+<span
+class="math display"><em>P</em>(<em>E</em> ∣ <em>H</em><sup><em>c</em></sup>) = <em>P</em><sub><em>i</em> − 1</sub></span>
+</center>
+<p>只要令<span
+class="math inline"><em>q</em> = 1 − <em>p</em></span>，那么</p>
+<center>
+<span
+class="math display"><em>P</em><sub><em>i</em></sub> = <em>p</em><em>P</em><sub><em>i</em> + 1</sub> + <em>q</em><em>P</em><sub><em>i</em> − 1</sub>, <em>i</em> = 1, 2, ⋯, <em>N</em> − 1</span>
+</center>
+<p>一些比较清楚的边界条件是<span
+class="math inline"><em>P</em><sub>0</sub> = 0, <em>P</em><sub><em>N</em></sub> = 1</span>，并且<span
+class="math inline"><em>p</em> + <em>q</em> = 1</span>。首先我们得到递推式</p>
+<center>
+<span
+class="math display"><em>p</em><em>P</em><sub><em>i</em></sub> + <em>q</em><em>P</em><sub><em>i</em></sub> = <em>p</em><em>P</em><sub><em>i</em> + 1</sub> + <em>q</em><em>P</em><sub><em>i</em> − 1</sub></span>
+</center>
+<p>或者</p>
+<center>
+<span class="math display">$$
+P_{i+1}-P_i = \frac{q}{p}(P_i - P_{i-1}), i =1,2,\cdots,N-1
+$$</span>
+</center>
+<p>因此，若<span
+class="math inline"><em>P</em><sub>0</sub> = 0</span>，我们由上述差分方程得到</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    P_2 - P_1 &amp;=&amp; \frac{q}{p}(P_1-P_0) = \frac{q}{p}P_1\\
+    P_3 - P_2 &amp;=&amp; \frac{q}{p}(P_2-P_1) = (\frac{q}{p})^2P_1\\
+    \vdots\\
+    P_i-P_{i-1} &amp;=&amp; \frac{q}{p}(P_{i-1} - P_{i-2})
+=(\frac{q}{p})^{i-1}P_1
+\end{array}
+$$</span>
+</center>
+<p>只需要把前<span
+class="math inline"><em>i</em> − 1</span>个方程累加，就有</p>
+<center>
+<span class="math display">$$
+P_i - P_1 = P_1\left[\sum^{i-1}_{n = 1}(\frac{q}{p})^n\right]
+$$</span>
+</center>
+<p>那么我们有如下总结：</p>
+<center>
+<span class="math display">$$
+P_i = \left\{
+    \begin{array}{rcl}
+        \frac{1-(q/p)^i}{1-(q/p)}P_1 &amp; \text{若}\frac{q}{p}\neq 1\\
+        iP_1 &amp; \frac{q}{p} =1
+    \end{array}
+\right.
+$$</span>
+</center>
+<p>利用<span
+class="math inline"><em>P</em><sub><em>N</em></sub> = 1</span>，我们可以解出：</p>
+<center>
+<span class="math display">$$
+P_1 = \left\{\begin{array}{lc}
+    \frac{1-(q/p)}{1-(q/p)^N} &amp; p\neq \frac{1}{2}\\
+    \frac{1}{N} &amp; p = \frac{1}{2}
+\end{array}\right.
+$$</span>
+</center>
+<p>带回去就能得到<span
+class="math inline"><em>P</em><sub><em>i</em></sub></span>的概率，现在我们使用<span
+class="math inline"><em>Q</em><sub><em>i</em></sub></span>表示<span
+class="math inline"><em>A</em></span>有<span
+class="math inline"><em>i</em></span>元，<span
+class="math inline"><em>B</em></span>有<span
+class="math inline"><em>N</em> − <em>i</em></span>元，最后<span
+class="math inline"><em>B</em></span>赢得所有钱的概率。就有</p>
+<center>
+<span class="math display">$$
+Q_i = \left\{\begin{array}{lc}
+    \frac{1-(q/p)^{N-i}}{1-(q/p)^N} &amp; q\neq \frac{1}{2}\\
+    \frac{N-i}{N} &amp; q = \frac{1}{2}
+\end{array}\right.
+$$</span>
+</center>
+<p>当<span class="math inline"><em>q</em> = 1/2</span>的时候等价于<span
+class="math inline"><em>p</em> = 1/2</span>，有</p>
+<center>
+<span class="math display">$$
+\begin{array}{lc}
+P_i+Q_i =  \cfrac{1-(q/p)^i}{1-(q/p)^N} +
+\cfrac{1-(p/q)^{N-1}}{1-(p/q)^N}     = \cfrac{p^N-p^{N-i}q_i
+-q^N+q^ip^{N-i} }{p^N-q^N} = 1
+\end{array}
+$$</span>
+</center>
+<p>并且<span
+class="math inline"><em>p</em> = <em>q</em> = 1/2</span>结论成立，对此<span
+class="math inline"><em>P</em><sub><em>i</em></sub> + <em>Q</em><sub><em>i</em></sub> = 1</span>，也就是说，这场赌局最后一定有一个人赢所有钱。并且该结论告诉我们，若<span
+class="math inline"><em>A</em></span>一开始有<span
+class="math inline">5</span>元，<span
+class="math inline"><em>B</em></span>有<span
+class="math inline">10</span>元，那么<span
+class="math inline"><em>p</em> = 1/2</span>的时候，<span
+class="math inline"><em>A</em></span>获胜的概率只有<span
+class="math inline">1/3</span>，<span
+class="math inline"><em>p</em> = 0.6</span>的时候<span
+class="math inline"><em>A</em></span>获胜的概率将猛增为<span
+class="math inline">0.87</span>左右。</p>
 
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
-            <p>Link：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">https://monstergeo.github.io/blog/2026/05/23/Kalman-3/</a>
-            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">May 23rd 2026, 1:50:19 pm</a>
-            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">June 6th 2026, 7:18:00 pm</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/">https://monstergeo.github.io/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/">October 4th 2026, 9:08:07 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/">October 5th 2026, 2:35:49 am</a>
             <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/blog/2026/05/23/stm32-minirtos/" title="stm32_minirtos">
-                    <div class="nextTitle">stm32_minirtos</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/blog/2026/05/18/Kalman-2/" title="Kalman_2">
-                    <div class="prevTitle">Kalman_2</div>
+                <a href="/blog/2026/09/08/%E6%8B%93%E6%89%91%E6%BC%94%E5%8F%98/" title="拓扑演变">
+                    <div class="prevTitle">拓扑演变</div>
                 </a>
         </li>
     </ul>
@@ -661,7 +884,7 @@ class="math inline"><em>p</em><sub>2, 1</sub> = 0.01 + <em>q</em> =�
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%87%E7%A8%8B%E5%99%AA%E5%A3%B0"><span class="toc-number">1.</span> <span class="toc-text">添加过程噪声</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%B8%80%E7%BB%B4%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">完整一维卡尔曼滤波模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E5%99%AA%E5%A3%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">过程噪声</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E9%87%8F%E7%AE%B1%E4%B8%AD%E7%9A%84%E6%B0%B4%E6%B8%A9"><span class="toc-number">1.1.2.</span> <span class="toc-text">测量箱中的水温</span></a></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="toc-number">1.</span> <span class="toc-text">一般条件概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯公式</span></a></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">

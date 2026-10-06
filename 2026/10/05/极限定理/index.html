@@ -10,22 +10,22 @@
     <meta name="copyright" content="Done fool">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="添加过程噪声 在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析 完整一维卡尔曼滤波模型 过程噪声 我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为： $$ \begin{aligned}     p_{n+1,n} &#x3D; p_{n,n} + q_n \end{aligned} $$">
+    <meta name="description" content="极限定理 切比雪夫不等式及弱大数定理 命题1：马尔科夫不等式 我们设X是非负随机变量，则对任意常数a &gt; 0，有  $$ P\{X\geq a\} \leq \frac{E[X]}{a} $$  证明： 对a &gt; 0，定义指示变量  $$ I &#x3D;\left\{ \begin{array}{lc}     1 &amp; X \geq a\\     0 &amp;am">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kalman_3">
-<meta property="og:url" content="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/index.html">
+<meta property="og:title" content="极限定理">
+<meta property="og:url" content="https://monstergeo.github.io/blog/2026/10/05/%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="添加过程噪声 在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析 完整一维卡尔曼滤波模型 过程噪声 我们使用q表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为： $$ \begin{aligned}     p_{n+1,n} &#x3D; p_{n,n} + q_n \end{aligned} $$">
+<meta property="og:description" content="极限定理 切比雪夫不等式及弱大数定理 命题1：马尔科夫不等式 我们设X是非负随机变量，则对任意常数a &gt; 0，有  $$ P\{X\geq a\} \leq \frac{E[X]}{a} $$  证明： 对a &gt; 0，定义指示变量  $$ I &#x3D;\left\{ \begin{array}{lc}     1 &amp; X \geq a\\     0 &amp;am">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-23T05:50:19.000Z">
-<meta property="article:modified_time" content="2026-06-06T11:18:00.280Z">
+<meta property="article:published_time" content="2026-10-05T15:15:01.000Z">
+<meta property="article:modified_time" content="2026-10-06T14:46:32.248Z">
 <meta property="article:author" content="Done fool">
-<meta property="article:tag" content="Kalman">
+<meta property="article:tag" content="Probability Theory">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/blog/">
-    <title>Kalman_3 · Marcus</title>
+    <title>极限定理 · Marcus</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -247,7 +247,7 @@
             <a href="/blog/">Marcus&#39;s blog</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">Kalman_3</a>
+            <a href="#" class="post-name">极限定理</a>
         </div>
     </div>
 </header>
@@ -274,7 +274,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                Kalman_3
+                极限定理
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -286,14 +286,14 @@
             <div class="post-intros">
                 <!-- 文章页标签  -->
                     <div class="post-intro-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Kalman">Kalman</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Probability Theory">Probability Theory</a>
 </div>
 
                 <!-- 文章字数统计 -->
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2026/05/23</span>
+                    <span class="post-intro-time">2026/10/05</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -445,164 +445,341 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="添加过程噪声">添加过程噪声</h1>
-<p>在这个章节，我们将在之前说的一维卡尔曼滤波器中添加过程噪声并分析</p>
-<h2 id="完整一维卡尔曼滤波模型">完整一维卡尔曼滤波模型</h2>
-<h3 id="过程噪声">过程噪声</h3>
-<p>我们使用<span
-class="math inline"><em>q</em></span>表示过程噪声，协方差外推方程应该包含我们的过程噪声，因为这个噪声对误差是无法避免的。因此恒定动态模型的协方差外推方程为：</p>
-<p><span class="math display">$$
-\begin{aligned}
-    p_{n+1,n} = p_{n,n} + q_n
-\end{aligned}
-$$</span><br />
-</p>
-<p>我们把这个公式加入到我们总结的一维卡尔曼滤波表格</p>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">类别</th>
-<th style="text-align: left;">方程 (Equation)</th>
-<th style="text-align: left;">方程名称 (Equation Name)</th>
-<th style="text-align: left;">文献中的其他别名 (Alternative names used
-in the literature)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>状态更新</strong><br>(State
-Update)</td>
-<td style="text-align: left;"><span
-class="math inline"><em>x̂</em><sub><em>n</em>, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub> + <em>K</em><sub><em>n</em></sub>(<em>z</em><sub><em>n</em></sub> − <em>x̂</em><sub><em>n</em>, <em>n</em> − 1</sub>)</span></td>
-<td style="text-align: left;">状态更新<br>(State Update)</td>
-<td style="text-align: left;">滤波方程 (Filtering Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span
-class="math inline"><em>p</em><sub><em>n</em>, <em>n</em></sub> = (1 − <em>K</em><sub><em>n</em></sub>)<em>p</em><sub><em>n</em>, <em>n</em> − 1</sub></span></td>
-<td style="text-align: left;">协方差更新<br>(Covariance Update)</td>
-<td style="text-align: left;">修正方程 (Corrector Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span class="math inline">$K_n =
-\frac{p_{n,n-1}}{p_{n,n-1} + r_n}$</span></td>
-<td style="text-align: left;">卡尔曼增益<br>(Kalman Gain)</td>
-<td style="text-align: left;">权重方程 (Weight Equation)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>状态预测</strong><br>(State
-Predict)</td>
-<td style="text-align: left;"><span
-class="math inline"><em>x̂</em><sub><em>n</em> + 1, <em>n</em></sub> = <em>x̂</em><sub><em>n</em>, <em>n</em></sub></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
-class="math inline">$\hat{x}_{n+1,n} = \hat{x}_{n,n} + \Delta t
-\dot{\hat{x}}_{n,n}$</span><br><span
-class="math inline">$\dot{\hat{x}}_{n+1,n} =
-\dot{\hat{x}}_{n,n}$</span><br><em>(适用于匀速运动动力学)</em></td>
-<td style="text-align: left;">状态外推<br>(State Extrapolation)</td>
-<td style="text-align: left;">预测器方程 (Predictor
-Equation)<br>状态转移方程 (Transition Equation)<br>预测方程 (Prediction
-Equation)<br>动力学模型 (Dynamic Model)<br>状态空间模型 (State Space
-Model)</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span
-class="math inline"><em>p</em><sub><em>x</em>, <em>n</em> + 1, <em>n</em></sub> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup> + <em>q</em><sub><em>n</em></sub></span><br><em>(适用于恒定状态动力学/静态系统)</em><br><br><span
-class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>x</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>x</em></sup> + <em>Δ</em><em>t</em><sup>2</sup><em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup></span><br><span
-class="math inline"><em>p</em><sub><em>n</em> + 1, <em>n</em></sub><sup><em>v</em></sup> = <em>p</em><sub><em>n</em>, <em>n</em></sub><sup><em>v</em></sup> + <em>q</em><sub><em>n</em></sub></span><br><em>(适用于匀速运动动力学)</em></td>
-<td style="text-align: left;">协方差外推<br>(Covariance
-Extrapolation)</td>
-<td style="text-align: left;">预测器协方差方程 (Predictor Covariance
-Equation)</td>
-</tr>
-</tbody>
-</table>
-<p>现在我们使用一个例子。</p>
-<h3 id="测量箱中的水温">测量箱中的水温</h3>
-<p>我们假设在稳态下，液体温度是恒温的，但真实的液体也许会有一点可能，我们用下面方程描述系统的动态特性：</p>
+        <h1 id="极限定理">极限定理</h1>
+<h2 id="切比雪夫不等式及弱大数定理">切比雪夫不等式及弱大数定理</h2>
+<p><strong>命题1：马尔科夫不等式</strong> 我们设<span
+class="math inline"><em>X</em></span>是非负随机变量，则对任意常数<span
+class="math inline"><em>a</em> &gt; 0</span>，有</p>
 <center>
-<p><span
-class="math display"><em>x</em><sub><em>n</em></sub> = <em>T</em> + <em>w</em><sub><em>n</em></sub></span></p>
+<span class="math display">$$
+P\{X\geq a\} \leq \frac{E[X]}{a}
+$$</span>
 </center>
-<p>其中<span class="math inline"><em>T</em></span>是稳定温度，<span
-class="math inline"><em>w</em><sub><em>n</em></sub></span>是关于随机变量<span
-class="math inline"><em>q</em></span>的噪声。</p>
-<p>现在，我们做些假设</p>
-<ul>
-<li>我们假设真实温度是50摄氏度</li>
-<li>假设模型是准确的，因此我们将过程噪声<span
-class="math inline"><em>q</em></span>设为极小值<span
-class="math inline">0.0001</span></li>
-<li>误差在0.1摄氏度</li>
-<li>每5秒测量一次</li>
-<li>每次的实际温度为: 50.005, 49.994, 49.993, 50.001, 50.006, 49.998,
-50.021, 50.005, 50 , 49.997</li>
-<li>每次测量值为：49.986, 49.963, 50.9, 50.001, 50.018, 50.05, 49.938,
-49.858, 49.965, 50.114</li>
-</ul>
-<p>依旧简单初始化，我们观测到温度大概在60度，因此<span
-class="math inline"><em>x̂</em><sub>0, 0</sub> = 60</span>，</p>
-<p>现在，我们假设侧脸误差在100，那么方差就是<span
-class="math inline"><em>p</em><sub>0, 0</sub> = 100<sup>2</sup></span>。</p>
-<p>由于这个方差非常高，如果用接近实际值的值来做初始化收敛就会更高，现在我们开始测量</p>
-<p>这是个静态的系统，那么第一次的温度就是<span
-class="math inline"><em>x̂</em><sub>1, 0</sub> = 60</span>，方差为<span
-class="math inline"><em>p</em><sub>1, 0</sub> = <em>p</em><sub>0, 0</sub> + <em>q</em> = 10000 + 0.0001 = 10000.0001</span></p>
-<p>对第一次测量，<span
-class="math inline"><em>z</em><sub>1</sub> = 49.986</span>，那么测量误差为$
-0.1<span class="math inline">，<em>那</em><em>么</em></span>r_1 =
-0.01$。现在我们计算卡尔曼增益</p>
-<p><span class="math display">$$
+<p><strong>证明：</strong> 对<span
+class="math inline"><em>a</em> &gt; 0</span>，定义指示变量</p>
+<center>
+<span class="math display">$$
+I =\left\{ \begin{array}{lc}
+    1 &amp; X \geq a\\
+    0 &amp; \text{else}
+\end{array}\right.
+$$</span>
+</center>
+由于<span class="math inline"><em>X</em> ≥ 0</span>，我们有
+<center>
+<span class="math display">$$
+I \leq \frac{X}{a}
+$$</span>
+</center>
+对两边求期望就有
+<center>
+<span class="math display">$$
+E[I] \leq \frac{1}{a}E[X]
+$$</span>
+</center>
+<p>并且，由于<span
+class="math inline"><em>E</em>[<em>I</em>] = 1 ⋅ <em>P</em>(1) + 0 ⋅ <em>P</em>(0) = <em>P</em>{<em>X</em> ≥ <em>a</em>}</span>，那么就得到了马尔科夫不等式。</p>
+<p>那么我们可以继续推出切比雪夫不等式</p>
+<p><strong>命题2：切比雪夫不等式</strong> 设<span
+class="math inline"><em>X</em></span>是一随机变量，均值<span
+class="math inline"><em>μ</em></span>和方差<span
+class="math inline"><em>σ</em><sup>2</sup></span>都有限，则对任意<span
+class="math inline"><em>k</em> &gt; 0</span>，有</p>
+<center>
+<span class="math display">$$
+P\{\mid X-\mu\mid \geq k\} \leq \frac{\sigma^2}{k^2}
+$$</span>
+</center>
+<p><strong>证明：</strong> 由于<span
+class="math inline">(<em>x</em> − <em>μ</em>)<sup>2</sup></span>是非负的，我们可以利用马尔科夫不等式（其中<span
+class="math inline"><em>a</em> = <em>k</em><sup>2</sup></span>），那么</p>
+<center>
+<span class="math display">$$
+P\{(X-\mu)^2 \geq k^2\} \leq \frac{E[(X-\mu)^2]}{k^2} =
+\frac{\sigma^2}{k^2}
+$$</span>
+</center>
+<p>由于<span
+class="math inline">(<em>x</em> − <em>μ</em>)<sup>2</sup> ≥ <em>k</em><sup>2</sup></span>等价于<span
+class="math inline">∣<em>x</em> − <em>μ</em>∣ ≥ <em>k</em></span>，替换一下就得到切比雪夫不等式了。</p>
+<p>马尔科夫和切比雪夫不等式的重要性在于，当我们只知道分布的期望，或者知道期望和方差时，可以利用他们导出概率上界。当然如果知道准确的概率分布，那么可以直接计算准确的概率值而不需要推导概率上界。</p>
+<p><strong>例题：</strong>假设工厂在一周内生产的产品数量是一个均值为50的随机变量
++ 本周产品数量超过75件的概率是多少？ +
+如果进一步知道每周产量的方差是25，那么本周产品在40到60之间的概率是多少?</p>
+<strong>解：</strong> 第一个问题：利用马尔科夫不等式，有
+<center>
+<span class="math display">$$
+P\{X &gt; 75\} \leq \frac{E[X]}{75} = \frac{2}{3}
+$$</span>
+</center>
+第二个问题，利用切比雪夫不等式，有
+<center>
+<span class="math display">$$
+P\{\mid X-50\mid \geq 10\} \leq \frac{\sigma^2}{10^2} = \frac{1}{4}
+$$</span>
+</center>
+那么
+<center>
+<span class="math display">$$
+P\{\mid X-50\mid &lt;10 \} \geq 1-\frac{1}{4} = \frac{3}{4}
+$$</span>
+</center>
+<h1 id="矩母函数">矩母函数</h1>
+随机变量<span class="math inline"><em>X</em></span>的矩母函数<span
+class="math inline"><em>M</em>(<em>t</em>)</span>如下定义：
+<center>
+<span class="math display">$$
+M(t) = E[e^{tX}] = \left\{\begin{array}{ll}
+    \sum_x e^{tx} p(x) &amp; \text{X离散,p是分布列}\\
+    \int^\infty_{-\infty} e^{tx}f(x)dx &amp;
+\text{若X连续，f(x)是密度函数}
+\end{array}\right.
+$$</span>
+</center>
+<p><span class="math inline"><em>t</em></span>是任意实数，我们说<span
+class="math inline"><em>M</em>(<em>t</em>)</span>是矩母函数的理由，是因为<span
+class="math inline"><em>X</em></span>的各阶矩都可以通过<span
+class="math inline"><em>M</em>(<em>t</em>)</span>在<span
+class="math inline"><em>t</em> = 0</span>的各阶导数得到。比如</p>
+<center>
+<span class="math display">$$
+M'(t) = \frac{d}{dt}E[e^{tX}] = E\left[\frac{d}{dt}e^{tX}\right] =
+E[Xe^{tX}]
+$$</span>
+</center>
+<p>带入<span class="math inline"><em>t</em> = 0</span>，那么<span
+class="math inline"><em>M</em><sup>′</sup>(0) = <em>E</em>[<em>X</em>]</span>是一阶矩。</p>
+<p><strong>例题：</strong> 对服从参数<span
+class="math inline">(<em>n</em>, <em>p</em>)</span>的二项分布，设<span
+class="math inline"><em>X</em></span>是参数为<span
+class="math inline">(<em>n</em>, <em>p</em>)</span>的二项随机变量，则</p>
+<center>
+<span class="math display">$$
+M(t) = \sum^n_{k = 0}e^{tk}{n\choose k}p^k(1-p)^{n-k} = \sum^n_{k =
+0}{n\choose k}(pe^t)^k(1-p)^{n-k} = (pe^t+1-p)^n
+$$</span>
+</center>
+<p>最后一步使用了二项式定理。现在求一阶矩可以这样做：</p>
+<center>
+<span
+class="math display"><em>M</em><sup>′</sup>(<em>t</em>) = <em>n</em>(<em>p</em><em>e</em><sup><em>t</em></sup> + 1 − <em>p</em>)<sup><em>n</em> − 1</sup><em>p</em><em>e</em><sup><em>t</em></sup>∣<sub><em>t</em> = 0</sub> = <em>n</em><em>p</em></span>
+</center>
+<p><strong>例题2：</strong>我们计算参数为<span
+class="math inline"><em>λ</em></span>的指数分布</p>
+<center>
+<span class="math display">$$
+M(t) = E[e^{tX}] = \int^\infty_0 e^{tx}\lambda e^{-\lambda x}dx =
+\lambda\int^\infty_0e^{-(\lambda-t)x}dx = \frac{\lambda}{\lambda-t}
+$$</span>
+</center>
+那么
+<center>
+<span class="math display">$$
+E[X] = M'(0) = \frac{1}{\lambda},~E[X]^2 =M''(0) = \frac{2}{\lambda}
+$$</span>
+</center>
+有
+<center>
+<span class="math display">$$
+\text{Var}(X) = E[X^2] - (E[X])^2 = \frac{1}{\lambda}
+$$</span>
+</center>
+<p>矩母函数的一个重要性质是，独立随机变量和的矩母函数等于每个随机变量的矩母函数的乘积，令<span
+class="math inline"><em>X</em>, <em>Y</em></span>是独立的随机变量，矩母函数分别为<span
+class="math inline"><em>M</em><sub><em>X</em></sub>(<em>t</em>)</span>和<span
+class="math inline"><em>M</em><sub><em>Y</em></sub>(<em>t</em>)</span>，记<span
+class="math inline"><em>M</em><sub><em>X</em> + <em>Y</em></sub>(<em>t</em>)</span>是<span
+class="math inline"><em>X</em> + <em>Y</em></span>的矩母函数，那么</p>
+<center>
+<span
+class="math display"><em>M</em><sub><em>X</em> + <em>Y</em></sub>(<em>t</em>) = <em>E</em>[<em>e</em><sup><em>t</em>(<em>X</em> + <em>Y</em>)</sup>] = <em>E</em>[<em>e</em><sup><em>t</em><em>X</em></sup><em>e</em><sup><em>t</em><em>Y</em></sup>] = <em>E</em>[<em>e</em><sup><em>t</em><em>X</em></sup>]<em>E</em>[<em>e</em><sup><em>t</em><em>Y</em></sup>] = <em>M</em><sub><em>X</em></sub>(<em>t</em>)<em>M</em><sub><em>Y</em></sub>(<em>t</em>)</span>
+</center>
+<p><strong>例题：独立的二项随机变量的和</strong> 设<span
+class="math inline"><em>X</em>, <em>Y</em></span>是互相独立的二项随机变量，分布参数为<span
+class="math inline">(<em>n</em>, <em>p</em>)</span>和<span
+class="math inline">(<em>m</em>, <em>p</em>)</span>，那<span
+class="math inline"><em>X</em> + <em>Y</em></span>的分布是什么？</p>
+<p><strong>解：</strong>矩母函数为<span
+class="math inline">(<em>p</em><em>e</em><sup><em>t</em></sup> + 1 − <em>p</em>)<sup><em>n</em></sup>(<em>p</em><em>e</em><sup><em>t</em></sup> + 1 − <em>p</em>)<sup><em>m</em></sup> = (<em>p</em><em>e</em><sup><em>t</em></sup> + 1 − <em>p</em>)<sup><em>n</em> + <em>m</em></sup></span>，这说明这是一个服从参数为<span
+class="math inline">((<em>n</em> + <em>m</em>), <em>p</em>)</span>的二项分布，即<span
+class="math inline"><em>X</em> + <em>Y</em></span>的分布也是二项分布，服从参数<span
+class="math inline">((<em>n</em> + <em>m</em>), <em>p</em>)</span></p>
+<p><strong>例题2：随机个随机变量之和的矩母函数</strong> 我们设<span
+class="math inline"><em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, ⋯</span>是一列独立同分布的随机变量。设<span
+class="math inline"><em>N</em></span>是取值为非负整数集合的随机变量，且和<span
+class="math inline"><em>X</em><sub><em>i</em></sub>(<em>i</em> ≥ 1)</span>独立，现在计算</p>
+<center>
+<span class="math display">$$
+Y = \sum^N_{i = 1}X_i
+$$</span>
+</center>
+<p>的矩母函数。</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+    &amp;&amp;E\left[\exp\{t\sum^N_{i=1}X_i\}\mid N = n\right]\\
+    &amp;=&amp; E\left[\exp\left\{t\sum^n_{i = 1}X_i\right\}\right]\\
+    &amp;=&amp; E\left[\exp\left\{t\sum^n_{i = 1}X_i\right\}\right]\\
+    &amp;=&amp; (M_X(t))^n
+\end{array}
+$$</span>
+</center>
+<h2 id="联合矩母函数">联合矩母函数</h2>
+<p>我们把矩母函数推广多多变量，设<span
+class="math inline"><em>X</em><sub>1</sub>, ⋯, <em>X</em><sub><em>n</em></sub></span>是随机变量序列。其联合矩母函数<span
+class="math inline"><em>M</em>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>)</span>对实数<span
+class="math inline"><em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub></span>定义</p>
+<center>
+<span
+class="math display"><em>M</em>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>) = <em>E</em>[<em>e</em><sup><em>t</em><sub>1</sub><em>X</em><sub>1</sub> + ⋯ + <em>t</em><sub><em>n</em></sub><em>X</em><sub><em>n</em></sub></sup>]</span>
+</center>
+<p><span
+class="math inline"><em>X</em><sub><em>i</em></sub></span>的矩母函数可以这样从联合矩母函数中得到：</p>
+<center>
+<span
+class="math display"><em>M</em><sub><em>X</em><sub><em>i</em></sub></sub>(<em>t</em>) = <em>E</em>[<em>e</em><sup><em>t</em><em>X</em><sub><em>i</em></sub></sup>] = <em>M</em>(0, ⋯, 0, <em>t</em>, 0, ⋯, 0)</span>
+</center>
+<p>其中<span class="math inline"><em>t</em></span>的位置在第<span
+class="math inline"><em>i</em></span>个变量上。</p>
+<p>我们可以证明，对<span
+class="math inline"><em>X</em><sub>1</sub>, ⋯, <em>X</em><sub><em>n</em></sub></span>，联合矩母函数唯一确定了它们的联合分布。因此，<span
+class="math inline"><em>X</em><sub>1</sub>, ⋯, <em>X</em><sub><em>n</em></sub></span>互相独立的充要条件是</p>
+<center>
+<span
+class="math display"><em>M</em>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>) = <em>M</em><sub><em>X</em><sub>1</sub></sub>(<em>t</em><sub>1</sub>)⋯<em>M</em><sub><em>X</em><sub><em>n</em></sub></sub>(<em>t</em><sub><em>n</em></sub>)</span>
+</center>
+<p>我们来证明一下：</p>
+<p><strong>证明：</strong> 我们假设<span
+class="math inline"><em>X</em><sub>1</sub>, ⋯, <em>X</em><sub><em>n</em></sub></span>是独立的，那么</p>
+<center>
+<span
+class="math display"><em>M</em>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>) = <em>E</em>[<em>e</em><sup><em>t</em><sub>1</sub><em>X</em><sub>1</sub> + ⋯ + <em>t</em><sub><em>n</em></sub><em>X</em><sub><em>n</em></sub></sup>]</span>
+</center>
+<p>由独立性，则期望的和等于和的期望，我们有</p>
+<center>
+<span class="math display">$$
+\begin{array}{rcl}
+  E[e^{t_1X_1+\cdots+t_nX_n}] &amp; = &amp; E[e^{t_1X_1}\cdots
+e^{t_nX_n}]\\
+  &amp;=&amp; E[e^{t_1X_1}] \cdots E[e^{t_nX_n}]\\
+  &amp;=&amp; M_{X_1}(t_1)\cdots M_{X_n}(t_n)
+\end{array}
+$$</span>
+</center>
+<p>反过来，我们证明积的期望是期望的积</p>
+<p>现在我们假设<span class="math inline">$M(t_1,\cdots,t_n) =
+\prod^n_{i=1} M_{X_i}(t_i)$</span>。</p>
+<p>我们构造一组独立的随机变量<span
+class="math inline"><em>Y</em> = {<em>Y</em><sub>1</sub>, ⋯, <em>Y</em><sub><em>n</em></sub>}</span>，使得每个<span
+class="math inline"><em>Y</em><sub><em>i</em></sub></span>的边际分布和<span
+class="math inline"><em>X</em><sub><em>i</em></sub></span>一样。由上述必要性，那么<span
+class="math inline"><em>Y</em></span>的联合矩母函数等于矩母函数的积。带入<span
+class="math inline"><em>X</em><sub><em>i</em></sub></span>，就有</p>
+<center>
+<span class="math display">$$
+M_Y(t_1,\cdots,t_n) = \prod^n_{i = 1} M_{X_i}(t_i)
+$$</span>
+</center>
+<p>同样的我们也有</p>
+<center>
+<span
+class="math display"><em>M</em><sub><em>X</em></sub>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>) = <em>M</em><sub><em>Y</em></sub>(<em>t</em><sub>1</sub>, ⋯, <em>t</em><sub><em>n</em></sub>)</span>
+</center>
+<p>最后，利用矩母函数的唯一性，那么<span
+class="math inline"><em>Y</em></span>和<span
+class="math inline"><em>X</em></span>具有相同的联合分布函数，我们导出</p>
+<center>
+<span class="math display">$$
+F_Y = F_X  = \prod^n_{i = 1}F_{X_i}(x_i)
+$$</span>
+</center>
+<p>由于<span
+class="math inline"><em>Y</em></span>独立，所以矩母函数的分解成立，因而<span
+class="math inline"><em>X</em></span>也应该是独立的。</p>
+<h1 id="中心极限定理">中心极限定理</h1>
+<p>中心极限定理告诉我们，大量独立随机变量的和近似地服从正态分布。</p>
+<p><strong>定理：</strong> 设<span
+class="math inline"><em>X</em><sub>1</sub>, ⋯,</span>是独立同分布的随机变量序列，其分布的均值是<span
+class="math inline"><em>μ</em></span>，方差是<span
+class="math inline"><em>σ</em><sup>2</sup></span>，对任意<span
+class="math inline">−∞ &lt; <em>a</em> &lt; ∞</span>，随机变量</p>
+<center>
+<span class="math display">$$
+\lim\limits_{n\to \infty} P\left\{\frac{X_1+\cdots+X_n -
+n\mu}{\sigma\sqrt{n}} \leq a \right\}
+=  \frac{1}{\sqrt{2\pi}}\int^a_{-\infty}e^{-x^2/2}dx
+$$</span>
+</center>
+<p>证明的关键是引理：</p>
+<p><strong>引理：</strong> 设<span
+class="math inline"><em>Z</em><sub>1</sub>, ⋯</span>是一公共分布函数为<span
+class="math inline"><em>F</em><sub><em>Z</em><sub><em>n</em></sub></sub></span>的随机变量序列，对应的矩母函数是<span
+class="math inline"><em>M</em><sub><em>Z</em><sub><em>n</em></sub></sub></span>，<span
+class="math inline"><em>n</em> ≥ 1</span>，另外，设<span
+class="math inline"><em>Z</em></span>的分布是<span
+class="math inline"><em>F</em><sub><em>Z</em></sub></span>，矩母函数是<span
+class="math inline"><em>M</em><sub><em>Z</em></sub></span>，若<span
+class="math inline"><em>M</em><sub><em>Z</em><sub><em>n</em></sub></sub>(<em>t</em>) → <em>M</em><sub><em>Z</em></sub>(<em>t</em>)</span>对一切<span
+class="math inline"><em>t</em></span>成立，则<span
+class="math inline"><em>F</em><sub><em>Z</em><sub><em>n</em></sub></sub>(<em>t</em>) → <em>F</em><sub><em>Z</em></sub>(<em>t</em>)</span>对<span
+class="math inline"><em>F</em><sub><em>Z</em></sub>(<em>t</em>)</span>的所有连续点成立。</p>
+<p><strong>证明：</strong> 定义<span
+class="math inline"><em>μ</em> = 0, <em>σ</em><sup>2</sup> = 1</span>，并且我们只证明<span
+class="math inline"><em>X</em><sub><em>i</em></sub></span>的矩母函数<span
+class="math inline"><em>M</em>(<em>t</em>)</span>存在且有限的情况下证明中心极限定理。此时<span
+class="math inline">$X_i/\sqrt{n}$</span>的矩母函数为</p>
+<center>
+<span class="math display">$$
+E\left[\exp\left\{\frac{tX_i}{\sqrt{n}} \right\}  \right] =
+M(\frac{t}{\sqrt{n}})
+$$</span>
+</center>
+<p>因此<span class="math inline">$\sum^n_{i =
+1}X_i/\sqrt{n}$</span>的矩母函数是<span
+class="math inline">$\left[M\left(\frac{t}{\sqrt{n}}\right)\right]$</span></p>
+<p>为了证明定理，要么证明<span
+class="math inline"><em>n</em> → ∞</span>的时候有<span
+class="math inline">$M(t/\sqrt{n})^n = e^{t^2/2}$</span>，要么证明<span
+class="math inline">$nL(t/\sqrt{n}) \to t^2/2$</span>，其中<span
+class="math inline"><em>L</em>(<em>n</em>) = ln <em>M</em>(<em>t</em>)</span>
+，我们选择证明后者。那么</p>
+<center>
+<span class="math display">$$
 \begin{aligned}
-    K_1 = \frac{p_{1,0}}{p_{1,0}+r_1} = 0.999...
+\lim_{n\to\infty} \frac{L(t/\sqrt{n})}{n^{-1}} &amp;= \lim_{n\to\infty}
+\frac{-\frac{1}{2} L'(t/\sqrt{n})n^{-3/2}t}{-n^{-2}} \quad
+&amp;&amp;\text{利用洛必达法则} \\[12pt]
+&amp;= \lim_{n\to\infty} \left[ \frac{L'(t/\sqrt{n})t}{2n^{-1/2}}
+\right] = \lim_{n\to\infty} \left[ \frac{-\frac{1}{2}
+L''(t/\sqrt{n})n^{-3/2}t^2}{-n^{-3/2}} \right] \quad
+&amp;&amp;\text{再利用洛必达法则} \\[12pt]
+&amp;= \lim_{n\to\infty} \left[ L''\left(\frac{t}{\sqrt{n}}\right)
+\frac{t^2}{2} \right] = \frac{t^2}{2}
 \end{aligned}
-$$</span></p>
-<p>那么第一次估计值如下</p>
-<p><span class="math display">$$
-\begin{aligned}
-    \hat x_{1,1} = \hat{1,0} +K_1(z_1 - \hat x_{1,0}) = 49.986
-\end{aligned}
-$$</span></p>
-<p>更新方差为<span
-class="math inline"><em>p</em><sub>1, 1</sub> = (1 − <em>K</em><sub>1</sub>)<em>p</em><sub>1, 0</sub> = 0.01</span></p>
-<p>那么<span
-class="math inline"><em>p</em><sub>2, 1</sub> = 0.01 + <em>q</em> = 0.0101</span></p>
-<p>我们依旧写一个程序出来跑结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">double measurement2[] = &#123;49.986, 49.963, 50.09, 50.001, 50.018, 50.05, 49.938, 49.858, 49.965, 50.114&#125;;</span><br><span class="line"></span><br><span class="line">double KalmanFilter2(int n, int max, double measurement[], double estimation, double error_estimation, double error_measurement)</span><br><span class="line">&#123;</span><br><span class="line">    if(n &gt; max) return estimation;</span><br><span class="line">    double Kalman_gain = (error_estimation) / (error_estimation + error_measurement);</span><br><span class="line">    double new_estimation = estimation + Kalman_gain * (measurement2[n-1] - estimation);</span><br><span class="line">    double new_error_estimation = (1 - Kalman_gain) * error_estimation;</span><br><span class="line">    double next_error_estimation = new_error_estimation + 0.0001; // 假设系统噪声为0.01</span><br><span class="line">    printf(&quot;第%d次测量值：%lf, 卡尔曼增益：%lf, 新的估计值：%lf, 新的估计误差：%lf\n&quot;, n, measurement2[n-1], Kalman_gain, new_estimation, next_error_estimation);</span><br><span class="line">    KalmanFilter2(n + 1, max, measurement2, new_estimation, next_error_estimation, error_measurement);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double estimation = 60.0;</span><br><span class="line">    double frist_error_estimation = 10000.0001;</span><br><span class="line">    double error_measurement = 0.01;</span><br><span class="line">    int size = sizeof(measurement2) / sizeof(measurement2[0]);</span><br><span class="line">    double final_estimation = KalmanFilter2(1, size, measurement2, estimation, frist_error_estimation, error_measurement);</span><br><span class="line">    printf(&quot;最终估计值为：%lf\n&quot;, final_estimation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">第1次测量值：49.986000, 卡尔曼增益：0.999999, 新的估计值：49.986010, 新的估计误差：0.010100</span><br><span class="line">第2次测量值：49.963000, 卡尔曼增益：0.502487, 新的估计值：49.974448, 新的估计误差：0.005125</span><br><span class="line">第3次测量值：50.090000, 卡尔曼增益：0.338837, 新的估计值：50.013601, 新的估计误差：0.003488</span><br><span class="line">第4次测量值：50.001000, 卡尔曼增益：0.258621, 新的估计值：50.010342, 新的估计误差：0.002686</span><br><span class="line">第5次测量值：50.018000, 卡尔曼增益：0.211742, 新的估计值：50.011964, 新的估计误差：0.002217</span><br><span class="line">第6次测量值：50.050000, 卡尔曼增益：0.181497, 新的估计值：50.018867, 新的估计误差：0.001915</span><br><span class="line">第7次测量值：49.938000, 卡尔曼增益：0.160720, 新的估计值：50.005870, 新的估计误差：0.001707</span><br><span class="line">第8次测量值：49.858000, 卡尔曼增益：0.145824, 新的估计值：49.984307, 新的估计误差：0.001558</span><br><span class="line">第9次测量值：49.965000, 卡尔曼增益：0.134817, 新的估计值：49.981704, 新的估计误差：0.001448</span><br><span class="line">第10次测量值：50.114000, 卡尔曼增益：0.126498, 新的估计值：49.998439, 新的估计误差：0.001365</span><br><span class="line">最终估计值为：49.998439</span><br></pre></td></tr></table></figure>
-<p>卡尔曼增益的收敛速度还是很快的，在第3次的时候就收敛差不多了。</p>
-<p>一维卡尔曼的学习就到这里结束。</p>
+$$</span>
+</center>
+<p>拓展到一般情况，则令<span
+class="math inline"><em>X</em><sub><em>i</em></sub><sup>′</sup> = (<em>X</em><sub><em>i</em></sub> − <em>μ</em>)/<em>σ</em></span>即可。就有<span
+class="math inline"><em>E</em>[<em>X</em><sub><em>i</em></sub><sup>′</sup>] = 0</span>,Var<span
+class="math inline">(<em>X</em><sub><em>i</em></sub><sup>′</sup>) = 1</span>的情况。然后带回即可。</p>
 
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="https://monstergeo.github.io/blog">Done fool</a>
-            <p>Link：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">https://monstergeo.github.io/blog/2026/05/23/Kalman-3/</a>
-            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">May 23rd 2026, 1:50:19 pm</a>
-            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/05/23/Kalman-3/">June 6th 2026, 7:18:00 pm</a>
+            <p>Link：<a href="https://monstergeo.github.io/blog/2026/10/05/%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/">https://monstergeo.github.io/blog/2026/10/05/%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/</a>
+            <p>Publish date：<a href="https://monstergeo.github.io/blog/2026/10/05/%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/">October 5th 2026, 11:15:01 pm</a>
+            <p>Update date：<a href="https://monstergeo.github.io/blog/2026/10/05/%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/">October 6th 2026, 10:46:32 pm</a>
             <p>License：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/blog/2026/05/23/stm32-minirtos/" title="stm32_minirtos">
-                    <div class="nextTitle">stm32_minirtos</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/blog/2026/05/18/Kalman-2/" title="Kalman_2">
-                    <div class="prevTitle">Kalman_2</div>
+                <a href="/blog/2026/10/04/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/" title="条件概率">
+                    <div class="prevTitle">条件概率</div>
                 </a>
         </li>
     </ul>
@@ -661,7 +838,7 @@ class="math inline"><em>p</em><sub>2, 1</sub> = 0.01 + <em>q</em> =�
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%87%E7%A8%8B%E5%99%AA%E5%A3%B0"><span class="toc-number">1.</span> <span class="toc-text">添加过程噪声</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%B8%80%E7%BB%B4%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">完整一维卡尔曼滤波模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E5%99%AA%E5%A3%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">过程噪声</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E9%87%8F%E7%AE%B1%E4%B8%AD%E7%9A%84%E6%B0%B4%E6%B8%A9"><span class="toc-number">1.1.2.</span> <span class="toc-text">测量箱中的水温</span></a></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">极限定理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F%E5%8F%8A%E5%BC%B1%E5%A4%A7%E6%95%B0%E5%AE%9A%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">切比雪夫不等式及弱大数定理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">矩母函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%9F%A9%E6%AF%8D%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">联合矩母函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">中心极限定理</span></a></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
